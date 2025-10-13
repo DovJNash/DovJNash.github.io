@@ -2,96 +2,410 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dov Nash | Home</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars: Galactic Defender</title>
     <style>
         body {
             margin: 0;
-            padding: 0;
-            background: linear-gradient(120deg, #6a89cc 0%, #b8e994 100%);
-            font-family: 'Segoe UI', Arial, sans-serif;
-            color: #222;
+            overflow: hidden;
+            background-color: #000000;
+            user-select: none;
         }
-        .container {
-            max-width: 700px;
-            margin: 5vh auto 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 18px;
-            box-shadow: 0 4px 32px rgba(0,0,0,0.10);
-            padding: 2.5em 2em;
-            text-align: center;
+        #gameCanvas {
+            display: block;
         }
-        h1 {
-            font-size: 2.6em;
-            margin-bottom: 0.2em;
-            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
-            color: #4a69bd;
+        #scoreDisplay, #timerDisplay, #healthDisplay {
+            position: absolute;
+            left: 10px;
+            font-size: 20px;
+            color: #FFD700;
+            font-family: 'Star Jedi', 'Courier New', monospace;
         }
-        h2 {
-            font-size: 1.2em;
-            font-weight: 400;
-            color: #38ada9;
-            margin-bottom: 1.5em;
+        #scoreDisplay {
+            top: 10px;
         }
-        p {
-            font-size: 1.1em;
-            color: #444;
-            margin-bottom: 1.5em;
+        #timerDisplay {
+            top: 40px;
         }
-        .links {
-            margin: 2em 0;
-            display: flex;
-            justify-content: center;
-            gap: 2em;
+        #healthDisplay {
+            top: 70px;
         }
-        .link-card {
-            background: #f6e58d;
-            color: #222;
+        #winScreen, #loseScreen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: #FFD700;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
             border-radius: 10px;
-            padding: 1em 1.8em;
-            box-shadow: 0 2px 8px #dedede;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            display: none;
+            text-align: center;
+            font-family: 'Star Jedi', 'Courier New', monospace;
         }
-        .link-card:hover {
-            background: #f9ca24;
-            color: #218c5d;
-            box-shadow: 0 4px 16px #b8e994;
+        #restartButton {
+            font-size: 24px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #FFD700;
+            color: #000000;
+            border: none;
+            font-family: 'Star Jedi', 'Courier New', monospace;
         }
-        footer {
-            margin-top: 2em;
-            font-size: 0.95em;
-            color: #888;
-        }
-        @media (max-width: 600px) {
-            .container {
-                padding: 1em 0.5em;
-            }
-            .links {
-                flex-direction: column;
-                gap: 1em;
-            }
+        #finishFeature {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            color: #FFD700;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            text-align: center;
+            font-family: 'Star Jedi', 'Courier New', monospace;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Hi, I'm Dov Nash</h1>
-        <h2>Welcome to my personal website!</h2>
-        <p>
-            I'm a passionate developer, creator, and learner.<br>
-            Explore my projects, connect with me, and see what I'm working on!
-        </p>
-        <div class="links">
-            <a class="link-card" href="https://github.com/DovJNash" target="_blank">GitHub</a>
-            <a class="link-card" href="mailto:djnash211@email.com">Email Me</a>
-            <a class="link-card" href="https://dovnash.me" target="_blank">Home</a>
-        </div>
-        <footer>
-            Made with 💻 using GitHub Pages.<br>
-            &copy; 2025 Dov Nash
-        </footer>
+    <canvas id="gameCanvas"></canvas>
+    <div id="scoreDisplay">Score: 0</div>
+    <div id="timerDisplay">Time: 00:00</div>
+    <div id="healthDisplay">Health: 100%</div>
+    <div id="winScreen">
+        The Force is Strong with You!
+        <br>
+        <button id="restartButton">New Mission</button>
     </div>
+    <div id="loseScreen">
+        You've Turned to the Dark Side!
+        <br>
+        <button id="restartButton">Try Again</button>
+    </div>
+    <div id="finishFeature">
+        Finish Line Appeared!
+        <br>
+        Reach 25 points to win!
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const healthDisplay = document.getElementById('healthDisplay');
+        const winScreen = document.getElementById('winScreen');
+        const loseScreen = document.getElementById('loseScreen');
+        const restartButtons = document.querySelectorAll('#restartButton');
+        const finishFeature = document.getElementById('finishFeature');
+
+        // Sound effects
+        const shootSound = new Audio('https://example.com/tie-fighter-laser.mp3');
+        const enemyDeathSound = new Audio('https://example.com/tie-fighter-explosion.mp3');
+        const scoreUpSound = new Audio('https://example.com/r2d2-happy.mp3');
+        const damageSound = new Audio('https://example.com/lightsaber-clash.mp3');
+
+        let score = 0;
+        let enemies = [];
+        let bullets = [];
+        let gameWon = false;
+        let gameLost = false;
+        let gameTime = 0;
+        let lastSpawnTime = 0;
+        let enemiesPerSecond = 0.3; // Reduced from 0.5
+        let lastEnemyIncrease = 0;
+        let powerUps = [];
+        let lastPowerUpSpawn = 0;
+        let bulletCount = 1;
+        let playerHealth = 100;
+        let lastShootTime = 0;
+        let shotsPerSecond = 2; // Changed to 2
+        let stars = [];
+        let shotsFired = 0; // New variable to track shots fired
+        let finishFeatureAppeared = false;
+        let lastDamageTime = 0; // New variable to track last damage time
+
+        const player = {
+            x: canvas.width / 2,
+            y: canvas.height - 50,
+            width: 40,
+            height: 40,
+            color: '#00FF00'
+        };
+
+        function drawPlayer() {
+            ctx.fillStyle = player.color;
+            ctx.beginPath();
+            ctx.moveTo(player.x, player.y);
+            ctx.lineTo(player.x - player.width / 2, player.y + player.height);
+            ctx.lineTo(player.x + player.width / 2, player.y + player.height);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function createEnemy() {
+            return {
+                x: Math.random() * canvas.width,
+                y: 0,
+                radius: 15,
+                color: '#FF0000',
+                health: 3,
+                speed: Math.random() * 2 + 1
+            };
+        }
+
+        function createBullet() {
+            return {
+                x: player.x,
+                y: player.y,
+                width: 5,
+                height: 10,
+                color: '#00FFFF',
+                speed: 5
+            };
+        }
+
+        function createPowerUp() {
+            return {
+                x: Math.random() * canvas.width,
+                y: 0,
+                size: 20,
+                color: '#FFA500',
+                speed: 2
+            };
+        }
+
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < 100; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    speed: Math.random() * 0.2 + 0.1
+                });
+            }
+        }
+
+        function drawStars() {
+            ctx.fillStyle = '#FFFFFF';
+            stars.forEach(star => {
+                ctx.fillRect(star.x, star.y, 1, 1);
+                star.y += star.speed;
+                if (star.y > canvas.height) {
+                    star.y = 0;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+        }
+
+        function updateGame() {
+            if (gameWon || gameLost) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawStars();
+            drawPlayer();
+
+            gameTime += 1/60;
+            const minutes = Math.floor(gameTime / 60);
+            const seconds = Math.floor(gameTime % 60);
+            timerDisplay.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            if (gameTime - lastEnemyIncrease >= 10) {
+                enemiesPerSecond *= 1.2;
+                lastEnemyIncrease = gameTime;
+            }
+
+            if (gameTime - lastSpawnTime >= 1 / enemiesPerSecond) {
+                enemies.push(createEnemy());
+                lastSpawnTime = gameTime;
+            }
+
+            if (gameTime - lastPowerUpSpawn >= 15) {
+                powerUps.push(createPowerUp());
+                lastPowerUpSpawn = gameTime;
+            }
+
+            let playerOnEnemy = false;
+            enemies.forEach((enemy, index) => {
+                enemy.y += enemy.speed;
+                ctx.fillStyle = enemy.color;
+                ctx.beginPath();
+                ctx.arc(enemy.x, enemy.y, enemy.radius, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (enemy.y - enemy.radius > canvas.height) {
+                    enemies.splice(index, 1);
+                    score -= 1;
+                    scoreDisplay.textContent = `Score: ${score}`;
+                }
+
+                const dx = player.x - enemy.x;
+                const dy = player.y - enemy.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < player.width / 2 + enemy.radius) {
+                    playerOnEnemy = true;
+                }
+            });
+
+            // Apply damage every second if player is on an enemy
+            if (playerOnEnemy && gameTime - lastDamageTime >= 1) {
+                playerHealth = Math.max(0, playerHealth - 1);
+                healthDisplay.textContent = `Health: ${playerHealth.toFixed(1)}%`;
+                damageSound.play();
+                lastDamageTime = gameTime;
+
+                if (playerHealth <= 0) {
+                    gameLost = true;
+                    loseScreen.style.display = 'block';
+                }
+            }
+
+            powerUps.forEach((powerUp, index) => {
+                powerUp.y += powerUp.speed;
+                ctx.fillStyle = powerUp.color;
+                ctx.beginPath();
+                ctx.moveTo(powerUp.x, powerUp.y - powerUp.size / 2);
+                ctx.lineTo(powerUp.x - powerUp.size / 2, powerUp.y + powerUp.size / 2);
+                ctx.lineTo(powerUp.x + powerUp.size / 2, powerUp.y + powerUp.size / 2);
+                ctx.closePath();
+                ctx.fill();
+
+                const dx = player.x - powerUp.x;
+                const dy = player.y - powerUp.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < player.width / 2 + powerUp.size / 2) {
+                    powerUps.splice(index, 1);
+                    playerHealth = Math.min(playerHealth + 10, 100);
+                    healthDisplay.textContent = `Health: ${playerHealth.toFixed(1)}%`;
+                    shotsPerSecond *= 2;
+                    scoreUpSound.play();
+                }
+
+                if (powerUp.y - powerUp.size / 2 > canvas.height) {
+                    powerUps.splice(index, 1);
+                }
+            });
+
+            bullets.forEach((bullet, bulletIndex) => {
+                bullet.y -= bullet.speed;
+                ctx.fillStyle = bullet.color;
+                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+
+                if (bullet.y < 0) {
+                    bullets.splice(bulletIndex, 1);
+                }
+
+                enemies.forEach((enemy, enemyIndex) => {
+                    const dx = bullet.x - enemy.x;
+                    const dy = bullet.y - enemy.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < enemy.radius) {
+                        bullets.splice(bulletIndex, 1);
+                        shotsFired++;
+
+                        if (shotsFired % 2 === 0) {
+                            enemies.splice(enemyIndex, 1);
+                            score++;
+                            scoreDisplay.textContent = `Score: ${score}`;
+                            enemyDeathSound.play();
+
+                            if (score === 10 && !finishFeatureAppeared) {
+                                finishFeatureAppeared = true;
+                                finishFeature.style.display = 'block';
+                                setTimeout(() => {
+                                    finishFeature.style.display = 'none';
+                                }, 3000);
+                            }
+
+                            if (score === 25) {
+                                gameWon = true;
+                                winScreen.style.display = 'block';
+                            }
+                        }
+                    }
+                });
+            });
+
+            requestAnimationFrame(updateGame);
+        }
+
+        function restartGame() {
+            score = 0;
+            enemies = [];
+            bullets = [];
+            powerUps = [];
+            gameWon = false;
+            gameLost = false;
+            gameTime = 0;
+            lastSpawnTime = 0;
+            lastPowerUpSpawn = 0;
+            enemiesPerSecond = 0.3; // Reduced from 0.5
+            lastEnemyIncrease = 0;
+            bulletCount = 1;
+            playerHealth = 100;
+            shotsPerSecond = 2; // Changed to 2
+            shotsFired = 0; // Reset shots fired
+            finishFeatureAppeared = false;
+            lastDamageTime = 0; // Reset last damage time
+            scoreDisplay.textContent = 'Score: 0';
+            timerDisplay.textContent = 'Time: 00:00';
+            healthDisplay.textContent = 'Health: 100%';
+            winScreen.style.display = 'none';
+            loseScreen.style.display = 'none';
+            finishFeature.style.display = 'none';
+            player.x = canvas.width / 2;
+            player.y = canvas.height - 50;
+            initStars();
+            updateGame();
+        }
+
+        canvas.addEventListener('mousemove', (e) => {
+            player.x = e.clientX - player.width / 2;
+            player.y = e.clientY - player.height / 2;
+
+            // Clamp player position within the game boundaries
+            player.x = Math.max(0, Math.min(canvas.width - player.width, player.x));
+            player.y = Math.max(0, Math.min(canvas.height - player.height, player.y));
+        });
+
+        canvas.addEventListener('click', () => {
+            if (!gameWon && !gameLost) {
+                const currentTime = Date.now();
+                if (currentTime - lastShootTime >= 1000 / shotsPerSecond) {
+                    for (let i = 0; i < bulletCount; i++) {
+                        const bullet = createBullet();
+                        bullet.x += (i - (bulletCount - 1) / 2) * 10;
+                        bullets.push(bullet);
+                    }
+                    shootSound.play();
+                    lastShootTime = currentTime;
+                }
+            }
+        });
+
+        restartButtons.forEach(button => {
+            button.addEventListener('click', restartGame);
+        });
+
+        initStars();
+        updateGame();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.x = canvas.width / 2;
+            player.y = canvas.height - 50;
+            initStars();
+        });
+    </script>
 </body>
 </html>
