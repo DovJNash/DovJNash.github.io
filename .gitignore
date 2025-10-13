@@ -1,0 +1,27 @@
+# Build artifacts
+node_modules/
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backup files
+*.backup
+*.bak
+
+# Don't ignore assets folders but ignore large files
+# assets/**/*.mp3
+# assets/**/*.wav
+# assets/**/*.ogg
+# assets/**/*.glb
+# assets/**/*.gltf
