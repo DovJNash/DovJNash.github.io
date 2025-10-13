@@ -3,1660 +3,2013 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Star Wars: Galactic Defender</title>
+    <title>Star Wars: Galactic Defender 3D - Production Edition</title>
+    
+    <!-- Three.js from CDN for 3D graphics -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             margin: 0;
             overflow: hidden;
-            background: linear-gradient(180deg, #000000 0%, #0a0a2e 50%, #000000 100%);
+            background: #000;
+            font-family: 'Courier New', 'Orbitron', monospace;
+            color: #fff;
             user-select: none;
+            -webkit-user-select: none;
         }
-        #gameCanvas {
+        
+        #gameContainer {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        #renderCanvas {
             display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
+        
+        /* ==== HUD STYLING ==== */
         #hud {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
+            height: 100%;
             pointer-events: none;
+            z-index: 10;
         }
-        #scoreDisplay, #timerDisplay, #healthDisplay, #waveDisplay, #comboDisplay, #dpsDisplay, #fpsDisplay {
+        
+        .hud-element {
             position: absolute;
-            left: 10px;
+            color: #00ff00;
             font-size: 18px;
-            color: #FFD700;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.9);
             font-family: 'Courier New', monospace;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-weight: bold;
         }
+        
         #scoreDisplay {
-            top: 10px;
-            font-size: 24px;
+            top: 20px;
+            left: 20px;
+            font-size: 28px;
         }
-        #timerDisplay {
-            top: 40px;
+        
+        #healthBar {
+            top: 60px;
+            left: 20px;
+            width: 250px;
+            height: 30px;
+            background: rgba(50, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
         }
-        #healthDisplay {
-            top: 70px;
+        
+        #healthBarFill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000 0%, #ffff00 50%, #00ff00 100%);
+            width: 100%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
         }
+        
+        #healthText {
+            position: absolute;
+            top: 65px;
+            left: 95px;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000;
+            color: #fff;
+        }
+        
         #waveDisplay {
             top: 100px;
+            left: 20px;
+            font-size: 20px;
         }
+        
         #comboDisplay {
             top: 130px;
+            left: 20px;
+            font-size: 18px;
+            color: #ffaa00;
         }
-        #dpsDisplay {
-            top: 160px;
-        }
+        
         #fpsDisplay {
-            top: 190px;
+            top: 20px;
+            right: 20px;
+            text-align: right;
             font-size: 14px;
             color: #888;
         }
+        
         #miniMap {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 150px;
-            height: 150px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 2px solid #FFD700;
-            border-radius: 5px;
+            top: 60px;
+            right: 20px;
+            width: 180px;
+            height: 180px;
+            background: rgba(0, 0, 20, 0.9);
+            border: 3px solid #00ff00;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
         }
-        #powerUpIndicators {
+        
+        #crosshair {
             position: absolute;
-            bottom: 60px;
-            left: 10px;
-            font-size: 14px;
-            color: #FFA500;
-            font-family: 'Courier New', monospace;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(0, 255, 0, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
         }
-        .powerUpActive {
-            margin: 5px 0;
-            padding: 5px 10px;
-            background-color: rgba(255, 165, 0, 0.3);
-            border-radius: 3px;
-            border-left: 3px solid #FFA500;
-        }
-        #cooldownIndicators {
+        
+        #crosshair::before, #crosshair::after {
+            content: '';
             position: absolute;
-            bottom: 10px;
+            background: rgba(0, 255, 0, 0.6);
+        }
+        
+        #crosshair::before {
+            width: 20px;
+            height: 2px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        #crosshair::after {
+            width: 2px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* ==== ABILITIES BAR ==== */
+        #abilitiesBar {
+            position: absolute;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
-        .cooldown {
-            width: 60px;
-            height: 60px;
-            border: 3px solid #FFD700;
-            border-radius: 50%;
+        
+        .ability {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 50, 0, 0.8);
+            border: 3px solid #00ff00;
+            border-radius: 10px;
             position: relative;
-            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #00ff00;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            transition: all 0.2s ease;
         }
-        .cooldown-text {
+        
+        .ability.cooling {
+            opacity: 0.4;
+            border-color: #666;
+            color: #666;
+        }
+        
+        .ability-key {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #FFD700;
-            font-size: 14px;
-            font-family: 'Courier New', monospace;
-        }
-        .cooldown-ready {
-            border-color: #00FF00;
-            box-shadow: 0 0 10px #00FF00;
-        }
-        #healthBar {
-            position: absolute;
-            top: 95px;
-            left: 10px;
-            width: 200px;
-            height: 15px;
-            background-color: rgba(50, 50, 50, 0.8);
-            border: 2px solid #FFD700;
+            top: 3px;
+            right: 5px;
+            font-size: 10px;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 4px;
             border-radius: 3px;
         }
-        #healthBarFill {
-            height: 100%;
-            background: linear-gradient(90deg, #00FF00 0%, #FFFF00 50%, #FF0000 100%);
-            border-radius: 2px;
-            transition: width 0.3s;
+        
+        .ability-cooldown {
+            position: absolute;
+            bottom: 3px;
+            font-size: 12px;
+            color: #ff6666;
         }
-        #winScreen, #loseScreen {
+        
+        /* ==== MENUS ==== */
+        .menu {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 48px;
-            color: #FFD700;
-            background-color: rgba(0, 0, 0, 0.95);
-            padding: 40px;
+            background: linear-gradient(135deg, rgba(0, 0, 50, 0.95), rgba(0, 0, 20, 0.95));
+            border: 3px solid #00ff00;
             border-radius: 15px;
-            display: none;
+            padding: 40px;
             text-align: center;
-            font-family: 'Courier New', monospace;
-            border: 3px solid #FFD700;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.5);
+            pointer-events: all;
+            display: none;
+            z-index: 100;
+            min-width: 400px;
+            max-width: 600px;
         }
-        #statsDisplay {
+        
+        .menu.active {
+            display: block;
+            animation: menuFadeIn 0.3s ease;
+        }
+        
+        @keyframes menuFadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        .menu h1 {
+            font-size: 48px;
+            color: #00ff00;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+        
+        .menu h2 {
+            font-size: 36px;
+            color: #00ff00;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 0.6);
+        }
+        
+        .menu-button {
+            background: linear-gradient(135deg, #003300, #006600);
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 15px 30px;
+            margin: 10px;
             font-size: 18px;
-            margin-top: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            pointer-events: all;
+            font-weight: bold;
+        }
+        
+        .menu-button:hover {
+            background: linear-gradient(135deg, #006600, #009900);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+            transform: scale(1.05);
+        }
+        
+        .menu-button:active {
+            transform: scale(0.95);
+        }
+        
+        /* ==== SETTINGS ==== */
+        .settings-group {
+            margin: 20px 0;
             text-align: left;
         }
-        .stat-row {
-            margin: 8px 0;
-            color: #FFA500;
-        }
-        #restartButton, .menuButton {
-            font-size: 20px;
-            padding: 12px 24px;
-            margin: 10px;
-            cursor: pointer;
-            background-color: #FFD700;
-            color: #000000;
-            border: none;
-            font-family: 'Courier New', monospace;
-            border-radius: 5px;
-            pointer-events: auto;
-            transition: all 0.3s;
-        }
-        #restartButton:hover, .menuButton:hover {
-            background-color: #FFA500;
-            transform: scale(1.1);
-        }
-        #pauseMenu {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 36px;
-            color: #FFD700;
-            background-color: rgba(0, 0, 0, 0.95);
-            padding: 40px;
-            border-radius: 15px;
-            display: none;
-            text-align: center;
-            font-family: 'Courier New', monospace;
-            border: 3px solid #FFD700;
-            pointer-events: auto;
-        }
-        #upgradeMenu {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #FFD700;
-            background-color: rgba(0, 0, 0, 0.95);
-            padding: 30px;
-            border-radius: 15px;
-            display: none;
-            font-family: 'Courier New', monospace;
-            border: 3px solid #FFD700;
-            pointer-events: auto;
-            max-width: 600px;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        .upgrade-item {
-            margin: 15px 0;
-            padding: 10px;
-            background-color: rgba(255, 165, 0, 0.2);
-            border-radius: 5px;
-        }
-        #mainMenu {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #FFD700;
-            background-color: rgba(0, 0, 0, 0.95);
-            padding: 40px;
-            border-radius: 15px;
+        
+        .settings-group label {
             display: block;
-            text-align: center;
-            font-family: 'Courier New', monospace;
-            border: 3px solid #FFD700;
-            pointer-events: auto;
+            margin: 10px 0 5px 0;
+            color: #00ff00;
+            font-size: 16px;
         }
+        
+        .settings-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: #333;
+            outline: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .settings-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #00ff00;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        }
+        
+        .settings-group input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #00ff00;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        }
+        
+        .settings-group select {
+            width: 100%;
+            padding: 10px;
+            background: #001100;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        /* ==== LOADING SCREEN ==== */
+        #loadingScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+        
+        #loadingScreen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        #loadingScreen h1 {
+            font-size: 48px;
+            color: #00ff00;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+        }
+        
+        #loadingBar {
+            width: 400px;
+            height: 30px;
+            background: #333;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+        
+        #loadingBarFill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #00aa00);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+        }
+        
+        #loadingText {
+            margin-top: 20px;
+            color: #00ff00;
+            font-size: 18px;
+        }
+        
+        /* ==== ANNOUNCEMENTS ==== */
         #waveAnnouncement {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 64px;
-            color: #FFD700;
-            font-family: 'Courier New', monospace;
+            font-size: 72px;
+            color: #00ff00;
+            text-shadow: 0 0 30px rgba(0, 255, 0, 1);
+            font-weight: bold;
             display: none;
-            text-shadow: 0 0 20px #FFD700;
-            animation: pulse 0.5s ease-in-out;
+            z-index: 50;
+            animation: announceWave 2s ease-in-out;
         }
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+        
+        @keyframes announceWave {
+            0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            10%, 90% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
             50% { transform: translate(-50%, -50%) scale(1.2); }
         }
-        .difficulty-button {
-            display: block;
-            margin: 10px auto;
-            width: 200px;
-        }
-        #finishFeature {
+        
+        /* ==== DAMAGE EFFECTS ==== */
+        .damage-flash {
             position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.3);
+            pointer-events: none;
+            animation: flash 0.3s ease-out;
+            z-index: 5;
+        }
+        
+        @keyframes flash {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        /* ==== POWER-UP INDICATORS ==== */
+        #powerUpIndicators {
+            position: absolute;
+            top: 160px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .powerup-active {
+            background: rgba(255, 165, 0, 0.4);
+            border: 2px solid #ffaa00;
+            border-radius: 5px;
+            padding: 8px 15px;
+            color: #ffaa00;
+            font-size: 14px;
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.6);
+            animation: powerupPulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes powerupPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        /* ==== TARGET LOCK ==== */
+        .target-lock {
+            position: absolute;
+            border: 3px solid #ff0000;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            pointer-events: none;
+            animation: rotateTarget 2s linear infinite;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            z-index: 15;
+        }
+        
+        .target-lock::before, .target-lock::after {
+            content: '';
+            position: absolute;
+            background: #ff0000;
+        }
+        
+        .target-lock::before {
+            width: 30px;
+            height: 2px;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 36px;
-            color: #FFD700;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            display: none;
-            text-align: center;
-            font-family: 'Courier New', monospace;
         }
-        .low-health-warning {
-            box-shadow: inset 0 0 50px rgba(255, 0, 0, 0.3);
-            pointer-events: none;
+        
+        .target-lock::after {
+            width: 2px;
+            height: 30px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        @keyframes rotateTarget {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* ==== STATS ==== */
+        .stats-line {
+            color: #00ff00;
+            font-size: 16px;
+            margin: 8px 0;
+            text-align: left;
+        }
+        
+        .stats-value {
+            color: #ffaa00;
+            float: right;
+        }
+        
+        /* ==== RESPONSIVE ==== */
+        @media (max-width: 768px) {
+            .hud-element {
+                font-size: 14px;
+            }
+            
+            #scoreDisplay {
+                font-size: 20px;
+            }
+            
+            #healthBar {
+                width: 150px;
+                height: 20px;
+            }
+            
+            #miniMap {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .ability {
+                width: 50px;
+                height: 50px;
+                font-size: 9px;
+            }
+            
+            .menu {
+                padding: 20px;
+                min-width: 280px;
+            }
+            
+            .menu h1 {
+                font-size: 32px;
+            }
+            
+            .menu-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
-    <canvas id="gameCanvas"></canvas>
-    
-    <div id="hud">
-        <div id="scoreDisplay">Score: 0</div>
-        <div id="timerDisplay">Time: 00:00</div>
-        <div id="healthDisplay">Health: 100%</div>
-        <div id="healthBar">
-            <div id="healthBarFill" style="width: 100%;"></div>
-        </div>
-        <div id="waveDisplay">Wave: 1</div>
-        <div id="comboDisplay">Combo: x0</div>
-        <div id="dpsDisplay">DPS: 0</div>
-        <div id="fpsDisplay">FPS: 60</div>
-        <canvas id="miniMap"></canvas>
-        <div id="powerUpIndicators"></div>
-        <div id="cooldownIndicators">
-            <div class="cooldown cooldown-ready" id="shieldCooldown">
-                <div class="cooldown-text">SPACE<br>Shield</div>
+    <div id="gameContainer">
+        <canvas id="renderCanvas"></canvas>
+        
+        <!-- HUD Overlay -->
+        <div id="hud">
+            <div id="scoreDisplay" class="hud-element">SCORE: 0</div>
+            <div id="healthBar">
+                <div id="healthBarFill"></div>
             </div>
-            <div class="cooldown cooldown-ready" id="bombCooldown">
-                <div class="cooldown-text">Q<br>Bomb</div>
+            <div id="healthText" class="hud-element">HP: 100/100</div>
+            <div id="waveDisplay" class="hud-element">WAVE: 1</div>
+            <div id="comboDisplay" class="hud-element">COMBO: 0x</div>
+            <div id="fpsDisplay" class="hud-element">FPS: 60</div>
+            
+            <canvas id="miniMap"></canvas>
+            
+            <div id="crosshair"></div>
+            
+            <div id="abilitiesBar">
+                <div class="ability" id="shieldAbility">
+                    <span class="ability-key">SPC</span>
+                    <div>SHIELD</div>
+                    <div class="ability-cooldown"></div>
+                </div>
+                <div class="ability" id="bombAbility">
+                    <span class="ability-key">Q</span>
+                    <div>BOMB</div>
+                    <div class="ability-cooldown"></div>
+                </div>
+                <div class="ability" id="dashAbility">
+                    <span class="ability-key">E</span>
+                    <div>DASH</div>
+                    <div class="ability-cooldown"></div>
+                </div>
             </div>
-            <div class="cooldown cooldown-ready" id="dashCooldown">
-                <div class="cooldown-text">E<br>Dash</div>
+            
+            <div id="powerUpIndicators"></div>
+            <div id="waveAnnouncement"></div>
+        </div>
+        
+        <!-- Main Menu -->
+        <div id="mainMenu" class="menu active">
+            <h1>STAR WARS:<br>GALACTIC DEFENDER 3D</h1>
+            <p style="color: #888; margin-bottom: 20px;">Production Edition - Full 3D Experience</p>
+            <button class="menu-button" onclick="startGame('easy')">START GAME - EASY</button>
+            <button class="menu-button" onclick="startGame('normal')">START GAME - NORMAL</button>
+            <button class="menu-button" onclick="startGame('hard')">START GAME - HARD</button>
+            <button class="menu-button" onclick="showSettings()">SETTINGS</button>
+            <div style="margin-top: 30px; font-size: 14px; color: #888;">
+                <p><strong>Controls:</strong></p>
+                <p>Arrow Keys / WASD / Mouse to Move</p>
+                <p>Left Click / Auto-Fire to Shoot</p>
+                <p>SPACE: Shield | Q: Bomb | E: Dash</p>
+                <p>TAB: Cycle Targets | ESC: Pause</p>
             </div>
         </div>
-    </div>
-    
-    <div id="mainMenu">
-        <h1 style="font-size: 48px; margin-bottom: 30px;">STAR WARS<br>Galactic Defender</h1>
-        <button class="menuButton difficulty-button" onclick="startGame('easy')">Easy</button>
-        <button class="menuButton difficulty-button" onclick="startGame('normal')">Normal</button>
-        <button class="menuButton difficulty-button" onclick="startGame('hard')">Hard</button>
-        <button class="menuButton difficulty-button" onclick="startGame('insane')">Insane</button>
-        <hr style="margin: 20px 0; border-color: #FFD700;">
-        <button class="menuButton" onclick="startGame('endless')">Endless Mode</button>
-        <button class="menuButton" onclick="startGame('timeattack')">Time Attack (60s)</button>
-        <button class="menuButton" onclick="startGame('survival')">Survival (1 Life)</button>
-        <button class="menuButton" onclick="showUpgradeMenu()">Upgrades</button>
-        <div style="margin-top: 20px; font-size: 14px; color: #FFA500;">
-            High Score: <span id="highScoreDisplay">0</span>
+        
+        <!-- Settings Menu -->
+        <div id="settingsMenu" class="menu">
+            <h2>SETTINGS</h2>
+            <div class="settings-group">
+                <label>Master Volume: <span id="masterVolumeValue">70</span>%</label>
+                <input type="range" id="masterVolume" min="0" max="100" value="70">
+            </div>
+            <div class="settings-group">
+                <label>Music Volume: <span id="musicVolumeValue">50</span>%</label>
+                <input type="range" id="musicVolume" min="0" max="100" value="50">
+            </div>
+            <div class="settings-group">
+                <label>SFX Volume: <span id="sfxVolumeValue">80</span>%</label>
+                <input type="range" id="sfxVolume" min="0" max="100" value="80">
+            </div>
+            <div class="settings-group">
+                <label>Graphics Quality:</label>
+                <select id="graphicsQuality">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high" selected>High</option>
+                    <option value="ultra">Ultra</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <label>Shadow Quality:</label>
+                <select id="shadowQuality">
+                    <option value="off">Off</option>
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <button class="menu-button" onclick="applySettings()">APPLY</button>
+            <button class="menu-button" onclick="hideSettings()">BACK</button>
         </div>
-    </div>
-    
-    <div id="pauseMenu">
-        <h2>PAUSED</h2>
-        <button class="menuButton" onclick="togglePause()">Resume</button>
-        <button class="menuButton" onclick="returnToMainMenu()">Main Menu</button>
-    </div>
-    
-    <div id="upgradeMenu">
-        <h2 style="text-align: center;">Upgrades</h2>
-        <div style="text-align: center; margin-bottom: 20px;">
-            Total Score: <span id="upgradeScore">0</span>
+        
+        <!-- Pause Menu -->
+        <div id="pauseMenu" class="menu">
+            <h2>PAUSED</h2>
+            <button class="menu-button" onclick="resumeGame()">RESUME</button>
+            <button class="menu-button" onclick="showSettings()">SETTINGS</button>
+            <button class="menu-button" onclick="quitToMenu()">QUIT TO MENU</button>
         </div>
-        <div id="upgradeList"></div>
-        <button class="menuButton" onclick="closeUpgradeMenu()">Close</button>
-    </div>
-    
-    <div id="winScreen">
-        <div style="font-size: 48px; margin-bottom: 20px;">Victory!</div>
-        <div style="font-size: 24px; margin-bottom: 20px;">The Force is Strong with You!</div>
-        <div id="statsDisplay"></div>
-        <button id="restartButton">New Mission</button>
-        <button class="menuButton" onclick="returnToMainMenu()">Main Menu</button>
-    </div>
-    
-    <div id="loseScreen">
-        <div style="font-size: 48px; margin-bottom: 20px;">Defeat</div>
-        <div style="font-size: 24px; margin-bottom: 20px;">You've Turned to the Dark Side!</div>
-        <div id="statsDisplay2"></div>
-        <button id="restartButton">Try Again</button>
-        <button class="menuButton" onclick="returnToMainMenu()">Main Menu</button>
-    </div>
-    
-    <div id="waveAnnouncement"></div>
-    
-    <div id="finishFeature">
-        Finish Line Appeared!
-        <br>
-        Reach 25 points to win!
+        
+        <!-- Game Over Menu -->
+        <div id="gameOverMenu" class="menu">
+            <h2>MISSION FAILED</h2>
+            <div id="gameOverStats" style="margin: 20px 0;"></div>
+            <button class="menu-button" onclick="restartGame()">RESTART</button>
+            <button class="menu-button" onclick="quitToMenu()">MAIN MENU</button>
+        </div>
+        
+        <!-- Victory Menu -->
+        <div id="victoryMenu" class="menu">
+            <h2>VICTORY!</h2>
+            <div id="victoryStats" style="margin: 20px 0;"></div>
+            <button class="menu-button" onclick="nextWave()">CONTINUE</button>
+            <button class="menu-button" onclick="quitToMenu()">MAIN MENU</button>
+        </div>
+        
+        <!-- Loading Screen -->
+        <div id="loadingScreen">
+            <h1>LOADING...</h1>
+            <div id="loadingBar">
+                <div id="loadingBarFill"></div>
+            </div>
+            <div id="loadingText">Initializing 3D Engine...</div>
+        </div>
     </div>
 
+    
     <script>
-        // ============================================
-        // GAME INITIALIZATION AND DOM ELEMENTS
-        // ============================================
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const miniMapCanvas = document.getElementById('miniMap');
-        const miniMapCtx = miniMapCanvas.getContext('2d');
-        miniMapCanvas.width = 150;
-        miniMapCanvas.height = 150;
-
-        // DOM Elements
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const timerDisplay = document.getElementById('timerDisplay');
-        const healthDisplay = document.getElementById('healthDisplay');
-        const healthBarFill = document.getElementById('healthBarFill');
-        const waveDisplay = document.getElementById('waveDisplay');
-        const comboDisplay = document.getElementById('comboDisplay');
-        const dpsDisplay = document.getElementById('dpsDisplay');
-        const fpsDisplay = document.getElementById('fpsDisplay');
-        const winScreen = document.getElementById('winScreen');
-        const loseScreen = document.getElementById('loseScreen');
-        const pauseMenu = document.getElementById('pauseMenu');
-        const mainMenu = document.getElementById('mainMenu');
-        const upgradeMenu = document.getElementById('upgradeMenu');
-        const waveAnnouncement = document.getElementById('waveAnnouncement');
-        const powerUpIndicators = document.getElementById('powerUpIndicators');
-        const restartButtons = document.querySelectorAll('#restartButton');
-
-        // ============================================
-        // SOUND EFFECTS (Placeholder comments)
-        // ============================================
-        // Different weapon sounds
-        const shootSound = new Audio('https://example.com/laser-shot.mp3');
-        const rapidFireSound = new Audio('https://example.com/rapid-fire.mp3');
-        const laserBeamSound = new Audio('https://example.com/laser-beam.mp3');
+    // ============================================
+    // STAR WARS: GALACTIC DEFENDER 3D
+    // Production Edition - Comprehensive Implementation
+    // ============================================
+    
+    'use strict';
+    
+    // ============================================
+    // GLOBAL CONFIGURATION
+    // ============================================
+    
+    const CONFIG = {
+        graphics: {
+            quality: 'high',
+            shadowQuality: 'medium',
+            particles: true,
+            postProcessing: true,
+            bloom: true,
+            fov: 75,
+            near: 0.1,
+            far: 2000
+        },
+        audio: {
+            master: 0.7,
+            music: 0.5,
+            sfx: 0.8
+        },
+        gameplay: {
+            autoFire: true,
+            fireRate: 150, // ms
+            playerSpeed: 8,
+            enemySpawnRate: 2000,
+            difficultyScale: 1.1
+        }
+    };
+    
+    // ============================================
+    // GAME STATE
+    // ============================================
+    
+    let gameState = 'menu'; // 'menu', 'playing', 'paused', 'gameover', 'victory'
+    let difficulty = 'normal';
+    let score = 0;
+    let wave = 1;
+    let combo = 0;
+    let maxCombo = 0;
+    let playerHealth = 100;
+    let maxHealth = 100;
+    let gameTime = 0;
+    let lastFireTime = 0;
+    let lastEnemySpawn = 0;
+    let enemiesThisWave = 0;
+    let enemiesKilledThisWave = 0;
+    
+    // ============================================
+    // THREE.JS SCENE SETUP
+    // ============================================
+    
+    let scene, camera, renderer;
+    let playerShip, cameraRig;
+    let enemies = [];
+    let bullets = [];
+    let powerUps = [];
+    let particles = [];
+    let stars = [];
+    let targetedEnemy = null;
+    
+    // Lighting
+    let ambientLight, dirLight, pointLight;
+    
+    // ============================================
+    // AUDIO SYSTEM
+    // ============================================
+    
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioContext;
+    let masterGain, musicGain, sfxGain;
+    
+    // Audio oscillators for procedural sounds
+    function initAudioSystem() {
+        try {
+            audioContext = new AudioContext();
+            
+            // Create gain nodes for volume control
+            masterGain = audioContext.createGain();
+            musicGain = audioContext.createGain();
+            sfxGain = audioContext.createGain();
+            
+            masterGain.gain.value = CONFIG.audio.master;
+            musicGain.gain.value = CONFIG.audio.music;
+            sfxGain.gain.value = CONFIG.audio.sfx;
+            
+            musicGain.connect(masterGain);
+            sfxGain.connect(masterGain);
+            masterGain.connect(audioContext.destination);
+            
+            console.log('Audio system initialized');
+        } catch (e) {
+            console.warn('Audio not supported:', e);
+        }
+    }
+    
+    // Procedural laser sound
+    function playLaserSound() {
+        if (!audioContext) return;
         
-        // Enemy type-specific destruction sounds
-        const enemyDeathSound = new Audio('https://example.com/explosion-small.mp3');
-        const strongEnemyDeathSound = new Audio('https://example.com/explosion-medium.mp3');
-        const bossDeathSound = new Audio('https://example.com/explosion-large.mp3');
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
         
-        // Boss music
-        const bossMusicSound = new Audio('https://example.com/boss-music.mp3');
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(800, audioContext.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.1);
         
-        // Power-up sounds
-        const powerUpCollectSound = new Audio('https://example.com/power-up.mp3');
-        const shieldActivateSound = new Audio('https://example.com/shield-up.mp3');
-        const nukeSound = new Audio('https://example.com/nuke.mp3');
+        gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
         
-        // Background music
-        const bgMusicSound = new Audio('https://example.com/background-music.mp3');
+        osc.connect(gain);
+        gain.connect(sfxGain);
         
-        // UI sounds
-        const buttonClickSound = new Audio('https://example.com/button-click.mp3');
-        const damageSound = new Audio('https://example.com/player-hit.mp3');
-
-        // ============================================
-        // GAME STATE VARIABLES
-        // ============================================
-        let gameState = 'menu'; // 'menu', 'playing', 'paused', 'gameover', 'victory'
-        let difficulty = 'normal';
-        let gameMode = 'normal';
-        let score = 0;
-        let wave = 1;
-        let gameTime = 0;
-        let enemies = [];
-        let bullets = [];
-        let powerUps = [];
-        let particles = [];
-        let stars = [];
+        osc.start(audioContext.currentTime);
+        osc.stop(audioContext.currentTime + 0.1);
+    }
+    
+    // Procedural explosion sound
+    function playExplosionSound(large = false) {
+        if (!audioContext) return;
         
-        // Player stats
-        let playerHealth = 100;
-        let maxHealth = 100;
-        const player = {
-            x: 0,
-            y: 0,
-            width: 40,
-            height: 40,
-            color: '#00FF00',
-            speed: 5,
-            isDashing: false,
-            dashTime: 0
-        };
-
-        // Combat stats
-        let combo = 0;
-        let maxCombo = 0;
-        let lastHitTime = 0;
-        let comboTimeout = 2; // seconds
-        let totalDamage = 0;
-        let dps = 0;
-        let damageInLastSecond = [];
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        const filter = audioContext.createBiquadFilter();
         
-        // Statistics
-        let stats = {
-            enemiesDestroyed: 0,
-            shotsFired: 0,
-            shotsHit: 0,
-            powerUpsCollected: 0,
-            damageDealt: 0,
-            timeSurvived: 0
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(large ? 100 : 200, audioContext.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(10, audioContext.currentTime + 0.5);
+        
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(large ? 600 : 400, audioContext.currentTime);
+        
+        gain.gain.setValueAtTime(large ? 0.5 : 0.3, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+        
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(sfxGain);
+        
+        osc.start(audioContext.currentTime);
+        osc.stop(audioContext.currentTime + 0.5);
+    }
+    
+    // Power-up collection sound
+    function playPowerUpSound() {
+        if (!audioContext) return;
+        
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(400, audioContext.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.2);
+        
+        gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+        
+        osc.connect(gain);
+        gain.connect(sfxGain);
+        
+        osc.start(audioContext.currentTime);
+        osc.stop(audioContext.currentTime + 0.2);
+    }
+    
+    // Shield activation sound
+    function playShieldSound() {
+        if (!audioContext) return;
+        
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(300, audioContext.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(500, audioContext.currentTime + 0.3);
+        
+        gain.gain.setValueAtTime(0.2, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+        
+        osc.connect(gain);
+        gain.connect(sfxGain);
+        
+        osc.start(audioContext.currentTime);
+        osc.stop(audioContext.currentTime + 0.3);
+    }
+    
+    // Background music (ambient procedural)
+    let musicOscillator = null;
+    function startMusic() {
+        if (!audioContext || musicOscillator) return;
+        
+        // Simple ambient drone
+        musicOscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        
+        musicOscillator.type = 'sine';
+        musicOscillator.frequency.setValueAtTime(55, audioContext.currentTime); // A1 note
+        
+        gain.gain.value = 0.1;
+        
+        musicOscillator.connect(gain);
+        gain.connect(musicGain);
+        
+        musicOscillator.start();
+    }
+    
+    function stopMusic() {
+        if (musicOscillator) {
+            musicOscillator.stop();
+            musicOscillator = null;
+        }
+    }
+    
+    // ============================================
+    // 3D OBJECT CREATION
+    // ============================================
+    
+    function createPlayerShip() {
+        const ship = new THREE.Group();
+        
+        // Main body - X-Wing style
+        const bodyGeom = new THREE.BoxGeometry(1.5, 0.5, 3);
+        const bodyMat = new THREE.MeshPhongMaterial({
+            color: 0x00ff00,
+            emissive: 0x003300,
+            shininess: 100
+        });
+        const body = new THREE.Mesh(bodyGeom, bodyMat);
+        ship.add(body);
+        
+        // Wings
+        const wingGeom = new THREE.BoxGeometry(4, 0.2, 2);
+        const wingMat = new THREE.MeshPhongMaterial({
+            color: 0x00aa00,
+            shininess: 80
+        });
+        const wings = new THREE.Mesh(wingGeom, wingMat);
+        wings.position.y = 0;
+        ship.add(wings);
+        
+        // Cockpit
+        const cockpitGeom = new THREE.SphereGeometry(0.4, 8, 8);
+        const cockpitMat = new THREE.MeshPhongMaterial({
+            color: 0x00ffff,
+            emissive: 0x005555,
+            shininess: 100
+        });
+        const cockpit = new THREE.Mesh(cockpitGeom, cockpitMat);
+        cockpit.position.set(0, 0.4, 0.5);
+        ship.add(cockpit);
+        
+        // Engines (glowing)
+        const engineGeom = new THREE.CylinderGeometry(0.2, 0.25, 0.8, 8);
+        const engineMat = new THREE.MeshPhongMaterial({
+            color: 0xff6600,
+            emissive: 0xff3300,
+            emissiveIntensity: 1
+        });
+        
+        const engine1 = new THREE.Mesh(engineGeom, engineMat);
+        engine1.position.set(-1.5, 0, -1);
+        engine1.rotation.x = Math.PI / 2;
+        ship.add(engine1);
+        
+        const engine2 = new THREE.Mesh(engineGeom, engineMat);
+        engine2.position.set(1.5, 0, -1);
+        engine2.rotation.x = Math.PI / 2;
+        ship.add(engine2);
+        
+        // Add point lights for engines
+        const engineLight1 = new THREE.PointLight(0xff6600, 0.5, 10);
+        engineLight1.position.set(-1.5, 0, -1.5);
+        ship.add(engineLight1);
+        
+        const engineLight2 = new THREE.PointLight(0xff6600, 0.5, 10);
+        engineLight2.position.set(1.5, 0, -1.5);
+        ship.add(engineLight2);
+        
+        ship.userData = {
+            type: 'player',
+            velocity: new THREE.Vector3(),
+            health: maxHealth
         };
-
-        // Shooting mechanics
-        let lastShootTime = 0;
-        let shotsPerSecond = 2;
-        let bulletCount = 1;
-        let bulletDamage = 1;
-
-        // Enemy spawning
-        let lastSpawnTime = 0;
-        let enemiesPerSecond = 0.5;
-        let lastEnemyIncrease = 0;
-        let lastBossSpawn = 0;
-
-        // Power-up system
-        let lastPowerUpSpawn = 0;
-        let activePowerUps = {
-            shield: { active: false, endTime: 0 },
-            rapidFire: { active: false, endTime: 0 },
-            multiShot: { active: false, endTime: 0 },
-            laser: { active: false, endTime: 0 },
-            scoreMultiplier: { active: false, endTime: 0, multiplier: 2 }
+        
+        return ship;
+    }
+    
+    function createEnemyShip(type = 'basic') {
+        const enemy = new THREE.Group();
+        
+        // TIE Fighter style
+        const bodyGeom = new THREE.SphereGeometry(0.8, 12, 12);
+        const bodyMat = new THREE.MeshPhongMaterial({
+            color: 0xff0000,
+            emissive: 0x330000,
+            shininess: 60
+        });
+        const body = new THREE.Mesh(bodyGeom, bodyMat);
+        enemy.add(body);
+        
+        // Solar panels
+        const panelGeom = new THREE.BoxGeometry(2.5, 2, 0.1);
+        const panelMat = new THREE.MeshPhongMaterial({
+            color: 0x666666,
+            shininess: 40
+        });
+        
+        const panel1 = new THREE.Mesh(panelGeom, panelMat);
+        panel1.position.set(-1.5, 0, 0);
+        enemy.add(panel1);
+        
+        const panel2 = new THREE.Mesh(panelGeom, panelMat);
+        panel2.position.set(1.5, 0, 0);
+        enemy.add(panel2);
+        
+        enemy.userData = {
+            type: 'enemy',
+            enemyType: type,
+            health: type === 'boss' ? 50 : (type === 'strong' ? 10 : 3),
+            maxHealth: type === 'boss' ? 50 : (type === 'strong' ? 10 : 3),
+            speed: type === 'boss' ? 2 : (type === 'strong' ? 3 : 4),
+            points: type === 'boss' ? 100 : (type === 'strong' ? 10 : 5),
+            velocity: new THREE.Vector3()
         };
-
-        // Special abilities cooldowns
-        let abilities = {
-            shield: { cooldown: 15, lastUsed: -15, duration: 5 },
-            bomb: { cooldown: 20, lastUsed: -20 },
-            dash: { cooldown: 3, lastUsed: -3, duration: 0.3 }
+        
+        return enemy;
+    }
+    
+    function createBullet(position, direction) {
+        const geometry = new THREE.CylinderGeometry(0.1, 0.1, 1, 8);
+        const material = new THREE.MeshBasicMaterial({
+            color: 0x00ff00,
+            emissive: 0x00ff00,
+            emissiveIntensity: 1
+        });
+        const bullet = new THREE.Mesh(geometry, material);
+        
+        bullet.position.copy(position);
+        bullet.userData = {
+            type: 'bullet',
+            velocity: direction.clone().multiplyScalar(50),
+            damage: 1
         };
-
-        // Upgrades (persistent)
-        let upgrades = {
-            fireRate: 0,
-            bulletCount: 0,
-            moveSpeed: 0,
-            maxHealth: 0
+        
+        // Add glow
+        const light = new THREE.PointLight(0x00ff00, 0.5, 5);
+        light.position.copy(position);
+        scene.add(light);
+        bullet.userData.light = light;
+        
+        return bullet;
+    }
+    
+    function createPowerUp(position, type) {
+        const geometry = new THREE.OctahedronGeometry(0.5, 0);
+        const colors = {
+            health: 0x00ff00,
+            rapidFire: 0xff6600,
+            multiShot: 0xffff00,
+            shield: 0x0088ff
         };
-
-        // FPS tracking
-        let lastFrameTime = performance.now();
-        let fps = 60;
-        let frameCount = 0;
-        let fpsTime = 0;
-
-        // Screen shake
-        let screenShake = 0;
-
-        // Wave system
-        let waveInProgress = false;
-        let wavePauseTime = 0;
-        let enemiesThisWave = 0;
-        let enemiesKilledThisWave = 0;
-
-        // Object pooling
-        let bulletPool = [];
-        let particlePool = [];
-        const POOL_SIZE = 200;
-
-        // Touch controls (for mobile)
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let joystickActive = false;
-
-        // ============================================
-        // ENEMY TYPES CONFIGURATION
-        // ============================================
-        const enemyTypes = {
-            weak: {
-                health: 1,
-                speed: 1.5,
-                radius: 12,
-                color: '#FF6666',
-                points: 1,
-                movement: 'straight'
-            },
-            normal: {
-                health: 3,
-                speed: 2,
-                radius: 15,
-                color: '#FF0000',
-                points: 3,
-                movement: 'straight'
-            },
-            strong: {
-                health: 5,
-                speed: 1.5,
-                radius: 20,
-                color: '#CC0000',
-                points: 5,
-                movement: 'zigzag'
-            },
-            tracker: {
-                health: 4,
-                speed: 1.8,
-                radius: 15,
-                color: '#FF00FF',
-                points: 7,
-                movement: 'tracking'
-            },
-            boss: {
-                health: 50,
-                speed: 0.8,
-                radius: 40,
-                color: '#8B0000',
-                points: 50,
-                movement: 'circular',
-                isBoss: true
-            }
+        
+        const material = new THREE.MeshPhongMaterial({
+            color: colors[type] || 0xffffff,
+            emissive: colors[type] || 0xffffff,
+            emissiveIntensity: 0.5,
+            transparent: true,
+            opacity: 0.9
+        });
+        
+        const powerUp = new THREE.Mesh(geometry, material);
+        powerUp.position.copy(position);
+        powerUp.userData = {
+            type: 'powerup',
+            powerType: type,
+            rotationSpeed: 0.02
         };
-
-        // ============================================
-        // DIFFICULTY SETTINGS
-        // ============================================
-        const difficultySettings = {
-            easy: { healthMult: 1.5, damageMult: 0.7, spawnMult: 0.7 },
-            normal: { healthMult: 1, damageMult: 1, spawnMult: 1 },
-            hard: { healthMult: 0.8, damageMult: 1.3, spawnMult: 1.3 },
-            insane: { healthMult: 0.5, damageMult: 1.5, spawnMult: 1.5 }
+        
+        return powerUp;
+    }
+    
+    function createParticle(position, color, size = 0.2) {
+        const geometry = new THREE.SphereGeometry(size, 6, 6);
+        const material = new THREE.MeshBasicMaterial({
+            color: color,
+            transparent: true,
+            opacity: 1
+        });
+        const particle = new THREE.Mesh(geometry, material);
+        
+        particle.position.copy(position);
+        particle.userData = {
+            type: 'particle',
+            velocity: new THREE.Vector3(
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 10
+            ),
+            life: 1.0,
+            decay: 0.02
         };
-
-        // ============================================
-        // UTILITY FUNCTIONS
-        // ============================================
-        function getFromPool(pool, createFunc) {
-            if (pool.length > 0) {
-                return pool.pop();
-            }
-            return createFunc();
+        
+        return particle;
+    }
+    
+    function createExplosion(position, large = false) {
+        const count = large ? 50 : 20;
+        const color = large ? 0xff6600 : 0xffaa00;
+        
+        for (let i = 0; i < count; i++) {
+            const particle = createParticle(position, color, large ? 0.4 : 0.2);
+            particle.userData.velocity.multiplyScalar(large ? 2 : 1);
+            particles.push(particle);
+            scene.add(particle);
         }
-
-        function returnToPool(pool, obj) {
-            if (pool.length < POOL_SIZE) {
-                pool.push(obj);
-            }
+        
+        // Light flash
+        const flash = new THREE.PointLight(color, large ? 3 : 1.5, large ? 30 : 15);
+        flash.position.copy(position);
+        scene.add(flash);
+        
+        setTimeout(() => {
+            scene.remove(flash);
+        }, 100);
+    }
+    
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    
+    function initThreeJS() {
+        // Scene
+        scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x000000, 0.002);
+        
+        // Camera
+        camera = new THREE.PerspectiveCamera(
+            CONFIG.graphics.fov,
+            window.innerWidth / window.innerHeight,
+            CONFIG.graphics.near,
+            CONFIG.graphics.far
+        );
+        
+        // Camera rig for third-person follow
+        cameraRig = new THREE.Group();
+        cameraRig.add(camera);
+        camera.position.set(0, 8, 15);
+        camera.lookAt(0, 0, 0);
+        scene.add(cameraRig);
+        
+        // Renderer
+        const canvas = document.getElementById('renderCanvas');
+        renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            antialias: CONFIG.graphics.quality !== 'low',
+            alpha: false
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = CONFIG.graphics.shadowQuality !== 'off';
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        
+        // Lighting
+        ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+        scene.add(ambientLight);
+        
+        dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        dirLight.position.set(50, 100, 50);
+        dirLight.castShadow = CONFIG.graphics.shadowQuality !== 'off';
+        dirLight.shadow.camera.left = -50;
+        dirLight.shadow.camera.right = 50;
+        dirLight.shadow.camera.top = 50;
+        dirLight.shadow.camera.bottom = -50;
+        scene.add(dirLight);
+        
+        pointLight = new THREE.PointLight(0x4444ff, 0.5, 100);
+        pointLight.position.set(0, 20, 0);
+        scene.add(pointLight);
+        
+        // Create starfield
+        createStarfield();
+        
+        console.log('Three.js initialized');
+    }
+    
+    function createStarfield() {
+        const starGeometry = new THREE.BufferGeometry();
+        const starCount = 2000;
+        const positions = new Float32Array(starCount * 3);
+        
+        for (let i = 0; i < starCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 500;
+            positions[i + 1] = (Math.random() - 0.5) * 500;
+            positions[i + 2] = (Math.random() - 0.5) * 500;
         }
-
-        function playSound(sound) {
-            // Sound effects are disabled by default (placeholder URLs)
-            try {
-                sound.currentTime = 0;
-                sound.play().catch(e => {});
-            } catch(e) {}
+        
+        starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
+        const starMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.5,
+            transparent: true,
+            opacity: 0.8
+        });
+        
+        const starField = new THREE.Points(starGeometry, starMaterial);
+        scene.add(starField);
+    }
+    
+    // ============================================
+    // GAME LOGIC
+    // ============================================
+    
+    function startGame(diff) {
+        difficulty = diff;
+        gameState = 'playing';
+        score = 0;
+        wave = 1;
+        combo = 0;
+        maxCombo = 0;
+        playerHealth = maxHealth;
+        gameTime = 0;
+        enemiesThisWave = 0;
+        enemiesKilledThisWave = 0;
+        
+        // Clear arrays
+        enemies.forEach(e => scene.remove(e));
+        bullets.forEach(b => {
+            scene.remove(b);
+            if (b.userData.light) scene.remove(b.userData.light);
+        });
+        powerUps.forEach(p => scene.remove(p));
+        particles.forEach(p => scene.remove(p));
+        
+        enemies = [];
+        bullets = [];
+        powerUps = [];
+        particles = [];
+        targetedEnemy = null;
+        
+        // Create player ship
+        if (playerShip) scene.remove(playerShip);
+        playerShip = createPlayerShip();
+        playerShip.position.set(0, 0, 30);
+        scene.add(playerShip);
+        
+        // Attach camera rig to player
+        cameraRig.position.copy(playerShip.position);
+        
+        // Hide menus
+        document.getElementById('mainMenu').classList.remove('active');
+        document.getElementById('settingsMenu').classList.remove('active');
+        document.getElementById('gameOverMenu').classList.remove('active');
+        document.getElementById('victoryMenu').classList.remove('active');
+        document.getElementById('pauseMenu').classList.remove('active');
+        
+        // Start audio
+        if (audioContext && audioContext.state === 'suspended') {
+            audioContext.resume();
         }
-
-        function distance(x1, y1, x2, y2) {
-            return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+        startMusic();
+        
+        // Start wave
+        startWave();
+        
+        updateHUD();
+    }
+    
+    function startWave() {
+        const announcement = document.getElementById('waveAnnouncement');
+        announcement.textContent = `WAVE ${wave}`;
+        announcement.style.display = 'block';
+        
+        setTimeout(() => {
+            announcement.style.display = 'none';
+        }, 2000);
+        
+        // Spawn enemies for this wave
+        const baseCount = 5 + wave * 2;
+        enemiesThisWave = Math.min(baseCount, 30);
+        enemiesKilledThisWave = 0;
+        
+        console.log(`Wave ${wave} started: ${enemiesThisWave} enemies`);
+    }
+    
+    function spawnEnemy() {
+        if (gameState !== 'playing') return;
+        if (enemies.length >= enemiesThisWave) return;
+        
+        const types = ['basic', 'basic', 'basic', 'strong'];
+        if (wave % 3 === 0 && enemies.length === 0) {
+            types.push('boss');
         }
-
-        function loadGameData() {
-            try {
-                const saved = localStorage.getItem('galacticDefender');
-                if (saved) {
-                    const data = JSON.parse(saved);
-                    upgrades = data.upgrades || upgrades;
-                    document.getElementById('highScoreDisplay').textContent = data.highScore || 0;
-                }
-            } catch(e) {}
-        }
-
-        function saveGameData() {
-            try {
-                const currentHighScore = parseInt(document.getElementById('highScoreDisplay').textContent) || 0;
-                const data = {
-                    upgrades: upgrades,
-                    highScore: Math.max(score, currentHighScore)
-                };
-                localStorage.setItem('galacticDefender', JSON.stringify(data));
-                document.getElementById('highScoreDisplay').textContent = data.highScore;
-            } catch(e) {}
-        }
-
-        // ============================================
-        // GAME OBJECT CREATION
-        // ============================================
-        function createEnemy(type) {
-            const template = enemyTypes[type];
-            const diffMult = difficultySettings[difficulty].damageMult;
+        
+        const type = types[Math.floor(Math.random() * types.length)];
+        const enemy = createEnemyShip(type);
+        
+        // Random spawn position
+        const spawnX = (Math.random() - 0.5) * 60;
+        const spawnZ = -50;
+        enemy.position.set(spawnX, 0, spawnZ);
+        
+        // Movement pattern
+        enemy.userData.pattern = ['straight', 'zigzag', 'circular'][Math.floor(Math.random() * 3)];
+        enemy.userData.moveTime = 0;
+        
+        enemies.push(enemy);
+        scene.add(enemy);
+    }
+    
+    function updateEnemies(deltaTime) {
+        enemies.forEach((enemy, index) => {
+            enemy.userData.moveTime += deltaTime;
             
-            return {
-                x: Math.random() * canvas.width,
-                y: -template.radius,
-                radius: template.radius,
-                color: template.color,
-                health: Math.ceil(template.health * diffMult),
-                maxHealth: Math.ceil(template.health * diffMult),
-                speed: template.speed * (0.8 + wave * 0.1),
-                points: template.points,
-                type: type,
-                movement: template.movement,
-                isBoss: template.isBoss || false,
-                phase: 0,
-                moveTime: 0,
-                angle: 0,
-                targetX: Math.random() * canvas.width
-            };
-        }
-
-        function createBullet(x, y, angle = 0) {
-            const bullet = getFromPool(bulletPool, () => ({}));
-            bullet.x = x;
-            bullet.y = y;
-            bullet.width = 5;
-            bullet.height = 10;
-            bullet.color = activePowerUps.laser.active ? '#FF00FF' : '#00FFFF';
-            bullet.speed = 7;
-            bullet.angle = angle;
-            bullet.damage = bulletDamage;
-            return bullet;
-        }
-
-        function createPowerUp() {
-            const types = ['shield', 'rapidFire', 'multiShot', 'laser', 'nuke', 'scoreMultiplier'];
-            const type = types[Math.floor(Math.random() * types.length)];
-            const colors = {
-                shield: '#00FFFF',
-                rapidFire: '#FF00FF',
-                multiShot: '#FFFF00',
-                laser: '#FF0000',
-                nuke: '#FFA500',
-                scoreMultiplier: '#FFD700'
-            };
+            // Movement patterns
+            const speed = enemy.userData.speed * deltaTime;
             
-            return {
-                x: Math.random() * canvas.width,
-                y: -20,
-                size: 20,
-                color: colors[type],
-                speed: 2,
-                type: type
-            };
-        }
-
-        function createParticle(x, y, color) {
-            const particle = getFromPool(particlePool, () => ({}));
-            particle.x = x;
-            particle.y = y;
-            particle.vx = (Math.random() - 0.5) * 5;
-            particle.vy = (Math.random() - 0.5) * 5;
-            particle.life = 1;
-            particle.decay = 0.02;
-            particle.color = color;
-            particle.size = Math.random() * 3 + 2;
-            return particle;
-        }
-
-        function initStars() {
-            stars = [];
-            for (let i = 0; i < 150; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    speed: Math.random() * 0.5 + 0.1,
-                    size: Math.random() * 2
-                });
-            }
-        }
-
-        // ============================================
-        // DRAWING FUNCTIONS
-        // ============================================
-        function drawStars() {
-            ctx.fillStyle = '#FFFFFF';
-            stars.forEach(star => {
-                ctx.globalAlpha = 0.5 + star.size * 0.25;
-                ctx.fillRect(star.x, star.y, star.size, star.size);
-                star.y += star.speed;
-                if (star.y > canvas.height) {
-                    star.y = 0;
-                    star.x = Math.random() * canvas.width;
-                }
-            });
-            ctx.globalAlpha = 1;
-        }
-
-        function drawPlayer() {
-            // Engine glow
-            ctx.save();
-            ctx.shadowBlur = 20;
-            ctx.shadowColor = player.color;
-            
-            // Main ship
-            ctx.fillStyle = player.color;
-            ctx.beginPath();
-            ctx.moveTo(player.x, player.y);
-            ctx.lineTo(player.x - player.width / 2, player.y + player.height);
-            ctx.lineTo(player.x + player.width / 2, player.y + player.height);
-            ctx.closePath();
-            ctx.fill();
-            
-            ctx.restore();
-
-            // Shield effect
-            if (activePowerUps.shield.active || abilities.shield.lastUsed > gameTime - abilities.shield.duration) {
-                ctx.strokeStyle = '#00FFFF';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.arc(player.x, player.y + player.height / 2, player.width, 0, Math.PI * 2);
-                ctx.stroke();
-            }
-
-            // Dash effect
-            if (player.isDashing) {
-                ctx.fillStyle = 'rgba(0, 255, 0, 0.3)';
-                ctx.fillRect(player.x - player.width, player.y - 10, player.width * 2, player.height + 20);
-            }
-        }
-
-        function drawEnemy(enemy) {
-            // Draw health bar for bosses
-            if (enemy.isBoss) {
-                const barWidth = enemy.radius * 2;
-                const barHeight = 5;
-                const healthPercent = enemy.health / enemy.maxHealth;
-                
-                ctx.fillStyle = '#333';
-                ctx.fillRect(enemy.x - barWidth/2, enemy.y - enemy.radius - 15, barWidth, barHeight);
-                
-                ctx.fillStyle = healthPercent > 0.5 ? '#00FF00' : healthPercent > 0.25 ? '#FFFF00' : '#FF0000';
-                ctx.fillRect(enemy.x - barWidth/2, enemy.y - enemy.radius - 15, barWidth * healthPercent, barHeight);
-            }
-
-            // Draw enemy
-            ctx.save();
-            if (enemy.isBoss) {
-                ctx.shadowBlur = 20;
-                ctx.shadowColor = enemy.color;
-            }
-            
-            ctx.fillStyle = enemy.color;
-            ctx.beginPath();
-            ctx.arc(enemy.x, enemy.y, enemy.radius, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Draw different shapes for different types
-            if (enemy.type === 'tracker') {
-                ctx.strokeStyle = '#FF00FF';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-            }
-            
-            ctx.restore();
-        }
-
-        function drawBullet(bullet) {
-            ctx.save();
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = bullet.color;
-            ctx.fillStyle = bullet.color;
-            
-            if (activePowerUps.laser.active) {
-                ctx.fillRect(bullet.x - 2, bullet.y, 4, 20);
-            } else {
-                ctx.fillRect(bullet.x - bullet.width/2, bullet.y, bullet.width, bullet.height);
-            }
-            
-            ctx.restore();
-        }
-
-        function drawPowerUp(powerUp) {
-            ctx.save();
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = powerUp.color;
-            ctx.fillStyle = powerUp.color;
-            
-            // Rotating star shape
-            ctx.translate(powerUp.x, powerUp.y);
-            ctx.rotate(gameTime * 2);
-            ctx.beginPath();
-            for (let i = 0; i < 5; i++) {
-                const angle = (i * 4 * Math.PI) / 5;
-                const radius = i % 2 === 0 ? powerUp.size : powerUp.size / 2;
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-                if (i === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.closePath();
-            ctx.fill();
-            
-            ctx.restore();
-        }
-
-        function drawParticles() {
-            particles.forEach((p, index) => {
-                ctx.fillStyle = p.color;
-                ctx.globalAlpha = p.life;
-                ctx.fillRect(p.x, p.y, p.size, p.size);
-                
-                p.x += p.vx;
-                p.y += p.vy;
-                p.life -= p.decay;
-                
-                if (p.life <= 0) {
-                    returnToPool(particlePool, p);
-                    particles.splice(index, 1);
-                }
-            });
-            ctx.globalAlpha = 1;
-        }
-
-        function drawMiniMap() {
-            miniMapCtx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-            miniMapCtx.fillRect(0, 0, miniMapCanvas.width, miniMapCanvas.height);
-            
-            // Draw player
-            const scaleX = miniMapCanvas.width / canvas.width;
-            const scaleY = miniMapCanvas.height / canvas.height;
-            
-            miniMapCtx.fillStyle = '#00FF00';
-            miniMapCtx.fillRect(player.x * scaleX - 2, player.y * scaleY - 2, 4, 4);
-            
-            // Draw enemies
-            enemies.forEach(enemy => {
-                miniMapCtx.fillStyle = enemy.isBoss ? '#FF00FF' : '#FF0000';
-                const size = enemy.isBoss ? 4 : 2;
-                miniMapCtx.fillRect(enemy.x * scaleX - size/2, enemy.y * scaleY - size/2, size, size);
-            });
-        }
-
-        // ============================================
-        // GAME LOGIC - ENEMY MOVEMENT
-        // ============================================
-        function updateEnemyPosition(enemy) {
-            enemy.moveTime += 1/60;
-            
-            switch(enemy.movement) {
+            switch (enemy.userData.pattern) {
                 case 'straight':
-                    enemy.y += enemy.speed;
+                    enemy.position.z += speed;
                     break;
-                    
                 case 'zigzag':
-                    enemy.y += enemy.speed;
-                    enemy.x += Math.sin(enemy.moveTime * 3) * 2;
+                    enemy.position.z += speed;
+                    enemy.position.x += Math.sin(enemy.userData.moveTime * 2) * 0.5;
                     break;
-                    
                 case 'circular':
-                    enemy.y += enemy.speed * 0.5;
-                    enemy.angle += 0.02;
-                    enemy.x += Math.cos(enemy.angle) * 3;
-                    break;
-                    
-                case 'tracking':
-                    enemy.y += enemy.speed * 0.8;
-                    const dx = player.x - enemy.x;
-                    enemy.x += Math.sign(dx) * Math.min(Math.abs(dx) * 0.02, 2);
+                    enemy.position.z += speed * 0.5;
+                    const radius = 10;
+                    enemy.position.x = Math.cos(enemy.userData.moveTime) * radius;
                     break;
             }
             
-            // Keep enemies on screen horizontally
-            enemy.x = Math.max(enemy.radius, Math.min(canvas.width - enemy.radius, enemy.x));
-        }
-
-        // ============================================
-        // GAME LOGIC - COMBAT
-        // ============================================
-        function shoot() {
-            if (gameTime - lastShootTime < 1 / shotsPerSecond) return;
+            // Rotation for visual effect
+            enemy.rotation.y += deltaTime * 0.5;
             
-            stats.shotsFired++;
-            lastShootTime = gameTime;
+            // Remove if out of bounds
+            if (enemy.position.z > 50) {
+                scene.remove(enemy);
+                enemies.splice(index, 1);
+                
+                // Damage player for letting enemy through
+                if (enemy.userData.enemyType !== 'boss') {
+                    damagePlayer(5);
+                }
+            }
+        });
+    }
+    
+    function shoot() {
+        if (gameState !== 'playing') return;
+        
+        const now = Date.now();
+        if (now - lastFireTime < CONFIG.gameplay.fireRate) return;
+        lastFireTime = now;
+        
+        if (!playerShip) return;
+        
+        const bulletPos = playerShip.position.clone();
+        bulletPos.z -= 2;
+        
+        const direction = new THREE.Vector3(0, 0, -1);
+        const bullet = createBullet(bulletPos, direction);
+        
+        bullets.push(bullet);
+        scene.add(bullet);
+        
+        playLaserSound();
+    }
+    
+    function updateBullets(deltaTime) {
+        bullets.forEach((bullet, index) => {
+            bullet.position.add(bullet.userData.velocity.clone().multiplyScalar(deltaTime));
             
-            const spreadCount = bulletCount + (activePowerUps.multiShot.active ? 2 : 0);
-            
-            for (let i = 0; i < spreadCount; i++) {
-                const angle = (i - (spreadCount - 1) / 2) * 0.2;
-                const bullet = createBullet(player.x, player.y, angle);
-                bullets.push(bullet);
+            // Update light position
+            if (bullet.userData.light) {
+                bullet.userData.light.position.copy(bullet.position);
             }
             
-            playSound(activePowerUps.rapidFire.active ? rapidFireSound : shootSound);
-        }
-
-        function updateBullets() {
-            bullets.forEach((bullet, bulletIndex) => {
-                bullet.y -= bullet.speed;
-                bullet.x += Math.sin(bullet.angle) * bullet.speed * 0.5;
+            // Check collision with enemies
+            enemies.forEach((enemy, enemyIndex) => {
+                const distance = bullet.position.distanceTo(enemy.position);
                 
-                // Trail effect
-                if (Math.random() < 0.3) {
-                    particles.push(createParticle(bullet.x, bullet.y + 5, bullet.color));
-                }
-                
-                if (bullet.y < -50 || bullet.x < -50 || bullet.x > canvas.width + 50) {
-                    returnToPool(bulletPool, bullet);
-                    bullets.splice(bulletIndex, 1);
-                    return;
-                }
-                
-                drawBullet(bullet);
-            });
-        }
-
-        function checkCollisions() {
-            bullets.forEach((bullet, bulletIndex) => {
-                enemies.forEach((enemy, enemyIndex) => {
-                    const dist = distance(bullet.x, bullet.y, enemy.x, enemy.y);
+                if (distance < 2) {
+                    // Hit!
+                    enemy.userData.health -= bullet.userData.damage;
                     
-                    if (dist < enemy.radius) {
-                        // Hit!
-                        stats.shotsHit++;
-                        const damage = bullet.damage;
-                        enemy.health -= damage;
-                        
-                        totalDamage += damage;
-                        stats.damageDealt += damage;
-                        damageInLastSecond.push({ time: gameTime, damage: damage });
-                        
-                        // Combo system
-                        if (gameTime - lastHitTime < comboTimeout) {
-                            combo++;
-                        } else {
-                            combo = 1;
+                    // Visual feedback
+                    enemy.material = enemy.children[0].material;
+                    const originalColor = enemy.children[0].material.color.getHex();
+                    enemy.children[0].material.color.setHex(0xffffff);
+                    setTimeout(() => {
+                        if (enemy.children[0]) {
+                            enemy.children[0].material.color.setHex(originalColor);
                         }
+                    }, 50);
+                    
+                    // Remove bullet
+                    scene.remove(bullet);
+                    if (bullet.userData.light) scene.remove(bullet.userData.light);
+                    bullets.splice(index, 1);
+                    
+                    // Check if enemy destroyed
+                    if (enemy.userData.health <= 0) {
+                        scene.remove(enemy);
+                        enemies.splice(enemyIndex, 1);
+                        
+                        // Score and combo
+                        combo++;
                         maxCombo = Math.max(maxCombo, combo);
-                        lastHitTime = gameTime;
+                        score += enemy.userData.points * Math.max(1, Math.floor(combo / 5));
                         
-                        // Particles
-                        for (let i = 0; i < 5; i++) {
-                            particles.push(createParticle(enemy.x, enemy.y, enemy.color));
-                        }
+                        enemiesKilledThisWave++;
                         
-                        returnToPool(bulletPool, bullet);
-                        bullets.splice(bulletIndex, 1);
+                        // Explosion
+                        createExplosion(enemy.position, enemy.userData.enemyType === 'boss');
+                        playExplosionSound(enemy.userData.enemyType === 'boss');
                         
-                        if (enemy.health <= 0) {
-                            // Enemy destroyed
-                            stats.enemiesDestroyed++;
-                            enemiesKilledThisWave++;
-                            
-                            const scoreMultiplier = activePowerUps.scoreMultiplier.active ? 
-                                activePowerUps.scoreMultiplier.multiplier : 1;
-                            score += enemy.points * scoreMultiplier * Math.min(combo, 5);
-                            
-                            // Explosion particles
-                            const particleCount = enemy.isBoss ? 30 : 10;
-                            for (let i = 0; i < particleCount; i++) {
-                                particles.push(createParticle(enemy.x, enemy.y, enemy.color));
-                            }
-                            
-                            if (enemy.isBoss) {
-                                screenShake = 20;
-                                playSound(bossDeathSound);
-                            } else {
-                                screenShake = 5;
-                                playSound(enemy.type === 'strong' ? strongEnemyDeathSound : enemyDeathSound);
-                            }
-                            
-                            enemies.splice(enemyIndex, 1);
+                        // Chance to drop power-up
+                        if (Math.random() < 0.15) {
+                            const types = ['health', 'rapidFire', 'multiShot', 'shield'];
+                            const type = types[Math.floor(Math.random() * types.length)];
+                            const powerUp = createPowerUp(enemy.position, type);
+                            powerUps.push(powerUp);
+                            scene.add(powerUp);
                         }
                     }
-                });
+                }
             });
             
-            // Player collision with enemies
-            if (!activePowerUps.shield.active && 
-                !(abilities.shield.lastUsed > gameTime - abilities.shield.duration) &&
-                !player.isDashing) {
-                enemies.forEach(enemy => {
-                    const dist = distance(player.x, player.y + player.height/2, enemy.x, enemy.y);
-                    if (dist < player.width/2 + enemy.radius) {
-                        takeDamage(5);
-                        screenShake = 10;
-                    }
-                });
+            // Remove if out of bounds
+            if (bullet.position.z < -100) {
+                scene.remove(bullet);
+                if (bullet.userData.light) scene.remove(bullet.userData.light);
+                bullets.splice(index, 1);
             }
+        });
+    }
+    
+    function updatePowerUps(deltaTime) {
+        powerUps.forEach((powerUp, index) => {
+            // Rotate for visual effect
+            powerUp.rotation.x += powerUp.userData.rotationSpeed;
+            powerUp.rotation.y += powerUp.userData.rotationSpeed;
             
-            // Power-up collection
-            powerUps.forEach((powerUp, index) => {
-                const dist = distance(player.x, player.y, powerUp.x, powerUp.y);
-                if (dist < player.width/2 + powerUp.size) {
-                    collectPowerUp(powerUp);
+            // Move towards player slightly
+            powerUp.position.z += deltaTime * 2;
+            
+            // Check collection
+            if (playerShip) {
+                const distance = powerUp.position.distanceTo(playerShip.position);
+                
+                if (distance < 3) {
+                    // Collect!
+                    applyPowerUp(powerUp.userData.powerType);
+                    scene.remove(powerUp);
                     powerUps.splice(index, 1);
-                }
-            });
-        }
-
-        function takeDamage(amount) {
-            const diffMult = difficultySettings[difficulty].damageMult;
-            playerHealth -= amount * diffMult;
-            updateHealthBar();
-            playSound(damageSound);
-            
-            if (playerHealth <= 0) {
-                endGame(false);
-            }
-        }
-
-        function updateHealthBar() {
-            const healthPercent = Math.max(0, playerHealth / maxHealth);
-            healthBarFill.style.width = (healthPercent * 100) + '%';
-            healthDisplay.textContent = `Health: ${Math.ceil(playerHealth)}%`;
-            
-            // Low health warning
-            if (healthPercent < 0.25) {
-                canvas.classList.add('low-health-warning');
-            } else {
-                canvas.classList.remove('low-health-warning');
-            }
-            
-            // Clip gradient
-            if (healthPercent > 0.66) {
-                healthBarFill.style.background = '#00FF00';
-            } else if (healthPercent > 0.33) {
-                healthBarFill.style.background = '#FFFF00';
-            } else {
-                healthBarFill.style.background = '#FF0000';
-            }
-        }
-
-        function collectPowerUp(powerUp) {
-            stats.powerUpsCollected++;
-            playSound(powerUpCollectSound);
-            
-            const duration = 10; // seconds
-            
-            switch(powerUp.type) {
-                case 'shield':
-                    activePowerUps.shield.active = true;
-                    activePowerUps.shield.endTime = gameTime + duration;
-                    break;
-                case 'rapidFire':
-                    activePowerUps.rapidFire.active = true;
-                    activePowerUps.rapidFire.endTime = gameTime + duration;
-                    shotsPerSecond *= 2;
-                    break;
-                case 'multiShot':
-                    activePowerUps.multiShot.active = true;
-                    activePowerUps.multiShot.endTime = gameTime + duration;
-                    break;
-                case 'laser':
-                    activePowerUps.laser.active = true;
-                    activePowerUps.laser.endTime = gameTime + duration;
-                    bulletDamage = 3;
-                    break;
-                case 'nuke':
-                    screenShake = 30;
-                    playSound(nukeSound);
-                    enemies.forEach(enemy => {
-                        for (let i = 0; i < 15; i++) {
-                            particles.push(createParticle(enemy.x, enemy.y, enemy.color));
-                        }
-                    });
-                    score += enemies.reduce((sum, e) => sum + e.points, 0);
-                    stats.enemiesDestroyed += enemies.length;
-                    enemies = [];
-                    break;
-                case 'scoreMultiplier':
-                    activePowerUps.scoreMultiplier.active = true;
-                    activePowerUps.scoreMultiplier.endTime = gameTime + duration;
-                    break;
-            }
-        }
-
-        // ============================================
-        // SPECIAL ABILITIES
-        // ============================================
-        function activateShield() {
-            if (gameTime - abilities.shield.lastUsed < abilities.shield.cooldown) return;
-            
-            abilities.shield.lastUsed = gameTime;
-            playSound(shieldActivateSound);
-            
-            // Create shield particles
-            for (let i = 0; i < 20; i++) {
-                const angle = (i / 20) * Math.PI * 2;
-                const x = player.x + Math.cos(angle) * player.width;
-                const y = player.y + player.height/2 + Math.sin(angle) * player.width;
-                particles.push(createParticle(x, y, '#00FFFF'));
-            }
-        }
-
-        function activateBomb() {
-            if (gameTime - abilities.bomb.lastUsed < abilities.bomb.cooldown) return;
-            
-            abilities.bomb.lastUsed = gameTime;
-            screenShake = 25;
-            playSound(nukeSound);
-            
-            // Destroy all enemies on screen
-            enemies.forEach(enemy => {
-                if (enemy.y > 0 && enemy.y < canvas.height) {
-                    for (let i = 0; i < 10; i++) {
-                        particles.push(createParticle(enemy.x, enemy.y, enemy.color));
-                    }
-                    score += Math.floor(enemy.points * 0.5); // Half points for bomb kills
-                    stats.enemiesDestroyed++;
-                }
-            });
-            enemies = enemies.filter(e => e.y < 0 || e.y > canvas.height);
-        }
-
-        function activateDash() {
-            if (gameTime - abilities.dash.lastUsed < abilities.dash.cooldown) return;
-            
-            abilities.dash.lastUsed = gameTime;
-            player.isDashing = true;
-            player.dashTime = gameTime;
-        }
-
-        // ============================================
-        // WAVE SYSTEM
-        // ============================================
-        function startWave() {
-            waveInProgress = true;
-            enemiesThisWave = 0;
-            enemiesKilledThisWave = 0;
-            
-            // Announce wave
-            waveAnnouncement.textContent = `Wave ${wave}`;
-            waveAnnouncement.style.display = 'block';
-            setTimeout(() => {
-                waveAnnouncement.style.display = 'none';
-            }, 2000);
-            
-            // Spawn boss every 3 waves
-            if (wave % 3 === 0) {
-                enemies.push(createEnemy('boss'));
-                playSound(bossMusicSound);
-            }
-        }
-
-        function updateWaveSystem() {
-            if (!waveInProgress && gameTime - wavePauseTime > 3) {
-                wave++;
-                waveDisplay.textContent = `Wave: ${wave}`;
-                startWave();
-                
-                // Increase difficulty
-                enemiesPerSecond = 0.5 + wave * 0.1;
-            }
-        }
-
-        // ============================================
-        // SPAWNING LOGIC
-        // ============================================
-        function spawnEnemies() {
-            if (gameTime - lastSpawnTime < 1 / (enemiesPerSecond * difficultySettings[difficulty].spawnMult)) {
-                return;
-            }
-            
-            lastSpawnTime = gameTime;
-            
-            // Determine enemy type based on wave
-            let type = 'weak';
-            const rand = Math.random();
-            
-            if (wave >= 10) {
-                if (rand < 0.15) type = 'tracker';
-                else if (rand < 0.35) type = 'strong';
-                else if (rand < 0.65) type = 'normal';
-                else type = 'weak';
-            } else if (wave >= 5) {
-                if (rand < 0.2) type = 'strong';
-                else if (rand < 0.5) type = 'normal';
-                else type = 'weak';
-            } else if (wave >= 2) {
-                if (rand < 0.6) type = 'normal';
-                else type = 'weak';
-            }
-            
-            enemies.push(createEnemy(type));
-            enemiesThisWave++;
-        }
-
-        function spawnPowerUps() {
-            if (gameTime - lastPowerUpSpawn < 12) return;
-            
-            lastPowerUpSpawn = gameTime;
-            powerUps.push(createPowerUp());
-        }
-
-        // ============================================
-        // UI UPDATES
-        // ============================================
-        function updateUI() {
-            scoreDisplay.textContent = `Score: ${score}`;
-            
-            const minutes = Math.floor(gameTime / 60);
-            const seconds = Math.floor(gameTime % 60);
-            timerDisplay.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            comboDisplay.textContent = `Combo: x${combo}`;
-            
-            // Calculate DPS
-            damageInLastSecond = damageInLastSecond.filter(d => gameTime - d.time < 1);
-            dps = damageInLastSecond.reduce((sum, d) => sum + d.damage, 0);
-            dpsDisplay.textContent = `DPS: ${dps}`;
-            
-            // FPS
-            fpsDisplay.textContent = `FPS: ${Math.round(fps)}`;
-            
-            // Power-up indicators
-            let powerUpText = '';
-            for (let [key, value] of Object.entries(activePowerUps)) {
-                if (value.active) {
-                    const timeLeft = Math.ceil(value.endTime - gameTime);
-                    powerUpText += `<div class="powerUpActive">${key.toUpperCase()}: ${timeLeft}s</div>`;
-                    
-                    if (gameTime >= value.endTime) {
-                        value.active = false;
-                        // Reset effects
-                        if (key === 'rapidFire') shotsPerSecond /= 2;
-                        if (key === 'laser') bulletDamage = 1;
-                    }
+                    playPowerUpSound();
                 }
             }
-            powerUpIndicators.innerHTML = powerUpText;
             
-            // Update cooldown displays
-            updateCooldownDisplay('shieldCooldown', abilities.shield);
-            updateCooldownDisplay('bombCooldown', abilities.bomb);
-            updateCooldownDisplay('dashCooldown', abilities.dash);
+            // Remove if out of bounds
+            if (powerUp.position.z > 50) {
+                scene.remove(powerUp);
+                powerUps.splice(index, 1);
+            }
+        });
+    }
+    
+    function applyPowerUp(type) {
+        const indicators = document.getElementById('powerUpIndicators');
+        
+        switch (type) {
+            case 'health':
+                playerHealth = Math.min(maxHealth, playerHealth + 30);
+                showNotification('Health +30');
+                break;
+            case 'rapidFire':
+                CONFIG.gameplay.fireRate = 75;
+                showNotification('Rapid Fire!');
+                setTimeout(() => {
+                    CONFIG.gameplay.fireRate = 150;
+                }, 5000);
+                break;
+            case 'multiShot':
+                // Implement multi-shot logic
+                showNotification('Multi-Shot!');
+                break;
+            case 'shield':
+                showNotification('Shield +5s');
+                activateShield();
+                break;
         }
-
-        function updateCooldownDisplay(elementId, ability) {
-            const element = document.getElementById(elementId);
-            const cooldownRemaining = ability.cooldown - (gameTime - ability.lastUsed);
+        
+        updateHUD();
+    }
+    
+    function showNotification(text) {
+        const div = document.createElement('div');
+        div.className = 'powerup-active';
+        div.textContent = text;
+        document.getElementById('powerUpIndicators').appendChild(div);
+        
+        setTimeout(() => {
+            div.remove();
+        }, 3000);
+    }
+    
+    function updateParticles(deltaTime) {
+        particles.forEach((particle, index) => {
+            particle.position.add(particle.userData.velocity.clone().multiplyScalar(deltaTime));
+            particle.userData.velocity.multiplyScalar(0.95); // Damping
             
-            if (cooldownRemaining <= 0) {
-                element.classList.add('cooldown-ready');
-            } else {
-                element.classList.remove('cooldown-ready');
-                // Could add a visual indicator here for remaining time
+            particle.userData.life -= particle.userData.decay;
+            particle.material.opacity = particle.userData.life;
+            
+            if (particle.userData.life <= 0) {
+                scene.remove(particle);
+                particles.splice(index, 1);
             }
+        });
+    }
+    
+    function damagePlayer(amount) {
+        playerHealth -= amount;
+        playerHealth = Math.max(0, playerHealth);
+        
+        // Visual feedback
+        const flash = document.createElement('div');
+        flash.className = 'damage-flash';
+        document.getElementById('hud').appendChild(flash);
+        setTimeout(() => flash.remove(), 300);
+        
+        combo = 0; // Reset combo on damage
+        
+        updateHUD();
+        
+        if (playerHealth <= 0) {
+            gameOver();
         }
-
-        // ============================================
-        // MAIN GAME LOOP
-        // ============================================
-        function updateGame() {
-            if (gameState !== 'playing') {
-                requestAnimationFrame(updateGame);
-                return;
-            }
-            
-            // FPS calculation
-            const currentTime = performance.now();
-            const deltaTime = currentTime - lastFrameTime;
-            lastFrameTime = currentTime;
-            
-            frameCount++;
-            fpsTime += deltaTime;
-            if (fpsTime >= 1000) {
-                fps = frameCount;
-                frameCount = 0;
-                fpsTime = 0;
-            }
-            
-            gameTime += 1/60;
-            stats.timeSurvived = gameTime;
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Apply screen shake
-            if (screenShake > 0) {
-                ctx.save();
-                ctx.translate(
-                    Math.random() * screenShake - screenShake / 2,
-                    Math.random() * screenShake - screenShake / 2
-                );
-                screenShake *= 0.9;
-                if (screenShake < 0.5) screenShake = 0;
-            }
-            
-            // Draw game objects
-            drawStars();
-            drawPlayer();
-            
-            // Update and draw enemies
-            enemies.forEach((enemy, index) => {
-                updateEnemyPosition(enemy);
-                drawEnemy(enemy);
-                
-                if (enemy.y > canvas.height + enemy.radius) {
-                    enemies.splice(index, 1);
-                    if (!enemy.isBoss) {
-                        score = Math.max(0, score - 1);
-                    }
-                }
-            });
-            
-            // Update and draw bullets
-            updateBullets();
-            
-            // Update and draw power-ups
-            powerUps.forEach((powerUp, index) => {
-                powerUp.y += powerUp.speed;
-                drawPowerUp(powerUp);
-                
-                if (powerUp.y > canvas.height + powerUp.size) {
-                    powerUps.splice(index, 1);
-                }
-            });
-            
-            // Draw particles
-            drawParticles();
-            
-            if (screenShake > 0) {
-                ctx.restore();
-            }
-            
-            // Check collisions
-            checkCollisions();
-            
-            // Spawn logic
-            spawnEnemies();
-            spawnPowerUps();
-            
-            // Wave system
-            updateWaveSystem();
-            
-            // Update combo timeout
-            if (gameTime - lastHitTime > comboTimeout) {
-                combo = 0;
-            }
-            
-            // Update dash
-            if (player.isDashing && gameTime - player.dashTime > abilities.dash.duration) {
-                player.isDashing = false;
-            }
-            
-            // Update UI
-            updateUI();
-            drawMiniMap();
-            
-            // Check game mode conditions
-            if (gameMode === 'timeattack' && gameTime >= 60) {
-                endGame(true);
-            }
-            if (gameMode === 'survival' && playerHealth <= 0) {
-                endGame(false);
-            }
-            
-            requestAnimationFrame(updateGame);
-        }
-
-        // ============================================
-        // GAME STATE MANAGEMENT
-        // ============================================
-        function startGame(mode) {
-            // Parse mode
-            if (['easy', 'normal', 'hard', 'insane'].includes(mode)) {
-                difficulty = mode;
-                gameMode = 'normal';
-            } else {
-                gameMode = mode;
-            }
-            
-            // Apply upgrades
-            maxHealth = 100 + upgrades.maxHealth * 20;
-            playerHealth = maxHealth;
-            shotsPerSecond = 2 + upgrades.fireRate * 0.5;
-            bulletCount = 1 + upgrades.bulletCount;
-            player.speed = 5 + upgrades.moveSpeed;
-            
-            // Reset game state
-            gameState = 'playing';
-            score = 0;
-            wave = 1;
-            gameTime = 0;
-            enemies = [];
-            bullets = [];
-            powerUps = [];
-            particles = [];
-            combo = 0;
-            maxCombo = 0;
-            totalDamage = 0;
-            lastSpawnTime = 0;
-            lastPowerUpSpawn = 0;
-            lastHitTime = 0;
-            enemiesPerSecond = 0.5;
-            bulletDamage = 1;
-            waveInProgress = false;
-            wavePauseTime = -5;
-            
-            stats = {
-                enemiesDestroyed: 0,
-                shotsFired: 0,
-                shotsHit: 0,
-                powerUpsCollected: 0,
-                damageDealt: 0,
-                timeSurvived: 0
-            };
-            
-            activePowerUps = {
-                shield: { active: false, endTime: 0 },
-                rapidFire: { active: false, endTime: 0 },
-                multiShot: { active: false, endTime: 0 },
-                laser: { active: false, endTime: 0 },
-                scoreMultiplier: { active: false, endTime: 0, multiplier: 2 }
-            };
-            
-            abilities.shield.lastUsed = -abilities.shield.cooldown;
-            abilities.bomb.lastUsed = -abilities.bomb.cooldown;
-            abilities.dash.lastUsed = -abilities.dash.cooldown;
-            
-            // Position player
-            player.x = canvas.width / 2;
-            player.y = canvas.height - 100;
-            
-            // Hide menus
-            mainMenu.style.display = 'none';
-            winScreen.style.display = 'none';
-            loseScreen.style.display = 'none';
-            pauseMenu.style.display = 'none';
-            
-            updateHealthBar();
+    }
+    
+    function gameOver() {
+        gameState = 'gameover';
+        stopMusic();
+        
+        const stats = document.getElementById('gameOverStats');
+        stats.innerHTML = `
+            <div class="stats-line">Final Score: <span class="stats-value">${score}</span></div>
+            <div class="stats-line">Wave Reached: <span class="stats-value">${wave}</span></div>
+            <div class="stats-line">Max Combo: <span class="stats-value">${maxCombo}x</span></div>
+            <div class="stats-line">Enemies Destroyed: <span class="stats-value">${score / 5}</span></div>
+        `;
+        
+        document.getElementById('gameOverMenu').classList.add('active');
+    }
+    
+    function checkWaveComplete() {
+        if (enemiesKilledThisWave >= enemiesThisWave && enemies.length === 0) {
+            wave++;
             startWave();
         }
-
-        function endGame(victory) {
-            gameState = 'gameover';
-            
-            // Save high score
-            saveGameData();
-            
-            // Display statistics
-            const accuracy = stats.shotsFired > 0 ? (stats.shotsHit / stats.shotsFired * 100).toFixed(1) : 0;
-            const statsHTML = `
-                <div class="stat-row">Final Score: ${score}</div>
-                <div class="stat-row">Enemies Destroyed: ${stats.enemiesDestroyed}</div>
-                <div class="stat-row">Accuracy: ${accuracy}%</div>
-                <div class="stat-row">Max Combo: x${maxCombo}</div>
-                <div class="stat-row">Time Survived: ${Math.floor(stats.timeSurvived)}s</div>
-                <div class="stat-row">Damage Dealt: ${stats.damageDealt}</div>
-                <div class="stat-row">Power-ups Collected: ${stats.powerUpsCollected}</div>
-            `;
-            
-            if (victory) {
-                document.querySelector('#winScreen #statsDisplay').innerHTML = statsHTML;
-                winScreen.style.display = 'block';
-            } else {
-                document.querySelector('#loseScreen #statsDisplay2').innerHTML = statsHTML;
-                loseScreen.style.display = 'block';
-            }
-        }
-
-        function togglePause() {
-            if (gameState === 'playing') {
-                gameState = 'paused';
-                pauseMenu.style.display = 'block';
-            } else if (gameState === 'paused') {
-                gameState = 'playing';
-                pauseMenu.style.display = 'none';
-            }
-        }
-
-        function returnToMainMenu() {
-            gameState = 'menu';
-            mainMenu.style.display = 'block';
-            winScreen.style.display = 'none';
-            loseScreen.style.display = 'none';
-            pauseMenu.style.display = 'none';
-            upgradeMenu.style.display = 'none';
-        }
-
-        function showUpgradeMenu() {
-            upgradeMenu.style.display = 'block';
-            document.getElementById('upgradeScore').textContent = score;
-            
-            // Display upgrades
-            const upgradeList = document.getElementById('upgradeList');
-            upgradeList.innerHTML = `
-                <div class="upgrade-item">
-                    <strong>Fire Rate</strong> (Level ${upgrades.fireRate})<br>
-                    Cost: ${(upgrades.fireRate + 1) * 10} points<br>
-                    <button class="menuButton" onclick="purchaseUpgrade('fireRate')">Upgrade</button>
-                </div>
-                <div class="upgrade-item">
-                    <strong>Bullet Count</strong> (Level ${upgrades.bulletCount})<br>
-                    Cost: ${(upgrades.bulletCount + 1) * 15} points<br>
-                    <button class="menuButton" onclick="purchaseUpgrade('bulletCount')">Upgrade</button>
-                </div>
-                <div class="upgrade-item">
-                    <strong>Move Speed</strong> (Level ${upgrades.moveSpeed})<br>
-                    Cost: ${(upgrades.moveSpeed + 1) * 10} points<br>
-                    <button class="menuButton" onclick="purchaseUpgrade('moveSpeed')">Upgrade</button>
-                </div>
-                <div class="upgrade-item">
-                    <strong>Max Health</strong> (Level ${upgrades.maxHealth})<br>
-                    Cost: ${(upgrades.maxHealth + 1) * 20} points<br>
-                    <button class="menuButton" onclick="purchaseUpgrade('maxHealth')">Upgrade</button>
-                </div>
-            `;
-        }
-
-        function closeUpgradeMenu() {
-            upgradeMenu.style.display = 'none';
-        }
-
-        function purchaseUpgrade(type) {
-            const costs = {
-                fireRate: (upgrades.fireRate + 1) * 10,
-                bulletCount: (upgrades.bulletCount + 1) * 15,
-                moveSpeed: (upgrades.moveSpeed + 1) * 10,
-                maxHealth: (upgrades.maxHealth + 1) * 20
-            };
-            
-            const currentHighScore = parseInt(document.getElementById('highScoreDisplay').textContent) || 0;
-            
-            if (currentHighScore >= costs[type]) {
-                upgrades[type]++;
-                // Deduct from saved score (conceptually)
-                saveGameData();
-                showUpgradeMenu();
-            } else {
-                alert(`Not enough points! Need ${costs[type]}, have ${currentHighScore}`);
-            }
-        }
-
-        // ============================================
-        // EVENT LISTENERS
-        // ============================================
+    }
+    
+    // ============================================
+    // ABILITIES
+    // ============================================
+    
+    let shieldActive = false;
+    let shieldCooldown = 0;
+    let bombCooldown = 0;
+    let dashCooldown = 0;
+    
+    function activateShield() {
+        if (shieldCooldown > 0 || gameState !== 'playing') return;
         
-        // Mouse movement
-        canvas.addEventListener('mousemove', (e) => {
-            if (gameState !== 'playing') return;
-            
-            player.x = e.clientX;
-            player.y = e.clientY;
-            
-            // Clamp player position
-            player.x = Math.max(player.width/2, Math.min(canvas.width - player.width/2, player.x));
-            player.y = Math.max(player.height/2, Math.min(canvas.height - player.height/2, player.y));
-        });
-
-        // Mouse click to shoot
-        canvas.addEventListener('click', () => {
-            if (gameState === 'playing') {
-                shoot();
-            }
-        });
-
-        // Keyboard controls
-        document.addEventListener('keydown', (e) => {
-            if (gameState === 'playing') {
-                switch(e.key.toLowerCase()) {
-                    case ' ':
-                        e.preventDefault();
-                        activateShield();
-                        break;
-                    case 'q':
-                        activateBomb();
-                        break;
-                    case 'e':
-                        activateDash();
-                        break;
-                    case 'escape':
-                        togglePause();
-                        break;
-                }
-            } else if (gameState === 'paused' && e.key === 'Escape') {
-                togglePause();
-            }
-        });
-
-        // Touch controls for mobile
-        canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            if (gameState === 'playing') {
-                const touch = e.touches[0];
-                touchStartX = touch.clientX;
-                touchStartY = touch.clientY;
-                joystickActive = true;
-                shoot();
-            }
-        });
-
-        canvas.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            if (gameState === 'playing' && joystickActive) {
-                const touch = e.touches[0];
-                player.x = touch.clientX;
-                player.y = touch.clientY;
-                
-                player.x = Math.max(player.width/2, Math.min(canvas.width - player.width/2, player.x));
-                player.y = Math.max(player.height/2, Math.min(canvas.height - player.height/2, player.y));
-            }
-        });
-
-        canvas.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            joystickActive = false;
-        });
-
-        // Restart buttons
-        restartButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                startGame(difficulty);
+        shieldActive = true;
+        shieldCooldown = 10;
+        playShieldSound();
+        
+        // Visual effect
+        if (playerShip) {
+            const shieldGeom = new THREE.SphereGeometry(3, 16, 16);
+            const shieldMat = new THREE.MeshBasicMaterial({
+                color: 0x00ffff,
+                transparent: true,
+                opacity: 0.3,
+                side: THREE.DoubleSide
             });
+            const shield = new THREE.Mesh(shieldGeom, shieldMat);
+            playerShip.add(shield);
+            
+            setTimeout(() => {
+                shieldActive = false;
+                playerShip.remove(shield);
+            }, 3000);
+        }
+    }
+    
+    function activateBomb() {
+        if (bombCooldown > 0 || gameState !== 'playing') return;
+        
+        bombCooldown = 15;
+        playExplosionSound(true);
+        
+        // Damage all enemies
+        enemies.forEach(enemy => {
+            enemy.userData.health = 0;
+            createExplosion(enemy.position, false);
         });
-
-        // Window resize
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initStars();
+        
+        // Clear enemies
+        enemies.forEach(e => scene.remove(e));
+        enemies = [];
+    }
+    
+    function activateDash() {
+        if (dashCooldown > 0 || gameState !== 'playing') return;
+        
+        dashCooldown = 5;
+        
+        // Quick forward movement
+        if (playerShip) {
+            const dashSpeed = 20;
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    if (playerShip) {
+                        playerShip.position.z -= dashSpeed * 0.1;
+                    }
+                }, i * 50);
+            }
+        }
+    }
+    
+    function updateCooldowns(deltaTime) {
+        if (shieldCooldown > 0) shieldCooldown = Math.max(0, shieldCooldown - deltaTime);
+        if (bombCooldown > 0) bombCooldown = Math.max(0, bombCooldown - deltaTime);
+        if (dashCooldown > 0) dashCooldown = Math.max(0, dashCooldown - deltaTime);
+        
+        updateAbilityUI();
+    }
+    
+    function updateAbilityUI() {
+        const updateAbility = (id, cooldown) => {
+            const elem = document.getElementById(id);
+            if (cooldown > 0) {
+                elem.classList.add('cooling');
+                elem.querySelector('.ability-cooldown').textContent = cooldown.toFixed(1) + 's';
+            } else {
+                elem.classList.remove('cooling');
+                elem.querySelector('.ability-cooldown').textContent = '';
+            }
+        };
+        
+        updateAbility('shieldAbility', shieldCooldown);
+        updateAbility('bombAbility', bombCooldown);
+        updateAbility('dashAbility', dashCooldown);
+    }
+    
+    // ============================================
+    // INPUT HANDLING
+    // ============================================
+    
+    const keys = {};
+    const mouse = { x: 0, y: 0, click: false };
+    
+    document.addEventListener('keydown', (e) => {
+        keys[e.key.toLowerCase()] = true;
+        
+        if (gameState === 'playing') {
+            if (e.key === ' ') {
+                e.preventDefault();
+                activateShield();
+            } else if (e.key === 'q' || e.key === 'Q') {
+                activateBomb();
+            } else if (e.key === 'e' || e.key === 'E') {
+                activateDash();
+            } else if (e.key === 'Escape') {
+                togglePause();
+            } else if (e.key === 'Tab') {
+                e.preventDefault();
+                cycleTarget();
+            }
+        } else if (gameState === 'paused' && e.key === 'Escape') {
+            resumeGame();
+        }
+    });
+    
+    document.addEventListener('keyup', (e) => {
+        keys[e.key.toLowerCase()] = false;
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+    
+    document.addEventListener('click', () => {
+        if (gameState === 'playing') {
+            shoot();
+        }
+    });
+    
+    // Touch controls for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+    document.addEventListener('touchstart', (e) => {
+        if (gameState === 'playing') {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            shoot();
+        }
+    });
+    
+    document.addEventListener('touchmove', (e) => {
+        if (gameState === 'playing' && playerShip) {
+            const touch = e.touches[0];
+            mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+        }
+    });
+    
+    function updatePlayerMovement(deltaTime) {
+        if (!playerShip || gameState !== 'playing') return;
+        
+        const speed = CONFIG.gameplay.playerSpeed * deltaTime;
+        const pos = playerShip.position;
+        
+        // Keyboard controls
+        if (keys['w'] || keys['arrowup']) pos.z -= speed;
+        if (keys['s'] || keys['arrowdown']) pos.z += speed;
+        if (keys['a'] || keys['arrowleft']) pos.x -= speed;
+        if (keys['d'] || keys['arrowright']) pos.x += speed;
+        
+        // Mouse controls (relative to center)
+        const mouseInfluence = 0.3;
+        pos.x += mouse.x * speed * mouseInfluence * 30;
+        pos.y += mouse.y * speed * mouseInfluence * 30;
+        
+        // Bounds
+        pos.x = Math.max(-40, Math.min(40, pos.x));
+        pos.y = Math.max(-20, Math.min(20, pos.y));
+        pos.z = Math.max(10, Math.min(40, pos.z));
+        
+        // Tilt ship based on movement
+        playerShip.rotation.z = -mouse.x * 0.2;
+        playerShip.rotation.x = mouse.y * 0.2;
+        
+        // Update camera rig
+        cameraRig.position.lerp(playerShip.position, 0.1);
+    }
+    
+    function cycleTarget() {
+        if (enemies.length === 0) {
+            targetedEnemy = null;
+            return;
+        }
+        
+        const currentIndex = targetedEnemy ? enemies.indexOf(targetedEnemy) : -1;
+        const nextIndex = (currentIndex + 1) % enemies.length;
+        targetedEnemy = enemies[nextIndex];
+        
+        console.log('Target locked:', targetedEnemy.userData.enemyType);
+    }
+    
+    // ============================================
+    // UI UPDATES
+    // ============================================
+    
+    function updateHUD() {
+        document.getElementById('scoreDisplay').textContent = `SCORE: ${score}`;
+        document.getElementById('healthText').textContent = `HP: ${playerHealth}/${maxHealth}`;
+        document.getElementById('healthBarFill').style.width = `${(playerHealth / maxHealth) * 100}%`;
+        document.getElementById('waveDisplay').textContent = `WAVE: ${wave}`;
+        document.getElementById('comboDisplay').textContent = `COMBO: ${combo}x`;
+    }
+    
+    function updateMinimap() {
+        const miniMapCanvas = document.getElementById('miniMap');
+        const ctx = miniMapCanvas.getContext('2d');
+        
+        ctx.fillStyle = 'rgba(0, 0, 20, 0.5)';
+        ctx.fillRect(0, 0, miniMapCanvas.width, miniMapCanvas.height);
+        
+        // Draw player
+        if (playerShip) {
+            ctx.fillStyle = '#00ff00';
+            const px = (playerShip.position.x + 50) / 100 * miniMapCanvas.width;
+            const py = (playerShip.position.z - 10) / 80 * miniMapCanvas.height;
+            ctx.fillRect(px - 3, py - 3, 6, 6);
+        }
+        
+        // Draw enemies
+        ctx.fillStyle = '#ff0000';
+        enemies.forEach(enemy => {
+            const ex = (enemy.position.x + 50) / 100 * miniMapCanvas.width;
+            const ey = (enemy.position.z - 10) / 80 * miniMapCanvas.height;
+            const size = enemy.userData.enemyType === 'boss' ? 4 : 2;
+            ctx.fillRect(ex - size/2, ey - size/2, size, size);
         });
-
-        // ============================================
-        // INITIALIZATION
-        // ============================================
-        initStars();
-        loadGameData();
-        updateGame();
+    }
+    
+    // ============================================
+    // MENU FUNCTIONS
+    // ============================================
+    
+    function showSettings() {
+        document.getElementById('settingsMenu').classList.add('active');
+        document.getElementById('mainMenu').classList.remove('active');
+        document.getElementById('pauseMenu').classList.remove('active');
+    }
+    
+    function hideSettings() {
+        document.getElementById('settingsMenu').classList.remove('active');
+        if (gameState === 'menu') {
+            document.getElementById('mainMenu').classList.add('active');
+        } else if (gameState === 'paused') {
+            document.getElementById('pauseMenu').classList.add('active');
+        }
+    }
+    
+    function applySettings() {
+        // Update audio volumes
+        const masterVol = parseInt(document.getElementById('masterVolume').value) / 100;
+        const musicVol = parseInt(document.getElementById('musicVolume').value) / 100;
+        const sfxVol = parseInt(document.getElementById('sfxVolume').value) / 100;
+        
+        CONFIG.audio.master = masterVol;
+        CONFIG.audio.music = musicVol;
+        CONFIG.audio.sfx = sfxVol;
+        
+        if (masterGain) masterGain.gain.value = masterVol;
+        if (musicGain) musicGain.gain.value = musicVol;
+        if (sfxGain) sfxGain.gain.value = sfxVol;
+        
+        document.getElementById('masterVolumeValue').textContent = Math.round(masterVol * 100);
+        document.getElementById('musicVolumeValue').textContent = Math.round(musicVol * 100);
+        document.getElementById('sfxVolumeValue').textContent = Math.round(sfxVol * 100);
+        
+        // Update graphics quality
+        const graphicsQuality = document.getElementById('graphicsQuality').value;
+        CONFIG.graphics.quality = graphicsQuality;
+        
+        // Reapply graphics settings
+        switch (graphicsQuality) {
+            case 'low':
+                renderer.setPixelRatio(1);
+                CONFIG.graphics.particles = false;
+                break;
+            case 'medium':
+                renderer.setPixelRatio(1.5);
+                CONFIG.graphics.particles = true;
+                break;
+            case 'high':
+            case 'ultra':
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                CONFIG.graphics.particles = true;
+                break;
+        }
+        
+        console.log('Settings applied');
+    }
+    
+    function togglePause() {
+        if (gameState === 'playing') {
+            gameState = 'paused';
+            document.getElementById('pauseMenu').classList.add('active');
+        } else if (gameState === 'paused') {
+            resumeGame();
+        }
+    }
+    
+    function resumeGame() {
+        gameState = 'playing';
+        document.getElementById('pauseMenu').classList.remove('active');
+        document.getElementById('settingsMenu').classList.remove('active');
+    }
+    
+    function restartGame() {
+        startGame(difficulty);
+    }
+    
+    function nextWave() {
+        // Continue to next wave
+        gameState = 'playing';
+        document.getElementById('victoryMenu').classList.remove('active');
+        startWave();
+    }
+    
+    function quitToMenu() {
+        gameState = 'menu';
+        stopMusic();
+        
+        document.getElementById('mainMenu').classList.add('active');
+        document.getElementById('pauseMenu').classList.remove('active');
+        document.getElementById('gameOverMenu').classList.remove('active');
+        document.getElementById('victoryMenu').classList.remove('active');
+        document.getElementById('settingsMenu').classList.remove('active');
+    }
+    
+    // ============================================
+    // GAME LOOP
+    // ============================================
+    
+    let lastTime = performance.now();
+    let fpsCounter = 0;
+    let fpsTime = 0;
+    let spawnTimer = 0;
+    
+    function gameLoop() {
+        requestAnimationFrame(gameLoop);
+        
+        const currentTime = performance.now();
+        const deltaTime = Math.min((currentTime - lastTime) / 1000, 0.1); // Cap at 100ms
+        lastTime = currentTime;
+        
+        // FPS counter
+        fpsCounter++;
+        fpsTime += deltaTime;
+        if (fpsTime >= 1) {
+            document.getElementById('fpsDisplay').textContent = `FPS: ${fpsCounter}`;
+            fpsCounter = 0;
+            fpsTime = 0;
+        }
+        
+        if (gameState === 'playing') {
+            gameTime += deltaTime;
+            
+            // Player movement
+            updatePlayerMovement(deltaTime);
+            
+            // Auto-fire
+            if (CONFIG.gameplay.autoFire) {
+                shoot();
+            }
+            
+            // Spawn enemies
+            spawnTimer += deltaTime;
+            if (spawnTimer >= 2) {
+                spawnTimer = 0;
+                spawnEnemy();
+            }
+            
+            // Update game objects
+            updateEnemies(deltaTime);
+            updateBullets(deltaTime);
+            updatePowerUps(deltaTime);
+            updateParticles(deltaTime);
+            updateCooldowns(deltaTime);
+            
+            // Check wave completion
+            checkWaveComplete();
+            
+            // Update HUD
+            updateHUD();
+            updateMinimap();
+        }
+        
+        // Render
+        renderer.render(scene, camera);
+    }
+    
+    // ============================================
+    // WINDOW EVENTS
+    // ============================================
+    
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+    
+    // ============================================
+    // INITIALIZATION SEQUENCE
+    // ============================================
+    
+    function init() {
+        console.log('Initializing Star Wars: Galactic Defender 3D...');
+        
+        const loadingScreen = document.getElementById('loadingScreen');
+        const loadingBarFill = document.getElementById('loadingBarFill');
+        const loadingText = document.getElementById('loadingText');
+        
+        let progress = 0;
+        
+        const updateProgress = (percent, text) => {
+            progress = percent;
+            loadingBarFill.style.width = progress + '%';
+            loadingText.textContent = text;
+        };
+        
+        // Initialize in stages
+        setTimeout(() => {
+            updateProgress(20, 'Loading Three.js...');
+            
+            setTimeout(() => {
+                initThreeJS();
+                updateProgress(50, 'Creating 3D Scene...');
+                
+                setTimeout(() => {
+                    initAudioSystem();
+                    updateProgress(80, 'Initializing Audio System...');
+                    
+                    setTimeout(() => {
+                        updateProgress(100, 'Ready!');
+                        
+                        setTimeout(() => {
+                            loadingScreen.classList.add('hidden');
+                            gameLoop();
+                        }, 500);
+                    }, 300);
+                }, 300);
+            }, 300);
+        }, 500);
+    }
+    
+    // Start when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+    
     </script>
 </body>
 </html>
