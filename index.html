@@ -2,26 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DovJNash - Welcome!</title>
+    <title>Dov Nash | Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: Arial, sans-serif; margin: 2em; background: #f7f7f7; }
-        .container { max-width: 600px; margin: auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
-        h1 { color: #222; }
-        p { color: #555; }
-        a { color: #007acc; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #6a89cc 0%, #b8e994 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #222;
+        }
+        .container {
+            max-width: 700px;
+            margin: 5vh auto 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+            padding: 2.5em 2em;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.6em;
+            margin-bottom: 0.2em;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            color: #4a69bd;
+        }
+        h2 {
+            font-size: 1.2em;
+            font-weight: 400;
+            color: #38ada9;
+            margin-bottom: 1.5em;
+        }
+        p {
+            font-size: 1.1em;
+            color: #444;
+            margin-bottom: 1.5em;
+        }
+        .links {
+            margin: 2em 0;
+            display: flex;
+            justify-content: center;
+            gap: 2em;
+        }
+        .link-card {
+            background: #f6e58d;
+            color: #222;
+            border-radius: 10px;
+            padding: 1em 1.8em;
+            box-shadow: 0 2px 8px #dedede;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        .link-card:hover {
+            background: #f9ca24;
+            color: #218c5d;
+            box-shadow: 0 4px 16px #b8e994;
+        }
+        footer {
+            margin-top: 2em;
+            font-size: 0.95em;
+            color: #888;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 1em 0.5em;
+            }
+            .links {
+                flex-direction: column;
+                gap: 1em;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to DovJNash's Website!</h1>
-        <p>This is your personal GitHub Pages site. You can customize this page by editing <code>index.html</code> in your repository.</p>
+        <h1>Hi, I'm Dov Nash</h1>
+        <h2>Welcome to my personal website!</h2>
         <p>
-            <strong>Links:</strong><br>
-            <a href="https://github.com/DovJNash">My GitHub Profile</a>
+            I'm a passionate developer, creator, and learner.<br>
+            Explore my projects, connect with me, and see what I'm working on!
         </p>
-        <p>Made with 💻 using GitHub Pages.</p>
+        <div class="links">
+            <a class="link-card" href="https://github.com/DovJNash" target="_blank">GitHub</a>
+            <a class="link-card" href="mailto:your@email.com">Email Me</a>
+            <a class="link-card" href="https://dovnash.me" target="_blank">Home</a>
+        </div>
+        <footer>
+            Made with 💻 using GitHub Pages.<br>
+            &copy; 2025 Dov Nash
+        </footer>
     </div>
 </body>
 </html>
