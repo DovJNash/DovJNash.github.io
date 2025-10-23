@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ultimate Tic Tac Toe — Web Play</title>
+  <style>
+    html,body{height:100%;margin:0;background:#061022;color:#fff;font-family:system-ui,Segoe UI,Roboto,Arial}
+    #container{display:flex;height:100%;align-items:center;justify-content:center;gap:28px;padding:24px;box-sizing:border-box}
+    #game{width:760px;max-width:calc(100vw - 40px);background:linear-gradient(180deg,#082132,#0f2f44);border-radius:12px;padding:20px;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+    canvas{display:block;background:transparent;border-radius:8px}
+    .hud{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:12px}
+    .btn{padding:8px 12px;border-radius:8px;background:#FFD166;color:#071022;text-decoration:none;font-weight:700;cursor:pointer;border:none}
+    .small{font-size:13px;color:#bcd2e0}
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="game">
+      <h2 style="margin:0 0 10px 0">Ultimate Tic Tac Toe — Web</h2>
+      <canvas id="gameCanvas" width="720" height="480"></canvas>
+      <div class="hud">
+        <div>
+          <button id="newGameBtn" class="btn">New Classic</button>
+          <button id="connectBtn" class="btn">Connect (6×7)</button>
+          <button id="threeDBtn" class="btn">3D (fallback: 2D)</button>
+        </div>
+        <div class="small" id="status">Player: X • Mode: Classic • FPS: --</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // Minimal but polished single-file 2D TicTacToe web implementation.
+  // This is intentionally compact (suitable for Pages). It's the web-play fallback:
+  (function(){
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width, height = canvas.height;
+    const status = document.getElementById('status');
+    let fps = 60;
+    let last = performance.now(), smoothedFPS = 60;
+
+    // Game state
+    let rows = 3, cols = 3;
+    let board = [];
+    let current = 'X';
+    let gameOver = false;
+    let mode = 'Classic';
+
+    function resetBoard(r,c){
+      rows=r;cols=c;
+      board = new Array(rows);
+      for(let i=0;i<rows;i++){board[i]=new Array(cols).fill(' ');}
+      current = 'X'; gameOver=false;
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,width,height);
+      // background
+      ctx.fillStyle = '#071a28';
+      ctx.fillRect(0,0,width,height);
+
+      // board panel
+      const pad = 24;
+      const bw = Math.min(width - pad*2, height - pad*2);
+      const cell = bw / Math.max(rows, cols);
+      const ox = (width - bw)/2;
+      const oy = (height - bw)/2;
+
+      // panel
+      ctx.fillStyle = 'rgba(255,255,255,0.03)';
+      roundRect(ctx, ox-12, oy-12, bw+24, bw+24, 12);
+      ctx.fill();
+
+      // grid
+      ctx.strokeStyle = '#759fb6';
+      ctx.lineWidth = 3;
+      for(let r=1;r<rows;r++){
+        const y = oy + r*cell;
+        ctx.beginPath(); ctx.moveTo(ox,y); ctx.lineTo(ox + bw, y); ctx.stroke();
+      }
+      for(let c=1;c<cols;c++){
+        const x = ox + c*cell;
+        ctx.beginPath(); ctx.moveTo(x, oy); ctx.lineTo(x, oy + bw); ctx.stroke();
+      }
+
+      // cells
+      for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+        const v = board[r][c];
+        const cx = ox + c*cell + cell/2;
+        const cy = oy + r*cell + cell/2;
+        if(v === 'X'){
+          // draw X
+          ctx.strokeStyle = '#ff89c2';
+          ctx.lineWidth = Math.max(2, cell*0.08);
+          ctx.beginPath();
+          ctx.moveTo(cx - cell*0.28, cy - cell*0.28);
+          ctx.lineTo(cx + cell*0.28, cy + cell*0.28);
+          ctx.moveTo(cx + cell*0.28, cy - cell*0.28);
+          ctx.lineTo(cx - cell*0.28, cy + cell*0.28);
+          ctx.stroke();
+        } else if(v === 'O'){
+          ctx.strokeStyle = '#62ffdf';
+          ctx.lineWidth = Math.max(2, cell*0.08);
+          ctx.beginPath();
+          ctx.arc(cx, cy, cell*0.32, 0, Math.PI*2);
+          ctx.stroke();
+        }
+      }
+
+      // update status text
+      smoothedFPS = smoothedFPS * 0.95 + (1000/(Math.max(1, performance.now()-last))) * 0.05;
+      status.textContent = `Player: ${current} • Mode: ${mode} • FPS: ${Math.round(smoothedFPS)}`;
+
+    }
+
+    function roundRect(ctx,x,y,w,h,r){
+      if(w<2*r) r=w/2; if(h<2*r) r=h/2;
+      ctx.beginPath();
+      ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r);
+      ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r);
+      ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+    }
+
+    function checkWin(player){
+      // rows
+      for(let r=0;r<rows;r++){
+        let ok=true; for(let c=0;c<cols;c++) if(board[r][c]!==player) {ok=false;break;}
+        if(ok) return true;
+      }
+      // cols
+      for(let c=0;c<cols;c++){
+        let ok=true; for(let r=0;r<rows;r++) if(board[r][c]!==player) {ok=false;break;}
+        if(ok) return true;
+      }
+      // diag TL-BR if square
+      if(rows===cols){
+        let ok=true; for(let i=0;i<rows;i++) if(board[i][i]!==player){ok=false;break;} if(ok) return true;
+        ok=true; for(let i=0;i<rows;i++) if(board[i][rows-1-i]!==player){ok=false;break;} if(ok) return true;
+      }
+      return false;
+    }
+
+    function isFull(){ for(let r=0;r<rows;r++) for(let c=0;c<cols;c++) if(board[r][c]===' ') return false; return true; }
+
+    canvas.addEventListener('click', function(ev){
+      if(gameOver) return;
+      const rect = canvas.getBoundingClientRect();
+      const mx = ev.clientX - rect.left;
+      const my = ev.clientY - rect.top;
+      const pad = 24;
+      const bw = Math.min(width - pad*2, height - pad*2);
+      const cell = bw / Math.max(rows, cols);
+      const ox = (width - bw)/2;
+      const oy = (height - bw)/2;
+      if(mx < ox || mx > ox + bw || my < oy || my > oy + bw) return;
+      const col = Math.floor((mx - ox)/cell);
+      const row = Math.floor((my - oy)/cell);
+      if(board[row][col] === ' '){
+        board[row][col] = current;
+        if(checkWin(current)){
+          gameOver=true;
+          setTimeout(()=> alert(current + ' wins!'), 50);
+        } else if(isFull()){
+          gameOver=true;
+          setTimeout(()=> alert('Tie!'), 50);
+        } else {
+          current = (current === 'X') ? 'O' : 'X';
+          // if playing vs AI you could add AI move here
+        }
+      }
+    });
+
+    document.getElementById('newGameBtn').addEventListener('click', function(){ resetBoard(3,3); mode='Classic'; });
+    document.getElementById('connectBtn').addEventListener('click', function(){ resetBoard(6,7); mode='Connect (6x7)'; });
+    document.getElementById('threeDBtn').addEventListener('click', function(){ resetBoard(4,4); mode='3D (fallback 2D)'; alert('3D mode is only available in the downloadable Python version. This is the 2D fallback.'); });
+
+    function onResize(){
+      const rect = canvas.getBoundingClientRect();
+      width = canvas.width = Math.min(900, window.innerWidth - 48);
+      height = canvas.height = Math.min(600, window.innerHeight - 180);
+      draw();
+    }
+    window.addEventListener('resize', onResize);
+
+    // main loop
+    function loop(ts){
+      draw();
+      last = performance.now();
+      requestAnimationFrame(loop);
+    }
+
+    // init
+    resetBoard(3,3);
+    onResize();
+    requestAnimationFrame(loop);
+  })();
+  </script>
+</body>
+</html>
