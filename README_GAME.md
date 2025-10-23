@@ -242,3 +242,9 @@ Future enhancements could include:
 - More sophisticated 3D models
 - Texture mapping
 - Advanced post-processing effects
+
+## Branch Information
+
+This implementation is on branch: `copilot/fix-improve-mainpy-push3`
+
+Pull Request Title: "Fix and improve TicTacToe 3D (main.py) — Push 3"
