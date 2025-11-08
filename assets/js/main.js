@@ -385,13 +385,17 @@
       
       day.tasks.forEach((task, idx) => {
         const taskId = generateTaskId(phase.id, day.globalDay, idx);
+        const detailsId = `${taskId}_details`;
         const isComplete = isTaskComplete(taskId);
         
         const taskItem = document.createElement('div');
         taskItem.classList.add('task-item');
         if (isComplete) taskItem.classList.add('complete');
         
-        taskItem.innerHTML = `
+        // Build task header with checkbox and label
+        const taskHeader = document.createElement('div');
+        taskHeader.classList.add('task-header');
+        taskHeader.innerHTML = `
           <input 
             type="checkbox" 
             id="${taskId}" 
@@ -404,6 +408,88 @@
             ${task.estMinutes ? `<span class="task-time">${task.estMinutes}min</span>` : ''}
           </label>
         `;
+        
+        // Add details toggle button if details exist
+        if (task.details) {
+          const toggleBtn = document.createElement('button');
+          toggleBtn.classList.add('task-details-toggle');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+          toggleBtn.setAttribute('aria-controls', detailsId);
+          toggleBtn.innerHTML = '<span class="toggle-icon">▶</span> Show details';
+          toggleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const detailsContainer = taskItem.querySelector('.task-details-container');
+            const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+            
+            if (isExpanded) {
+              toggleBtn.setAttribute('aria-expanded', 'false');
+              toggleBtn.innerHTML = '<span class="toggle-icon">▶</span> Show details';
+              detailsContainer.style.display = 'none';
+            } else {
+              toggleBtn.setAttribute('aria-expanded', 'true');
+              toggleBtn.innerHTML = '<span class="toggle-icon">▼</span> Hide details';
+              detailsContainer.style.display = 'block';
+            }
+          });
+          taskHeader.appendChild(toggleBtn);
+        }
+        
+        taskItem.appendChild(taskHeader);
+        
+        // Add details container if details exist
+        if (task.details) {
+          const detailsContainer = document.createElement('div');
+          detailsContainer.classList.add('task-details-container');
+          detailsContainer.id = detailsId;
+          detailsContainer.style.display = 'none';
+          
+          const detailsContent = document.createElement('div');
+          detailsContent.classList.add('task-details-content');
+          detailsContent.innerHTML = task.details;
+          
+          // Extract and display source badges if resourceLinks exist
+          if (task.resourceLinks && task.resourceLinks.length > 0) {
+            const sourceBadges = document.createElement('div');
+            sourceBadges.classList.add('task-source-badges');
+            sourceBadges.innerHTML = '<strong>Quick Links:</strong> ';
+            
+            task.resourceLinks.forEach((link, linkIdx) => {
+              const badge = document.createElement('a');
+              badge.classList.add('source-badge');
+              badge.href = link;
+              badge.target = '_blank';
+              badge.rel = 'noopener noreferrer';
+              
+              // Extract domain name for badge label
+              let domain = 'Link';
+              try {
+                const url = new URL(link);
+                const hostname = url.hostname.replace('www.', '');
+                // Check exact match or subdomain (ends with the domain)
+                if (hostname === 'datacamp.com' || hostname.endsWith('.datacamp.com')) domain = 'DataCamp';
+                else if (hostname === 'youtube.com' || hostname.endsWith('.youtube.com') || hostname === 'youtu.be') domain = 'YouTube';
+                else if (hostname === 'khanacademy.org' || hostname.endsWith('.khanacademy.org')) domain = 'Khan Academy';
+                else if (hostname === 'numpy.org' || hostname.endsWith('.numpy.org')) domain = 'NumPy Docs';
+                else if (hostname === 'pytorch.org' || hostname.endsWith('.pytorch.org')) domain = 'PyTorch Docs';
+                else if (hostname === 'huggingface.co' || hostname.endsWith('.huggingface.co')) domain = 'Hugging Face';
+                else if (hostname === '3blue1brown.com' || hostname === 'www.3blue1brown.com' || hostname.endsWith('.3blue1brown.com')) domain = '3Blue1Brown';
+                else if (hostname === 'arxiv.org' || hostname.endsWith('.arxiv.org')) domain = 'arXiv';
+                else domain = hostname; // Use actual hostname if no match
+              } catch (e) {
+                // Invalid URL, use generic label
+              }
+              
+              badge.textContent = domain;
+              badge.title = link;
+              sourceBadges.appendChild(badge);
+            });
+            
+            detailsContent.appendChild(sourceBadges);
+          }
+          
+          detailsContainer.appendChild(detailsContent);
+          taskItem.appendChild(detailsContainer);
+        }
         
         tasksList.appendChild(taskItem);
       });
