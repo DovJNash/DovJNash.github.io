@@ -1,765 +1,842 @@
-// AI & Machine Learning Mastery Plan - Main JavaScript
-// Single-page design with dynamic daily breakdown rendering
+// AI & Machine Learning Mastery Plan - Enhanced Main JavaScript
+// Full 12-month tabbed interface with Progress HUD and search functionality
 
 (function() {
   'use strict';
 
-  // === PLAN Data Structure (Weeks 1-2) ===
-  const PLAN = {
-    week1: {
-      id: 'week1',
-      title: 'Week 1: Math + Python-for-Data Foundations',
-      days: [
-        {
-          day: 1,
-          globalDay: 1,
-          title: 'Day 1: Environment Setup & Vectors Introduction',
-          priority: 'HIGH',
-          tasks: [
-            { id: 'action1', label: 'Complete DataCamp "Introduction to NumPy" Chapter 1 only', type: 'action' },
-            { id: 'video1', label: 'Watch 3Blue1Brown Essence of Linear Algebra Ep. 1 "Vectors" (full episode)', type: 'action' },
-            { id: 'setup', label: 'Run scripts/test_env_setup.py to verify Python environment', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day01_vectors_intro.ipynb with vector visualization', type: 'deliverable' },
-            { id: 'artifact', label: 'Generate artifacts/day01_vectors_plot.png showing 2D/3D vector examples', type: 'deliverable' },
-            { id: 'notes', label: 'Write docs/notes/day01_vectors.md summarizing vectors as geometric objects', type: 'reflection' }
-          ],
-          resources: [
-            { name: 'DataCamp: Intro to NumPy Ch.1', url: '#' },
-            { name: '3Blue1Brown Ep.1', url: 'https://www.youtube.com/watch?v=fNk_zzaMoSs' },
-            { name: 'Khan Academy: Vectors', url: '#' }
-          ],
-          outputs: ['notebooks/foundations/day01_vectors_intro.ipynb', 'artifacts/day01_vectors_plot.png', 'docs/notes/day01_vectors.md', 'scripts/test_env_setup.py (run successfully)'],
-          verification: 'Environment script passes; notebook renders plots; notes explain vector magnitude and direction.',
-          reflection: 'Consider: How do vectors differ from scalars? Why are they fundamental to ML?'
-        },
-        {
-          day: 2,
-          globalDay: 2,
-          title: 'Day 2: Vector Operations & Community Intro',
-          priority: 'HIGH',
-          tasks: [
-            { id: 'datacamp', label: 'Complete DataCamp "Introduction to NumPy" Chapter 2', type: 'action' },
-            { id: 'video', label: 'Watch 3Blue1Brown Essence of Linear Algebra Ep. 2 "Linear combinations, span, and basis vectors"', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day02_vector_ops.ipynb with addition, scaling, dot product', type: 'deliverable' },
-            { id: 'community', label: 'Join Hugging Face Discord and introduce yourself in #introductions', type: 'action' },
-            { id: 'notes', label: 'Write docs/notes/day02_span.md explaining span and linear combinations', type: 'reflection' }
-          ],
-          resources: [
-            { name: 'DataCamp: Intro to NumPy Ch.2', url: '#' },
-            { name: '3Blue1Brown Ep.2', url: 'https://www.youtube.com/watch?v=k7RM-ot2NWY' }
-          ],
-          outputs: ['notebooks/foundations/day02_vector_ops.ipynb', 'docs/notes/day02_span.md'],
-          verification: 'Notebook includes working examples of vector addition, scalar multiplication, and dot product with NumPy.',
-          reflection: 'Post in HF Discord about your learning journey start.'
-        },
-        {
-          day: 3,
-          globalDay: 3,
-          title: 'Day 3: Linear Combinations & Span',
-          priority: 'HIGH',
-          tasks: [
-            { id: 'datacamp', label: 'Complete DataCamp "Introduction to NumPy" Chapter 3', type: 'action' },
-            { id: 'khan', label: 'Complete Khan Academy linear algebra: vector intro and span pages', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day03_linear_combinations.ipynb exploring span', type: 'deliverable' },
-            { id: 'artifact', label: 'Generate artifacts/day03_span_coverage.png visualizing 2D span', type: 'deliverable' },
-            { id: 'questions', label: 'Start docs/questions/week_01.md with any unclear concepts', type: 'reflection' }
-          ],
-          resources: [
-            { name: 'DataCamp: Intro to NumPy Ch.3', url: '#' },
-            { name: 'Khan Academy: Vectors & Space', url: '#' }
-          ],
-          outputs: ['notebooks/foundations/day03_linear_combinations.ipynb', 'artifacts/day03_span_coverage.png', 'docs/questions/week_01.md'],
-          verification: 'Visualization shows span of 2 vectors covering a plane; notes explain why 2 non-parallel vectors span R².',
-          reflection: 'What happens when vectors are parallel? How does this relate to linear independence?'
-        },
-        {
-          day: 4,
-          globalDay: 4,
-          title: 'Day 4: Matrix Basics & Transformations',
-          priority: 'HIGH',
-          tasks: [
-            { id: 'video', label: 'Watch 3Blue1Brown Ep. 3 "Linear transformations and matrices"', type: 'action' },
-            { id: 'khan', label: 'Complete Khan Academy: matrix intro and matrix-vector multiplication', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day04_matrices.ipynb with transformation examples', type: 'deliverable' },
-            { id: 'artifact', label: 'Generate artifacts/day04_transformation.png showing rotation/scaling transformations', type: 'deliverable' },
-            { id: 'notes', label: 'Add to docs/notes/day04_matrices.md explaining matrices as transformations', type: 'reflection' }
-          ],
-          resources: [
-            { name: '3Blue1Brown Ep.3', url: 'https://www.youtube.com/watch?v=kYB8IZa5AuE' },
-            { name: 'Khan Academy: Matrices', url: '#' }
-          ],
-          outputs: ['notebooks/foundations/day04_matrices.ipynb', 'artifacts/day04_transformation.png', 'docs/notes/day04_matrices.md'],
-          verification: 'Notebook applies 2×2 transformation matrices to vectors; visualization shows before/after.',
-          reflection: 'Why is the column perspective for matrix-vector multiplication useful?'
-        },
-        {
-          day: 5,
-          globalDay: 5,
-          title: 'Day 5: Matrix Multiplication & Composition',
-          priority: 'HIGH',
-          tasks: [
-            { id: 'video', label: 'Watch 3Blue1Brown Ep. 4 "Matrix multiplication as composition"', type: 'action' },
-            { id: 'datacamp', label: 'DataCamp: Intermediate Python - functions and loops (refresher)', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day05_mat_mult.ipynb with composition examples', type: 'deliverable' },
-            { id: 'code', label: 'Implement matrix multiplication from scratch (no NumPy matmul)', type: 'deliverable' },
-            { id: 'notes', label: 'Write docs/notes/day05_composition.md on why order matters', type: 'reflection' }
-          ],
-          resources: [
-            { name: '3Blue1Brown Ep.4', url: 'https://www.youtube.com/watch?v=XkY2DOUCWMU' },
-            { name: 'DataCamp: Intermediate Python', url: '#' }
-          ],
-          outputs: ['notebooks/foundations/day05_mat_mult.ipynb', 'docs/notes/day05_composition.md'],
-          verification: 'From-scratch implementation matches NumPy results; notes explain AB ≠ BA in general.',
-          reflection: 'Try composing rotation + scaling vs scaling + rotation. What changes?'
-        },
-        {
-          day: 6,
-          globalDay: 6,
-          title: 'Day 6: Determinants & Inverses',
-          priority: 'MEDIUM',
-          tasks: [
-            { id: 'video1', label: 'Watch 3Blue1Brown Ep. 5 "The determinant"', type: 'action' },
-            { id: 'video2', label: 'Watch 3Blue1Brown Ep. 6 "Inverse matrices, column space and null space"', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day06_determinants.ipynb with det calculations', type: 'deliverable' },
-            { id: 'artifact', label: 'Generate artifacts/day06_det_visual.png showing area scaling', type: 'deliverable' },
-            { id: 'notes', label: 'Write docs/notes/day06_determinants.md on geometric meaning', type: 'reflection' }
-          ],
-          resources: [
-            { name: '3Blue1Brown Ep.5', url: 'https://www.youtube.com/watch?v=Ip3X9LOh2dk' },
-            { name: '3Blue1Brown Ep.6', url: 'https://www.youtube.com/watch?v=uQhTuRlWMxw' }
-          ],
-          outputs: ['notebooks/foundations/day06_determinants.ipynb', 'artifacts/day06_det_visual.png', 'docs/notes/day06_determinants.md'],
-          verification: 'Notebook computes det for sample matrices; visualization shows how unit square transforms.',
-          reflection: 'What does det=0 mean for invertibility? Why?'
-        },
-        {
-          day: 7,
-          globalDay: 7,
-          title: 'Day 7: Week 1 Review & Reflection',
-          priority: 'MEDIUM',
-          tasks: [
-            { id: 'review', label: 'Review all Week 1 notebooks and notes', type: 'action' },
-            { id: 'questions', label: 'Update docs/questions/week_01.md with remaining questions', type: 'reflection' },
-            { id: 'summary', label: 'Write docs/weekly_logs/week_01.md summarizing key learnings', type: 'deliverable' },
-            { id: 'practice', label: 'Complete 5 practice problems from Khan Academy linear algebra', type: 'action' },
-            { id: 'community', label: 'Post Week 1 progress update in HF Discord or Twitter', type: 'action' }
-          ],
-          resources: [{ name: 'Khan Academy Practice', url: '#' }],
-          outputs: ['docs/weekly_logs/week_01.md', 'docs/questions/week_01.md (updated)'],
-          verification: 'Weekly log is ≥300 words; questions list has ≥2 items.',
-          reflection: 'What was hardest this week? What clicked? What still feels fuzzy?'
-        }
-      ]
-    },
-    week2: {
-      id: 'week2',
-      title: 'Week 2: Advanced Linear Algebra & Probability Intro',
-      days: [
-        {
-          day: 8,
-          globalDay: 8,
-          title: 'Day 8: Dot Product & Duality',
-          priority: 'HIGH',
-          tasks: [
-            { id: 'video', label: 'Watch 3Blue1Brown Ep. 7 "Dot products and duality"', type: 'action' },
-            { id: 'khan', label: 'Complete Khan Academy: dot product and projections', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day08_dot_product.ipynb exploring orthogonality', type: 'deliverable' },
-            { id: 'artifact', label: 'Generate artifacts/day08_projection.png showing vector projection', type: 'deliverable' },
-            { id: 'notes', label: 'Write docs/notes/day08_duality.md on dual interpretation of dot product', type: 'reflection' }
-          ],
-          resources: [
-            { name: '3Blue1Brown Ep.7', url: 'https://www.youtube.com/watch?v=LyGKycYT2v0' },
-            { name: 'Khan Academy: Dot Product', url: '#' }
-          ],
-          outputs: ['notebooks/foundations/day08_dot_product.ipynb', 'artifacts/day08_projection.png', 'docs/notes/day08_duality.md'],
-          verification: 'Notebook shows dot product = 0 for orthogonal vectors; projection formula implemented.',
-          reflection: 'How does dot product relate to cosine similarity in ML?'
-        },
-        {
-          day: 9,
-          globalDay: 9,
-          title: 'Day 9: Cross Product & 3D Geometry',
-          priority: 'MEDIUM',
-          tasks: [
-            { id: 'video', label: 'Watch 3Blue1Brown Ep. 8 "Cross products"', type: 'action' },
-            { id: 'khan', label: 'Complete Khan Academy: cross product intro', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day09_cross_product.ipynb with 3D examples', type: 'deliverable' },
-            { id: 'artifact', label: 'Generate artifacts/day09_cross_3d.png showing perpendicular result', type: 'deliverable' },
-            { id: 'notes', label: 'Write docs/notes/day09_cross.md on right-hand rule', type: 'reflection' }
-          ],
-          resources: [
-            { name: '3Blue1Brown Ep.8', url: 'https://www.youtube.com/watch?v=eu6i7WJeinw' },
-            { name: 'Khan Academy: Cross Product', url: '#' }
-          ],
-          outputs: ['notebooks/foundations/day09_cross_product.ipynb', 'artifacts/day09_cross_3d.png', 'docs/notes/day09_cross.md'],
-          verification: 'Notebook computes cross product; 3D plot shows perpendicular result.',
-          reflection: 'Cross product is less common in ML—when might it appear?'
-        },
-        {
-          day: 10,
-          globalDay: 10,
-          title: 'Day 10: Eigenvalues & Eigenvectors Intro',
-          priority: 'HIGH',
-          tasks: [
-            { id: 'video', label: 'Watch 3Blue1Brown Ep. 13 "Eigenvectors and eigenvalues"', type: 'action' },
-            { id: 'khan', label: 'Complete Khan Academy: eigenvectors intro', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day10_eigen.ipynb with 2x2 examples', type: 'deliverable' },
-            { id: 'artifact', label: 'Generate artifacts/day10_eigen_visual.png showing eigenvector direction preservation', type: 'deliverable' },
-            { id: 'notes', label: 'Write docs/notes/day10_eigen.md explaining "direction unchanged, only scaled"', type: 'reflection' }
-          ],
-          resources: [
-            { name: '3Blue1Brown Ep.13', url: 'https://www.youtube.com/watch?v=PFDu9oVAE-g' },
-            { name: 'Khan Academy: Eigenvectors', url: '#' }
-          ],
-          outputs: ['notebooks/foundations/day10_eigen.ipynb', 'artifacts/day10_eigen_visual.png', 'docs/notes/day10_eigen.md'],
-          verification: 'NumPy linalg.eig results match manual calculations for 2×2 matrix.',
-          reflection: 'Why are eigenvalues critical for PCA and understanding matrix behavior?'
-        },
-        {
-          day: 11,
-          globalDay: 11,
-          title: 'Day 11: Probability Basics',
-          priority: 'HIGH',
-          tasks: [
-            { id: 'datacamp', label: 'DataCamp: Introduction to Statistics in Python - Chapter 1', type: 'action' },
-            { id: 'khan', label: 'Khan Academy: Probability basics (sample spaces, events)', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day11_probability.ipynb with dice/coin simulations', type: 'deliverable' },
-            { id: 'artifact', label: 'Generate artifacts/day11_prob_dist.png showing frequency distributions', type: 'deliverable' },
-            { id: 'notes', label: 'Write docs/notes/day11_probability.md on basic probability rules', type: 'reflection' }
-          ],
-          resources: [
-            { name: 'DataCamp: Intro to Statistics', url: '#' },
-            { name: 'Khan Academy: Probability', url: '#' }
-          ],
-          outputs: ['notebooks/foundations/day11_probability.ipynb', 'artifacts/day11_prob_dist.png', 'docs/notes/day11_probability.md'],
-          verification: 'Simulation of 10,000 coin flips converges to ~50% heads.',
-          reflection: 'How does probability connect to ML model uncertainty?'
-        },
-        {
-          day: 12,
-          globalDay: 12,
-          title: 'Day 12: Random Variables & Distributions',
-          priority: 'HIGH',
-          tasks: [
-            { id: 'datacamp', label: 'DataCamp: Introduction to Statistics in Python - Chapter 2', type: 'action' },
-            { id: 'khan', label: 'Khan Academy: Random variables and probability distributions', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day12_distributions.ipynb with normal/uniform distributions', type: 'deliverable' },
-            { id: 'artifact', label: 'Generate artifacts/day12_normal_dist.png showing Gaussian curve', type: 'deliverable' },
-            { id: 'notes', label: 'Write docs/notes/day12_distributions.md on mean, variance, std dev', type: 'reflection' }
-          ],
-          resources: [
-            { name: 'DataCamp: Intro to Statistics Ch.2', url: '#' },
-            { name: 'Khan Academy: Random Variables', url: '#' }
-          ],
-          outputs: ['notebooks/foundations/day12_distributions.ipynb', 'artifacts/day12_normal_dist.png', 'docs/notes/day12_distributions.md'],
-          verification: 'Plot shows normal distribution with correct mean and std; code uses numpy.random.',
-          reflection: 'Why is the normal distribution so common in ML?'
-        },
-        {
-          day: 13,
-          globalDay: 13,
-          title: 'Day 13: Expectation & Variance',
-          priority: 'MEDIUM',
-          tasks: [
-            { id: 'datacamp', label: 'DataCamp: Introduction to Statistics in Python - Chapter 3', type: 'action' },
-            { id: 'khan', label: 'Khan Academy: Expected value and variance', type: 'action' },
-            { id: 'notebook', label: 'Create notebooks/foundations/day13_expectation.ipynb calculating E[X] and Var[X]', type: 'deliverable' },
-            { id: 'code', label: 'Implement expectation and variance from scratch (no .mean()/.var())', type: 'deliverable' },
-            { id: 'notes', label: 'Write docs/notes/day13_expectation.md on why variance measures spread', type: 'reflection' }
-          ],
-          resources: [
-            { name: 'DataCamp: Intro to Statistics Ch.3', url: '#' },
-            { name: 'Khan Academy: Expectation', url: '#' }
-          ],
-          outputs: ['notebooks/foundations/day13_expectation.ipynb', 'docs/notes/day13_expectation.md'],
-          verification: 'From-scratch calculations match NumPy; notebook explains formulas.',
-          reflection: 'How do E[X] and Var[X] relate to model evaluation metrics?'
-        },
-        {
-          day: 14,
-          globalDay: 14,
-          title: 'Day 14: Week 2 Review & Integration',
-          priority: 'MEDIUM',
-          tasks: [
-            { id: 'review', label: 'Review all Week 2 notebooks and notes', type: 'action' },
-            { id: 'questions', label: 'Create docs/questions/week_02.md with any unclear concepts', type: 'reflection' },
-            { id: 'summary', label: 'Write docs/weekly_logs/week_02.md summarizing key learnings', type: 'deliverable' },
-            { id: 'integration', label: 'Create notebooks/foundations/week_02_integration.ipynb connecting linear algebra + probability', type: 'deliverable' },
-            { id: 'community', label: 'Post Week 2 progress update and one question to HF Discord or community', type: 'action' }
-          ],
-          resources: [{ name: 'Week 2 Review Materials', url: '#' }],
-          outputs: ['docs/weekly_logs/week_02.md', 'docs/questions/week_02.md', 'notebooks/foundations/week_02_integration.ipynb'],
-          verification: 'Weekly log is ≥300 words; integration notebook connects at least 2 concepts.',
-          reflection: 'How do eigenvectors + probability both appear in PCA? Start thinking about connections.'
-        }
-      ]
-    }
+  // === Configuration ===
+  const STORAGE_PREFIX = 'llmPlan';
+  const STORAGE_KEYS = {
+    ACTIVE_TAB: `${STORAGE_PREFIX}.ui.activeTab`,
+    TASKS: `${STORAGE_PREFIX}.tasks`,
+    TIME: `${STORAGE_PREFIX}.time`,
+    PHASE_RENDERED: `${STORAGE_PREFIX}.rendered`
   };
 
   // === State Management ===
-  let debounceTimer = null;
+  let state = {
+    activePhase: null,
+    renderedPhases: new Set(),
+    tasks: {},
+    timeTracking: {},
+    searchActive: false
+  };
 
   // === Utility Functions ===
-  function getTaskId(weekId, globalDay, taskIndex) {
-    return `llmPlan.day.${globalDay}.task.${taskIndex}`;
-  }
-
-  function loadTaskState(taskId) {
-    return localStorage.getItem(taskId) === 'true';
-  }
-
-  function saveTaskState(taskId, completed) {
-    localStorage.setItem(taskId, completed.toString());
-  }
-
-  function debounce(func, wait) {
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(debounceTimer);
-        func(...args);
-      };
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(later, wait);
-    };
-  }
-
-  function announceProgress(message) {
-    const liveRegion = document.getElementById('progressLive');
-    if (liveRegion) {
-      liveRegion.textContent = message;
-      // Clear after 3 seconds
-      setTimeout(() => {
-        liveRegion.textContent = '';
-      }, 3000);
+  
+  function getFromStorage(key, defaultValue = null) {
+    try {
+      const value = localStorage.getItem(key);
+      return value ? JSON.parse(value) : defaultValue;
+    } catch (e) {
+      console.error('Error reading from localStorage:', e);
+      return defaultValue;
     }
   }
 
-  // === Rendering Functions ===
-  function renderDayCard(day, weekId) {
-    const card = document.createElement('div');
-    card.className = 'day-card';
-    card.dataset.day = day.globalDay;
-    
-    const priorityBadgeClass = `pri-${day.priority.toLowerCase()}`;
-    
-    let tasksHtml = '';
-    day.tasks.forEach((task, idx) => {
-      const taskId = getTaskId(weekId, day.globalDay, idx);
-      const isChecked = loadTaskState(taskId);
-      tasksHtml += `
-        <div class="task-row">
-          <input type="checkbox" 
-                 id="${taskId}" 
-                 data-task-id="${taskId}"
-                 ${isChecked ? 'checked' : ''}>
-          <label for="${taskId}">${task.label}</label>
-        </div>
-      `;
-    });
-    
-    let resourcesHtml = '';
-    if (day.resources && day.resources.length > 0) {
-      resourcesHtml = '<div class="pill-links">';
-      day.resources.forEach(resource => {
-        resourcesHtml += `<a href="${resource.url}" class="pill-link" target="_blank" rel="noopener">${resource.name}</a>`;
-      });
-      resourcesHtml += '</div>';
+  function setToStorage(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (e) {
+      console.error('Error writing to localStorage:', e);
     }
-    
-    let outputsHtml = '';
-    if (day.outputs && day.outputs.length > 0) {
-      outputsHtml = '<ul class="artifact-list">';
-      day.outputs.forEach(output => {
-        outputsHtml += `<li>${output}</li>`;
-      });
-      outputsHtml += '</ul>';
-    }
-    
-    card.innerHTML = `
-      <div class="day-card-header">
-        <div>
-          <h3 class="day-card-title">Day ${day.day}: ${day.title}</h3>
-          <span class="badge ${priorityBadgeClass}">${day.priority}</span>
-        </div>
-      </div>
-      
-      <div class="day-card-section">
-        <h4>📋 Tasks</h4>
-        ${tasksHtml}
-      </div>
-      
-      ${day.resources ? `
-        <div class="day-card-section">
-          <h4>📚 Resources</h4>
-          ${resourcesHtml}
-        </div>
-      ` : ''}
-      
-      ${day.outputs ? `
-        <div class="day-card-section">
-          <h4>📦 Outputs</h4>
-          ${outputsHtml}
-        </div>
-      ` : ''}
-      
-      <div class="day-card-section">
-        <h4>✅ Verification</h4>
-        <p>${day.verification}</p>
-      </div>
-      
-      <div class="day-card-section">
-        <h4>💭 Reflection</h4>
-        <p>${day.reflection}</p>
-      </div>
-    `;
-    
-    return card;
   }
 
-  function renderWeekSection(week) {
-    const section = document.createElement('div');
-    section.className = 'week-section';
-    section.dataset.weekId = week.id;
-    
-    const weekHeader = document.createElement('div');
-    weekHeader.className = 'week-header';
-    weekHeader.innerHTML = `
-      <h3 class="week-title">${week.title}</h3>
-      <span class="week-progress" id="week-${week.id}-progress">0%</span>
-    `;
-    section.appendChild(weekHeader);
-    
-    week.days.forEach(day => {
-      const dayCard = renderDayCard(day, week.id);
-      section.appendChild(dayCard);
-    });
-    
-    return section;
+  function generateTaskId(phaseId, globalDay, taskIndex) {
+    return `${STORAGE_PREFIX}_${phaseId}_day${globalDay}_task${taskIndex}`;
   }
 
-  function renderPhaseAccordion() {
-    const accordion = document.createElement('div');
-    accordion.className = 'phase-accordion';
-    accordion.id = 'weeks-1-2-accordion';
-    
-    const header = document.createElement('div');
-    header.className = 'phase-accordion-header';
-    header.innerHTML = `
-      <h2 class="phase-accordion-title">Weeks 1–2: Foundations (Days 1–14)</h2>
-      <span class="phase-accordion-toggle">−</span>
-    `;
-    
-    const content = document.createElement('div');
-    content.className = 'phase-accordion-content';
-    
-    // Render both weeks
-    content.appendChild(renderWeekSection(PLAN.week1));
-    content.appendChild(renderWeekSection(PLAN.week2));
-    
-    accordion.appendChild(header);
-    accordion.appendChild(content);
-    
-    // Toggle functionality
-    header.addEventListener('click', () => {
-      header.classList.toggle('collapsed');
-      content.classList.toggle('collapsed');
-    });
-    
-    return accordion;
+  function generateTimeId(globalDay) {
+    return `${STORAGE_PREFIX}.time.day.${globalDay}`;
+  }
+
+  // === Task Management ===
+  
+  function isTaskComplete(taskId) {
+    const tasks = getFromStorage(STORAGE_KEYS.TASKS, {});
+    return tasks[taskId] === true;
+  }
+
+  function setTaskComplete(taskId, complete) {
+    const tasks = getFromStorage(STORAGE_KEYS.TASKS, {});
+    if (complete) {
+      tasks[taskId] = true;
+    } else {
+      delete tasks[taskId];
+    }
+    setToStorage(STORAGE_KEYS.TASKS, tasks);
+    updateProgress();
+  }
+
+  function getActualTime(globalDay) {
+    const timeId = generateTimeId(globalDay);
+    return getFromStorage(timeId, 0);
+  }
+
+  function setActualTime(globalDay, minutes) {
+    const timeId = generateTimeId(globalDay);
+    setToStorage(timeId, parseInt(minutes) || 0);
   }
 
   // === Progress Calculation ===
-  function computeGlobalProgress() {
-    const allTaskKeys = [];
+  
+  function calculateProgress() {
+    const tasks = getFromStorage(STORAGE_KEYS.TASKS, {});
+    const completedTasks = Object.keys(tasks).filter(k => tasks[k]).length;
     
-    // Collect all task IDs
-    Object.keys(PLAN).forEach(weekKey => {
-      const week = PLAN[weekKey];
-      week.days.forEach(day => {
-        day.tasks.forEach((task, idx) => {
-          const taskId = getTaskId(week.id, day.globalDay, idx);
-          allTaskKeys.push(taskId);
-        });
-      });
-    });
-    
-    const totalTasks = allTaskKeys.length;
-    const completedTasks = allTaskKeys.filter(key => loadTaskState(key)).length;
-    const percent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
-    
-    // Count completed days
+    // Calculate total tasks across all phases
+    let totalTasks = 0;
+    let totalDays = 0;
     let completedDays = 0;
-    Object.keys(PLAN).forEach(weekKey => {
-      const week = PLAN[weekKey];
-      week.days.forEach(day => {
-        const dayTaskIds = day.tasks.map((task, idx) => getTaskId(week.id, day.globalDay, idx));
-        const allDayTasksComplete = dayTaskIds.every(taskId => loadTaskState(taskId));
-        if (allDayTasksComplete && dayTaskIds.length > 0) {
-          completedDays++;
-        }
-      });
-    });
     
-    return { total: totalTasks, completed: completedTasks, percent, days: completedDays };
-  }
-
-  function computeWeekProgress(weekId) {
-    const week = PLAN[weekId];
-    if (!week) return 0;
-    
-    const allTaskIds = [];
-    week.days.forEach(day => {
-      day.tasks.forEach((task, idx) => {
-        allTaskIds.push(getTaskId(week.id, day.globalDay, idx));
-      });
-    });
-    
-    const total = allTaskIds.length;
-    const completed = allTaskIds.filter(id => loadTaskState(id)).length;
-    return total > 0 ? Math.round((completed / total) * 100) : 0;
-  }
-
-  function updateGlobalProgress() {
-    const progress = computeGlobalProgress();
-    
-    // Update stats
-    const completedEl = document.getElementById('global-completed');
-    const totalEl = document.getElementById('global-total');
-    const daysEl = document.getElementById('global-days');
-    
-    if (completedEl) completedEl.textContent = progress.completed;
-    if (totalEl) totalEl.textContent = progress.total;
-    if (daysEl) daysEl.textContent = progress.days;
-    
-    // Update progress ring
-    const ringText = document.getElementById('progress-ring-percent');
-    const ringCircle = document.getElementById('progress-ring-value');
-    
-    if (ringText) ringText.textContent = `${progress.percent}%`;
-    if (ringCircle) {
-      const circumference = 2 * Math.PI * 90; // radius = 90
-      const offset = circumference - (progress.percent / 100) * circumference;
-      ringCircle.style.strokeDashoffset = offset;
-    }
-    
-    // Update week progress
-    Object.keys(PLAN).forEach(weekKey => {
-      const weekPercent = computeWeekProgress(weekKey);
-      const weekProgressEl = document.getElementById(`week-${weekKey}-progress`);
-      if (weekProgressEl) {
-        weekProgressEl.textContent = `${weekPercent}%`;
-      }
-    });
-    
-    // Announce to screen readers
-    announceProgress(`Progress updated: ${progress.completed} of ${progress.total} tasks completed, ${progress.percent}%`);
-  }
-
-  const debouncedUpdateProgress = debounce(updateGlobalProgress, 300);
-
-  // === Event Handlers ===
-  function handleCheckboxChange(event) {
-    const checkbox = event.target;
-    if (checkbox.type === 'checkbox' && checkbox.dataset.taskId) {
-      const taskId = checkbox.dataset.taskId;
-      saveTaskState(taskId, checkbox.checked);
-      debouncedUpdateProgress();
-    }
-  }
-
-  function resetProgress() {
-    const confirmed = confirm('Reset ALL progress? Type "RESET" in the next prompt to confirm.');
-    if (!confirmed) return;
-    
-    const secondConfirm = prompt('Type RESET to confirm resetting all progress:');
-    if (secondConfirm !== 'RESET') {
-      alert('Reset cancelled.');
-      return;
-    }
-    
-    // Clear only llmPlan.* keys
-    const keys = Object.keys(localStorage);
-    keys.forEach(key => {
-      if (key.startsWith('llmPlan.')) {
-        localStorage.removeItem(key);
-      }
-    });
-    
-    // Uncheck all checkboxes
-    document.querySelectorAll('input[type="checkbox"][data-task-id]').forEach(cb => {
-      cb.checked = false;
-    });
-    
-    updateGlobalProgress();
-    alert('All progress has been reset.');
-  }
-
-  function exportProgress() {
-    const progress = computeGlobalProgress();
-    
-    const exportData = {
-      exportDate: new Date().toISOString(),
-      globalProgress: {
-        totalTasks: progress.total,
-        completedTasks: progress.completed,
-        percent: progress.percent,
-        daysComplete: progress.days
-      },
-      weeks: {}
-    };
-    
-    Object.keys(PLAN).forEach(weekKey => {
-      const week = PLAN[weekKey];
-      const weekProgress = computeWeekProgress(weekKey);
-      
-      exportData.weeks[weekKey] = {
-        title: week.title,
-        progress: weekProgress,
-        days: week.days.map(day => {
-          const dayTaskIds = day.tasks.map((task, idx) => getTaskId(week.id, day.globalDay, idx));
-          const completed = dayTaskIds.filter(id => loadTaskState(id)).length;
-          const total = dayTaskIds.length;
-          
-          return {
-            day: day.day,
-            globalDay: day.globalDay,
-            title: day.title,
-            totalTasks: total,
-            completedTasks: completed,
-            percent: total > 0 ? Math.round((completed / total) * 100) : 0,
-            complete: completed === total && total > 0
-          };
-        })
-      };
-    });
-    
-    // Download as JSON
-    const dataStr = JSON.stringify(exportData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `llm-mastery-progress-${new Date().toISOString().split('T')[0]}.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-    
-    alert('Progress exported successfully!');
-  }
-
-  // === Sidebar & Scrollspy ===
-  function initSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    if (!sidebar) return;
-    
-    const sidebarLinks = sidebar.querySelectorAll('a[href^="#"]');
-    const sections = document.querySelectorAll('.content-section[id]');
-    
-    if (sections.length === 0) return;
-    
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -70% 0px',
-      threshold: 0
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          sidebarLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
+    if (typeof PLAN !== 'undefined' && PLAN.phases) {
+      PLAN.phases.forEach(phase => {
+        if (phase.days) {
+          totalDays += phase.days.length;
+          phase.days.forEach(day => {
+            if (day.tasks) {
+              totalTasks += day.tasks.length;
+              // Check if all tasks for this day are complete
+              const allTasksComplete = day.tasks.every((_, idx) => {
+                const taskId = generateTaskId(phase.id, day.globalDay, idx);
+                return isTaskComplete(taskId);
+              });
+              if (allTasksComplete) {
+                completedDays++;
+              }
             }
           });
         }
       });
-    }, observerOptions);
+    }
     
-    sections.forEach(section => observer.observe(section));
+    // Calculate phase-specific progress
+    let phaseCompleted = 0;
+    let phaseTotal = 0;
     
-    // Smooth scrolling
-    sidebarLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            if (history.pushState) {
-              history.pushState(null, null, href);
-            }
+    if (state.activePhase && typeof PLAN !== 'undefined' && PLAN.phases) {
+      const phase = PLAN.phases.find(p => p.id === state.activePhase);
+      if (phase && phase.days) {
+        phase.days.forEach(day => {
+          if (day.tasks) {
+            phaseTotal += day.tasks.length;
+            day.tasks.forEach((_, idx) => {
+              const taskId = generateTaskId(phase.id, day.globalDay, idx);
+              if (isTaskComplete(taskId)) {
+                phaseCompleted++;
+              }
+            });
+          }
+        });
+      }
+    }
+    
+    return {
+      global: {
+        completed: completedTasks,
+        total: totalTasks,
+        percent: totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0
+      },
+      phase: {
+        completed: phaseCompleted,
+        total: phaseTotal,
+        percent: phaseTotal > 0 ? Math.round((phaseCompleted / phaseTotal) * 100) : 0
+      },
+      days: {
+        completed: completedDays,
+        total: totalDays
+      }
+    };
+  }
+
+  function updateProgress() {
+    const progress = calculateProgress();
+    
+    // Update main progress section (if exists)
+    const globalCompleted = document.getElementById('global-completed');
+    const globalTotal = document.getElementById('global-total');
+    const globalDays = document.getElementById('global-days');
+    const progressRingPercent = document.getElementById('progress-ring-percent');
+    const progressRingValue = document.getElementById('progress-ring-value');
+    
+    if (globalCompleted) globalCompleted.textContent = progress.global.completed;
+    if (globalTotal) globalTotal.textContent = progress.global.total;
+    if (globalDays) globalDays.textContent = progress.days.completed;
+    if (progressRingPercent) progressRingPercent.textContent = `${progress.global.percent}%`;
+    
+    // Update progress ring
+    if (progressRingValue) {
+      const radius = 90;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference - (progress.global.percent / 100) * circumference;
+      progressRingValue.style.strokeDasharray = `${circumference} ${circumference}`;
+      progressRingValue.style.strokeDashoffset = offset;
+    }
+    
+    // Update HUD
+    const hudGlobalProgress = document.getElementById('hudGlobalProgress');
+    const hudPhaseProgress = document.getElementById('hudPhaseProgress');
+    const hudTasksComplete = document.getElementById('hudTasksComplete');
+    const hudDaysComplete = document.getElementById('hudDaysComplete');
+    
+    if (hudGlobalProgress) hudGlobalProgress.textContent = `${progress.global.percent}%`;
+    if (hudPhaseProgress) hudPhaseProgress.textContent = `${progress.phase.percent}%`;
+    if (hudTasksComplete) hudTasksComplete.textContent = `${progress.global.completed}/${progress.global.total}`;
+    if (hudDaysComplete) hudDaysComplete.textContent = `${progress.days.completed}/${progress.days.total}`;
+  }
+
+  // === Tab Management ===
+  
+  function initTabs() {
+    if (typeof PLAN === 'undefined' || !PLAN.phases) {
+      console.error('PLAN data not found');
+      return;
+    }
+    
+    const tabsNav = document.querySelector('.tabs-nav');
+    if (!tabsNav) return;
+    
+    // Create tabs
+    PLAN.phases.forEach((phase, index) => {
+      const tab = document.createElement('button');
+      tab.role = 'tab';
+      tab.id = `tab-${phase.id}`;
+      tab.setAttribute('aria-controls', `panel-${phase.id}`);
+      tab.setAttribute('aria-selected', 'false');
+      tab.classList.add('tab');
+      tab.textContent = `${index + 1}. ${phase.title.split(':')[0]}`;
+      tab.title = phase.title;
+      
+      tab.addEventListener('click', () => activateTab(phase.id));
+      
+      tabsNav.appendChild(tab);
+    });
+    
+    // Keyboard navigation
+    tabsNav.addEventListener('keydown', handleTabKeydown);
+    
+    // Load saved active tab or default to first
+    const savedTab = getFromStorage(STORAGE_KEYS.ACTIVE_TAB, null);
+    const initialTab = savedTab || PLAN.phases[0].id;
+    activateTab(initialTab);
+  }
+
+  function handleTabKeydown(e) {
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const currentIndex = tabs.findIndex(tab => tab.getAttribute('aria-selected') === 'true');
+    
+    let nextIndex = currentIndex;
+    
+    switch(e.key) {
+      case 'ArrowLeft':
+        nextIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
+        e.preventDefault();
+        break;
+      case 'ArrowRight':
+        nextIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+        e.preventDefault();
+        break;
+      case 'Home':
+        nextIndex = 0;
+        e.preventDefault();
+        break;
+      case 'End':
+        nextIndex = tabs.length - 1;
+        e.preventDefault();
+        break;
+      default:
+        return;
+    }
+    
+    if (nextIndex !== currentIndex) {
+      tabs[nextIndex].click();
+      tabs[nextIndex].focus();
+    }
+  }
+
+  function activateTab(phaseId) {
+    if (typeof PLAN === 'undefined') return;
+    
+    const phase = PLAN.phases.find(p => p.id === phaseId);
+    if (!phase) return;
+    
+    // Update tab states
+    document.querySelectorAll('.tab').forEach(tab => {
+      const isActive = tab.id === `tab-${phaseId}`;
+      tab.setAttribute('aria-selected', isActive.toString());
+      if (isActive) {
+        tab.classList.add('active');
+      } else {
+        tab.classList.remove('active');
+      }
+    });
+    
+    // Update state
+    state.activePhase = phaseId;
+    setToStorage(STORAGE_KEYS.ACTIVE_TAB, phaseId);
+    
+    // Render panel (lazy)
+    renderPanel(phase);
+    
+    // Show active panel
+    document.querySelectorAll('.tab-panel').forEach(panel => {
+      panel.style.display = panel.id === `panel-${phaseId}` ? 'block' : 'none';
+    });
+    
+    // Update progress to reflect current phase
+    updateProgress();
+  }
+
+  function renderPanel(phase) {
+    // Check if already rendered
+    if (state.renderedPhases.has(phase.id)) return;
+    
+    const tabsContent = document.querySelector('.tabs-content');
+    if (!tabsContent) return;
+    
+    // Create panel
+    const panel = document.createElement('div');
+    panel.role = 'tabpanel';
+    panel.id = `panel-${phase.id}`;
+    panel.setAttribute('aria-labelledby', `tab-${phase.id}`);
+    panel.classList.add('tab-panel');
+    
+    // Phase header
+    const header = document.createElement('div');
+    header.classList.add('phase-header');
+    header.innerHTML = `
+      <h3>${phase.title}</h3>
+      <p class="phase-meta">${phase.duration} | ${phase.description}</p>
+    `;
+    panel.appendChild(header);
+    
+    // Days container
+    const daysContainer = document.createElement('div');
+    daysContainer.classList.add('days-container');
+    
+    if (phase.days && phase.days.length > 0) {
+      phase.days.forEach(day => {
+        const dayCard = createDayCard(phase, day);
+        daysContainer.appendChild(dayCard);
+      });
+    } else {
+      const placeholder = document.createElement('div');
+      placeholder.classList.add('placeholder');
+      placeholder.textContent = 'Detailed day breakdown coming soon...';
+      daysContainer.appendChild(placeholder);
+    }
+    
+    panel.appendChild(daysContainer);
+    tabsContent.appendChild(panel);
+    
+    // Mark as rendered
+    state.renderedPhases.add(phase.id);
+  }
+
+  function createDayCard(phase, day) {
+    const card = document.createElement('div');
+    card.classList.add('day-card');
+    card.dataset.globalDay = day.globalDay;
+    
+    // Calculate estimated time
+    const estTime = day.tasks ? day.tasks.reduce((sum, task) => sum + (task.estMinutes || 0), 0) : 0;
+    const actualTime = getActualTime(day.globalDay);
+    
+    // Check if all tasks complete
+    const allTasksComplete = day.tasks ? day.tasks.every((_, idx) => {
+      const taskId = generateTaskId(phase.id, day.globalDay, idx);
+      return isTaskComplete(taskId);
+    }) : false;
+    
+    if (allTasksComplete) {
+      card.classList.add('complete');
+    }
+    
+    // Card header
+    const header = document.createElement('div');
+    header.classList.add('day-card-header');
+    header.innerHTML = `
+      <div class="day-card-title">
+        <h4>Day ${day.globalDay}: ${day.title}</h4>
+        <span class="priority-badge priority-${day.priority.toLowerCase()}">${day.priority}</span>
+      </div>
+      <div class="day-card-meta">
+        <span class="time-estimate">Est: ${estTime} min</span>
+        <span class="time-separator">|</span>
+        <span class="time-actual">
+          Actual: <input 
+            type="number" 
+            min="0" 
+            step="1" 
+            value="${actualTime}" 
+            class="time-input"
+            data-global-day="${day.globalDay}"
+            aria-label="Actual time in minutes"
+          /> min
+        </span>
+      </div>
+    `;
+    card.appendChild(header);
+    
+    // Tasks list
+    if (day.tasks && day.tasks.length > 0) {
+      const tasksList = document.createElement('div');
+      tasksList.classList.add('tasks-list');
+      
+      day.tasks.forEach((task, idx) => {
+        const taskId = generateTaskId(phase.id, day.globalDay, idx);
+        const isComplete = isTaskComplete(taskId);
+        
+        const taskItem = document.createElement('div');
+        taskItem.classList.add('task-item');
+        if (isComplete) taskItem.classList.add('complete');
+        
+        taskItem.innerHTML = `
+          <input 
+            type="checkbox" 
+            id="${taskId}" 
+            ${isComplete ? 'checked' : ''}
+            data-task-id="${taskId}"
+            aria-label="Task: ${task.label}"
+          />
+          <label for="${taskId}">
+            <span class="task-label">${task.label}</span>
+            ${task.estMinutes ? `<span class="task-time">${task.estMinutes}min</span>` : ''}
+          </label>
+        `;
+        
+        tasksList.appendChild(taskItem);
+      });
+      
+      card.appendChild(tasksList);
+    }
+    
+    // Reflection prompt
+    if (day.reflectionPrompt) {
+      const reflection = document.createElement('div');
+      reflection.classList.add('reflection-prompt');
+      reflection.innerHTML = `<strong>💭 Reflection:</strong> ${day.reflectionPrompt}`;
+      card.appendChild(reflection);
+    }
+    
+    // Event listeners
+    const timeInput = card.querySelector('.time-input');
+    if (timeInput) {
+      timeInput.addEventListener('change', (e) => {
+        setActualTime(day.globalDay, e.target.value);
+      });
+    }
+    
+    const checkboxes = card.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', (e) => {
+        const taskId = e.target.dataset.taskId;
+        setTaskComplete(taskId, e.target.checked);
+        
+        // Update card complete state
+        const allComplete = Array.from(checkboxes).every(cb => cb.checked);
+        if (allComplete) {
+          card.classList.add('complete');
+        } else {
+          card.classList.remove('complete');
+        }
+        
+        // Update task item state
+        const taskItem = e.target.closest('.task-item');
+        if (taskItem) {
+          if (e.target.checked) {
+            taskItem.classList.add('complete');
+          } else {
+            taskItem.classList.remove('complete');
           }
         }
       });
     });
+    
+    return card;
   }
 
-  // === Anchor Links ===
+  // === Search Functionality ===
+  
+  function toggleSearch() {
+    const searchModal = document.getElementById('searchModal');
+    if (!searchModal) return;
+    
+    state.searchActive = !state.searchActive;
+    
+    if (state.searchActive) {
+      searchModal.style.display = 'flex';
+      searchModal.setAttribute('aria-hidden', 'false');
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        setTimeout(() => searchInput.focus(), 100);
+      }
+    } else {
+      searchModal.style.display = 'none';
+      searchModal.setAttribute('aria-hidden', 'true');
+      clearSearch();
+    }
+  }
+
+  function performSearch(query) {
+    if (!query || !state.activePhase || typeof PLAN === 'undefined') return;
+    
+    const phase = PLAN.phases.find(p => p.id === state.activePhase);
+    if (!phase || !phase.days) return;
+    
+    const results = [];
+    const lowerQuery = query.toLowerCase();
+    
+    phase.days.forEach(day => {
+      if (day.tasks) {
+        day.tasks.forEach((task, idx) => {
+          if (task.label.toLowerCase().includes(lowerQuery)) {
+            results.push({
+              day: day.globalDay,
+              dayTitle: day.title,
+              task: task.label,
+              taskId: generateTaskId(phase.id, day.globalDay, idx)
+            });
+          }
+        });
+      }
+    });
+    
+    displaySearchResults(results, query);
+    highlightSearchMatches(query);
+  }
+
+  function displaySearchResults(results, query) {
+    const searchResults = document.getElementById('searchResults');
+    if (!searchResults) return;
+    
+    if (results.length === 0) {
+      searchResults.innerHTML = `<div class="search-no-results">No tasks found matching "${query}"</div>`;
+      return;
+    }
+    
+    searchResults.innerHTML = `
+      <div class="search-results-header">
+        Found ${results.length} task${results.length !== 1 ? 's' : ''}
+      </div>
+      ${results.map(result => `
+        <div class="search-result-item" data-day="${result.day}">
+          <div class="search-result-day">Day ${result.day}: ${result.dayTitle}</div>
+          <div class="search-result-task">${highlightText(result.task, query)}</div>
+        </div>
+      `).join('')}
+    `;
+    
+    // Add click handlers
+    searchResults.querySelectorAll('.search-result-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const day = item.dataset.day;
+        const dayCard = document.querySelector(`[data-global-day="${day}"]`);
+        if (dayCard) {
+          dayCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          dayCard.classList.add('highlighted');
+          setTimeout(() => dayCard.classList.remove('highlighted'), 2000);
+        }
+        toggleSearch();
+      });
+    });
+  }
+
+  function highlightText(text, query) {
+    const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  function escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlightSearchMatches(query) {
+    if (!query) return clearHighlights();
+    
+    const activePanel = document.querySelector('.tab-panel[style*="display: block"]');
+    if (!activePanel) return;
+    
+    const taskLabels = activePanel.querySelectorAll('.task-label');
+    const lowerQuery = query.toLowerCase();
+    
+    taskLabels.forEach(label => {
+      const originalText = label.textContent;
+      if (originalText.toLowerCase().includes(lowerQuery)) {
+        label.innerHTML = highlightText(originalText, query);
+        label.closest('.day-card').classList.add('search-match');
+      }
+    });
+  }
+
+  function clearHighlights() {
+    document.querySelectorAll('.task-label mark').forEach(mark => {
+      const text = mark.textContent;
+      mark.replaceWith(text);
+    });
+    document.querySelectorAll('.day-card.search-match').forEach(card => {
+      card.classList.remove('search-match');
+    });
+  }
+
+  function clearSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    
+    if (searchInput) searchInput.value = '';
+    if (searchResults) searchResults.innerHTML = '';
+    
+    clearHighlights();
+  }
+
+  // === Reset Functions ===
+  
+  function resetAllProgress() {
+    if (!confirm('Are you sure you want to reset ALL progress? This cannot be undone.')) {
+      return;
+    }
+    
+    localStorage.removeItem(STORAGE_KEYS.TASKS);
+    
+    // Reset all time tracking
+    for (let i = 1; i <= 364; i++) {
+      localStorage.removeItem(generateTimeId(i));
+    }
+    
+    // Refresh UI
+    location.reload();
+  }
+
+  function resetPhaseProgress() {
+    if (!state.activePhase) return;
+    
+    if (!confirm(`Are you sure you want to reset progress for the current phase? This cannot be undone.`)) {
+      return;
+    }
+    
+    const phase = PLAN.phases.find(p => p.id === state.activePhase);
+    if (!phase || !phase.days) return;
+    
+    const tasks = getFromStorage(STORAGE_KEYS.TASKS, {});
+    
+    phase.days.forEach(day => {
+      if (day.tasks) {
+        day.tasks.forEach((_, idx) => {
+          const taskId = generateTaskId(phase.id, day.globalDay, idx);
+          delete tasks[taskId];
+        });
+      }
+      localStorage.removeItem(generateTimeId(day.globalDay));
+    });
+    
+    setToStorage(STORAGE_KEYS.TASKS, tasks);
+    
+    // Refresh panel
+    state.renderedPhases.delete(state.activePhase);
+    const panel = document.getElementById(`panel-${state.activePhase}`);
+    if (panel) panel.remove();
+    
+    activateTab(state.activePhase);
+  }
+
+  // === Export Functions ===
+  
+  function exportProgress() {
+    const progress = calculateProgress();
+    const tasks = getFromStorage(STORAGE_KEYS.TASKS, {});
+    
+    const exportData = {
+      timestamp: new Date().toISOString(),
+      summary: progress,
+      tasks: tasks,
+      timeTracking: {}
+    };
+    
+    // Collect time tracking
+    for (let i = 1; i <= 364; i++) {
+      const time = getActualTime(i);
+      if (time > 0) {
+        exportData.timeTracking[`day${i}`] = time;
+      }
+    }
+    
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `llm-plan-progress-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // === HUD Functions ===
+  
+  function initHUD() {
+    const hudToggle = document.getElementById('hudToggle');
+    const hudExport = document.getElementById('hudExport');
+    const hudResetAll = document.getElementById('hudResetAll');
+    const hudResetPhase = document.getElementById('hudResetPhase');
+    const hudSearch = document.getElementById('hudSearch');
+    
+    if (hudToggle) {
+      hudToggle.addEventListener('click', () => {
+        const hud = document.getElementById('progressHUD');
+        const content = hud.querySelector('.hud-content');
+        const icon = hudToggle.querySelector('.hud-toggle-icon');
+        const isExpanded = hudToggle.getAttribute('aria-expanded') === 'true';
+        
+        if (isExpanded) {
+          content.style.display = 'none';
+          icon.textContent = '+';
+          hudToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          content.style.display = 'block';
+          icon.textContent = '−';
+          hudToggle.setAttribute('aria-expanded', 'true');
+        }
+      });
+    }
+    
+    if (hudExport) hudExport.addEventListener('click', exportProgress);
+    if (hudResetAll) hudResetAll.addEventListener('click', resetAllProgress);
+    if (hudResetPhase) hudResetPhase.addEventListener('click', resetPhaseProgress);
+    if (hudSearch) hudSearch.addEventListener('click', toggleSearch);
+  }
+
+  // === Search Modal Functions ===
+  
+  function initSearchModal() {
+    const searchModal = document.getElementById('searchModal');
+    const searchModalClose = document.getElementById('searchModalClose');
+    const searchInput = document.getElementById('searchInput');
+    
+    if (searchModalClose) {
+      searchModalClose.addEventListener('click', toggleSearch);
+    }
+    
+    if (searchModal) {
+      searchModal.addEventListener('click', (e) => {
+        if (e.target === searchModal) {
+          toggleSearch();
+        }
+      });
+    }
+    
+    if (searchInput) {
+      let searchTimeout;
+      searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          performSearch(e.target.value);
+        }, 300);
+      });
+      
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          toggleSearch();
+        }
+      });
+    }
+  }
+
+  // === Legacy Functions (for compatibility) ===
+  
+  function initSidebar() {
+    // Existing sidebar functionality
+    const sidebar = document.querySelector('.sidebar');
+    if (!sidebar) return;
+    
+    // Highlight active section on scroll
+    const sections = document.querySelectorAll('.content-section');
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+    
+    function highlightNavigation() {
+      let currentSection = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 150) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', highlightNavigation);
+    highlightNavigation();
+  }
+
   function initAnchorLinks() {
     const anchorLinks = document.querySelectorAll('.anchor-link');
     
     anchorLinks.forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        const sectionId = this.closest('.content-section').getAttribute('id');
-        const url = window.location.origin + window.location.pathname + '#' + sectionId;
-        
-        if (navigator.clipboard && navigator.clipboard.writeText) {
+        const section = this.closest('.content-section');
+        if (section) {
+          const url = `${window.location.origin}${window.location.pathname}#${section.id}`;
+          
+          // Copy to clipboard
           navigator.clipboard.writeText(url).then(() => {
+            // Show feedback
             const originalText = this.textContent;
             this.textContent = '✓';
-            this.style.background = '#10b981';
-            this.style.borderColor = '#10b981';
-            this.style.color = 'white';
-            
             setTimeout(() => {
               this.textContent = originalText;
-              this.style.background = '';
-              this.style.borderColor = '';
-              this.style.color = '';
-            }, 2000);
+            }, 1000);
           }).catch(err => {
-            console.error('Failed to copy:', err);
+            console.error('Failed to copy link:', err);
           });
         }
       });
     });
   }
 
-  // === Initialization ===
-  function initPlan() {
-    const dailyBreakdown = document.getElementById('dailyBreakdown');
-    if (!dailyBreakdown) {
-      console.error('dailyBreakdown container not found');
-      return;
+  function resetProgress() {
+    if (confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
+      // Clear all llmPlan_ prefixed keys
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith(STORAGE_PREFIX)) {
+          localStorage.removeItem(key);
+        }
+      });
+      location.reload();
     }
-    
-    // Render the phase accordion with weeks 1-2
-    const accordion = renderPhaseAccordion();
-    dailyBreakdown.appendChild(accordion);
-    
-    // Add event delegation for checkboxes
-    dailyBreakdown.addEventListener('change', handleCheckboxChange);
-    
-    // Initial progress update
-    updateGlobalProgress();
-    
-    console.log('Daily breakdown initialized with Weeks 1-2');
   }
 
+  function exportProgressLegacy() {
+    exportProgress();
+  }
+
+  // === Initialization ===
+  
   function init() {
-    // Initialize daily breakdown
-    initPlan();
+    console.log('Initializing AI & ML Mastery Plan (Tabbed Interface)...');
     
-    // Initialize sidebar and scrollspy
+    // Initialize tabs
+    initTabs();
+    
+    // Initialize HUD
+    initHUD();
+    
+    // Initialize search
+    initSearchModal();
+    
+    // Initialize sidebar and legacy features
     initSidebar();
-    
-    // Initialize anchor links
     initAnchorLinks();
     
-    // Initialize control buttons
+    // Initialize progress
+    updateProgress();
+    
+    // Control buttons (legacy)
     const resetBtn = document.getElementById('reset-progress-btn');
     const exportBtn = document.getElementById('export-progress-btn');
     
@@ -768,7 +845,7 @@
     }
     
     if (exportBtn) {
-      exportBtn.addEventListener('click', exportProgress);
+      exportBtn.addEventListener('click', exportProgressLegacy);
     }
     
     // Handle initial hash
@@ -784,7 +861,7 @@
     
     // SVG gradient for progress ring
     const progressRing = document.querySelector('.progress-ring');
-    if (progressRing) {
+    if (progressRing && !progressRing.querySelector('defs')) {
       const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
       const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
       gradient.setAttribute('id', 'gradient');
@@ -807,7 +884,7 @@
       progressRing.insertBefore(defs, progressRing.firstChild);
     }
     
-    console.log('AI & ML Mastery Plan (single-page) initialized');
+    console.log('Initialization complete');
   }
 
   // Run initialization
