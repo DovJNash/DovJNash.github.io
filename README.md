@@ -321,6 +321,80 @@ DovJNash.github.io/
         └── main.js         # All JavaScript (navigation, localStorage, progress)
 ```
 
+## Task Details Field
+
+### Overview
+
+The plan data structure (`assets/js/data/planPhases.js`) supports rich, paragraph-level task details that are displayed in collapsible sections. These details provide comprehensive guidance for each learning task.
+
+### Details Field Structure
+
+Each task can include a `details` field containing HTML-formatted educational content (120-220 words recommended):
+
+```javascript
+{
+  label: 'Complete DataCamp "Introduction to NumPy" Chapter 1',
+  estMinutes: 90,
+  resourceLinks: ['https://datacamp.com', 'https://numpy.org/docs'],
+  details: '<strong>Action:</strong> Work through the chapter... <strong>Boundaries:</strong> Stop after Chapter 1... <strong>Deliverable:</strong> Create a notebook... <strong>Verification:</strong> Run tests...'
+}
+```
+
+### Required Components
+
+Well-structured task details should include:
+
+1. **Action** — What to do, how to approach it, key focus areas
+2. **Boundaries** — What NOT to do, scope limitations, stopping points
+3. **Deliverable** — Concrete artifacts to create (notebooks, docs, implementations)
+4. **Verification** — Success criteria, self-tests, common pitfalls to avoid  
+5. **Resources** — 2-4 linked references (DataCamp courses, documentation, papers, videos)
+
+### Example Pattern (Week 1 Style)
+
+```html
+<strong>Action:</strong> [Detailed instructions on what to do and how]
+
+<strong>Boundaries:</strong> [Clear scope limits and what not to do]
+
+<strong>Deliverable:</strong> [Specific artifacts to create with file names]
+
+<strong>Verification:</strong> [How to know you succeeded, common pitfalls]
+
+Success check: [Specific test or self-assessment]
+Estimated time: [Realistic time estimate]
+
+<strong>Resources:</strong> <a href="[url]" target="_blank" rel="noopener">[Link Text]</a>
+```
+
+### UI Rendering
+
+- Tasks with a `details` field show a "Show details" button
+- Clicking toggles a collapsible section with the rich content
+- `resourceLinks` array creates badge links (DataCamp, YouTube, Khan Academy, etc.)
+- ARIA attributes ensure keyboard accessibility
+- Details are lazy-loaded to keep DOM performant
+
+### Adding Details to Tasks
+
+1. Locate the task in `assets/js/data/planPhases.js`
+2. Add a `details` property with HTML-formatted string
+3. Optionally add `resourceLinks` array with URLs
+4. Follow the Week 1 pattern for consistency (see Days 1-7 for examples)
+
+### Best Practices
+
+- **Length:** 120-220 words provides enough detail without overwhelming
+- **Specificity:** Use concrete examples, file names, and commands
+- **Resources:** Link to official docs, quality tutorials, and papers
+- **Verification:** Include self-tests and success criteria
+- **HTML:** Use `<strong>` for labels, `<a>` for links with `target="_blank" rel="noopener"`
+
+### Coverage Status
+
+- **Week 1 (Days 1-7):** ✅ Complete with exemplar-quality details (36 tasks)
+- **Remaining Days:** Structure in place, ready for detail expansion following Week 1 pattern
+
 ## Browser Support
 
 The site works in all modern browsers:
