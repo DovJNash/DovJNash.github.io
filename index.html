@@ -1,88 +1,1292 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ultimate Tic Tac Toe — Play or Download</title>
-  <style>
-    :root{--bg:#071022;--card:#0f2436;--accent:#FFD166;--muted:#9eb2c6;--glass:rgba(255,255,255,0.04)}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-    body{background:linear-gradient(180deg,#021024 0%, #06182a 100%);color:var(--muted);display:flex;align-items:center;justify-content:center;padding:32px}
-    .wrap{max-width:1100px;width:100%;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start}
-    .hero{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:12px;padding:28px;box-shadow:0 6px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
-    h1{color:#ffffff;margin:0 0 8px 0;font-size:28px}
-    p.lead{margin:0 0 18px 0;color:var(--muted);line-height:1.45}
-    .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-block;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:600}
-    .btn.primary{background:var(--accent);color:#071022}
-    .btn.ghost{border:1px solid rgba(255,255,255,0.06);color:var(--muted);background:transparent}
-    .card{background:var(--card);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03)}
-    .meta small{color:rgba(255,255,255,0.45)}
-    .screenshot{width:100%;height:220px;border-radius:8px;background:linear-gradient(180deg,#062036,#0b2b45);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.08);font-weight:700}
-    footer{margin-top:18px;color:rgba(255,255,255,0.22);font-size:13px}
-    @media (max-width:980px){.wrap{grid-template-columns:1fr;}}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI & Machine Learning Mastery Plan — Revision 4 (LLM-Focused). A comprehensive 12-month learning roadmap for mastering LLM systems from fundamentals to production.">
+  <meta name="author" content="DovJNash">
+  <title>AI & Machine Learning Mastery Plan — Revision 4 (LLM-Focused)</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <h1>Ultimate Tic Tac Toe — Play or Download</h1>
-      <p class="lead">
-        Play a polished browser version of the game instantly, or download and run the Python 3D version locally.
-        The Python version is more advanced (3D, OpenGL, richer AI) but must be run on your machine — it won't run inside GitHub Pages.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="./play-web.html">Play in your browser</a>
-        <a class="btn ghost" href="./README_GAME.md">Download & Run Python game</a>
-        <a class="btn ghost" href="https://github.com/DovJNash/DovJNash.github.io/blob/main/main.py" target="_blank">View main.py</a>
-      </div>
-
-      <hr style="margin:18px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
-      <div style="display:flex;gap:12px;align-items:center">
-        <div style="flex:1">
-          <div class="meta"><small>Modes:</small></div>
-          <h3 style="margin:6px 0 0 0;color:#fff">Classic, Connect (6×7), Ultimate (9×9 fallback), 3D (4×4×4)</h3>
-          <p style="margin:12px 0 0 0;color:var(--muted)">Browser play uses the 2D advanced build. The Python game includes 3D mode and OpenGL (if available).</p>
-        </div>
-        <div style="width:200px">
-          <div class="card" style="text-align:center">
-            <div class="screenshot">Game Preview</div>
-            <div style="margin-top:10px;font-size:13px;color:var(--muted)">Click Play in your browser to launch the web version.</div>
-          </div>
-        </div>
-      </div>
-
-      <footer>
-        Note: If you want the Python 3D experience, follow the README instructions (download, setup venv, pip install -r requirements.txt, then python main.py).
-      </footer>
+  <!-- Skip to Content Link -->
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+  
+  <!-- Header with Sticky Navigation -->
+  <header class="header" role="banner">
+    <div class="header-container">
+      <h1 class="site-title">AI & ML Mastery Plan</h1>
+      <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="#direction">Direction</a></li>
+          <li><a href="#outcomes">Outcomes</a></li>
+          <li><a href="#tooling">Tooling</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#weekly-plan">Weekly Plan</a></li>
+          <li><a href="#israeli-context">Israeli Context</a></li>
+          <li><a href="#gpu-strategy">GPU Strategy</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#success-criteria">Success</a></li>
+          <li><a href="#failure-recovery">Recovery</a></li>
+          <li><a href="#mlops">MLOps</a></li>
+          <li><a href="#changes">Changes</a></li>
+          <li><a href="#repo-structure">Repo</a></li>
+          <li><a href="#next-actions">Next Actions</a></li>
+          <li><a href="#mindset">Mindset</a></li>
+        </ul>
+      </nav>
     </div>
-
-    <aside>
+  </header>
+  
+  <!-- Hero Section -->
+  <section class="hero" role="banner">
+    <div class="hero-container">
+      <h1>AI & Machine Learning Mastery Plan</h1>
+      <p class="lead">Revision 4 (LLM-Focused, With All Notes Fixed)</p>
+      <div class="hero-meta">
+        <span><strong>Student:</strong> DovJNash (9th grade, Israel)</span>
+        <span><strong>Date:</strong> 2025-11-08</span>
+        <span><strong>Duration:</strong> 12 months (52 weeks)</span>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Main Content -->
+  <main id="main-content" class="main-content" role="main">
+    
+    <!-- 1. Author's Direction Note -->
+    <section id="direction" class="content-section">
+      <div class="section-header">
+        <h2>1. Author's Direction Note</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      <div class="callout callout-info">
+        <div class="callout-title">🎯 Supersedes Prior Revisions</div>
+        <p><strong>Robotics/control are out of scope going forward.</strong> All energy is on LLM systems end-to-end:</p>
+        <ul>
+          <li>Tokenizer → embedding → attention/Transformer</li>
+          <li>Training loops → scaling laws → PEFT (LoRA/QLoRA)</li>
+          <li>Inference optimization → serving → evaluation & safety</li>
+          <li>Portfolio development and deployment</li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- 2. Outcomes by Month 12 -->
+    <section id="outcomes" class="content-section">
+      <div class="section-header">
+        <h2>2. Outcomes by Month 12</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3 class="card-title">📐 Foundations</h3>
+          <ol>
+            <li>Strong, applied math foundations (linear algebra, calculus for optimization, probability/statistics)</li>
+            <li>Classical ML literacy and evaluation (sklearn baselines, metrics, learning curves)</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🧠 Deep Learning</h3>
+          <ol start="3">
+            <li>Deep learning engineering (PyTorch, training loops, stability, mixed precision, logging)</li>
+            <li>Transformer internals mastery; implement GPT-style model from scratch with unit tests</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🚀 LLM Systems</h3>
+          <ol start="5">
+            <li>Pretrain small models (1–30M params) on curated corpora; run small-scale scaling laws</li>
+            <li>Efficient fine-tuning (LoRA/QLoRA), quantization and KV-cache for fast inference</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🎯 Production</h3>
+          <ol start="7">
+            <li>Evaluation harness (perplexity + human rubric), safety filters, latency and cost tracking</li>
+            <li>Production MVP: FastAPI, Docker, HTTPS domain, Sentry monitoring, CI</li>
+            <li>Portfolio with documented repos, bilingual blog posts (Hebrew + English), and public demos</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 3. Tooling & Benefits -->
+    <section id="tooling" class="content-section">
+      <div class="section-header">
+        <h2>3. Tooling & Benefits (with Usage Plan)</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Tool/Service</th>
+            <th>Usage Plan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IDE + Git</td>
+            <td>VS Code + Copilot Pro + GitLens</td>
+            <td>Daily development environment</td>
+          </tr>
+          <tr>
+            <td>Notebooks</td>
+            <td>Deepnote Team plan</td>
+            <td>Collaboration and experimentation</td>
+          </tr>
+          <tr>
+            <td>Secrets</td>
+            <td>1Password</td>
+            <td>Store all tokens/keys securely</td>
+          </tr>
+          <tr>
+            <td>Docs/PM</td>
+            <td>Notion Education + AI</td>
+            <td>Logs, paper summaries, planning</td>
+          </tr>
+          <tr>
+            <td>Compute</td>
+            <td>Kaggle (free T4)</td>
+            <td>Default for prototypes/CIFAR and scaling runs</td>
+          </tr>
+          <tr>
+            <td>Compute</td>
+            <td>Colab Pro</td>
+            <td>ONE month (~$10) during Weeks 23–33 for pretraining/scaling</td>
+          </tr>
+          <tr>
+            <td>Compute</td>
+            <td>Azure $100 credit</td>
+            <td>Reserve $40–$60 for QLoRA (Weeks 37–40); ~$40 emergency buffer</td>
+          </tr>
+          <tr>
+            <td>Hosting</td>
+            <td>DigitalOcean $200 credit</td>
+            <td>API/static site hosting</td>
+          </tr>
+          <tr>
+            <td>Data/DB</td>
+            <td>MongoDB Atlas $50</td>
+            <td>Experiment tracking (metrics, prompts/responses, eval scores)</td>
+          </tr>
+          <tr>
+            <td>Courses</td>
+            <td>DataCamp</td>
+            <td>Weeks 1–11: foundations and classical ML</td>
+          </tr>
+          <tr>
+            <td>Courses</td>
+            <td>Educative</td>
+            <td>Weeks 11–17: when stuck on deep learning concepts</td>
+          </tr>
+          <tr>
+            <td>Courses</td>
+            <td>FrontendMasters</td>
+            <td>Weeks 34–36: UI/streaming for MVP</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    
+    <!-- 4. Macro Timeline -->
+    <section id="timeline" class="content-section">
+      <div class="section-header">
+        <h2>4. Macro Timeline (12 months) with Buffers & Reviews</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h4>Weeks 1–6: Foundations</h4>
+          <p>Math + Python-for-Data; NumPy, vectors, probability, gradients</p>
+          <p><strong>Review at Week 6</strong></p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 7–10: Classical ML</h4>
+          <p>Sklearn, metrics, cross-validation, learning curves</p>
+          <p><strong>Review at Week 10</strong></p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 11–17: Deep Learning Core</h4>
+          <p>PyTorch MLP/CNN, stability, activation/grad viz, CIFAR-10</p>
+          <p><strong>Review at Week 17</strong></p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 18–22: NLP & Transformer Fundamentals</h4>
+          <p>Attention, MHA, positional encoding, Pre-LN blocks, papers (AIAIN, BERT)</p>
+          <p><strong>Review at Week 22</strong></p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 23–28: GPT from Scratch & Char Pretraining</h4>
+          <p>Training loops, grad accumulation, mixed precision, sampling strategies</p>
+          <p><strong>Review at Week 28</strong></p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 29–33: Tokenizer (BPE 16k) + Data Curation + Scaling Laws Lab</h4>
+          <p>BPE training, data normalization/dedup, scaling experiments (1M–30M)</p>
+          <p><strong>Review at Week 33</strong></p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 34–36: Serving MVP + Ethics/Safety</h4>
+          <p>FastAPI, Docker, HTTPS, Sentry, safety filters, minimal UI</p>
+          <p><strong>Review at Week 36</strong></p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 37–40: PEFT/QLoRA + Inference Optimization</h4>
+          <p>LoRA/QLoRA fine-tuning (3B–7B), quantization (8/4-bit), KV-cache</p>
+          <p><strong>Review at Week 40</strong></p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 41–44: MLOps (Essential Hardening)</h4>
+          <p>Pytest, black, CI, YAML configs, JSONL logging, cleanup scripts</p>
+          <p><strong>Review at Week 44</strong></p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 45–48: Capstone Build/Iterate</h4>
+          <p>Choose ONE: Math Study Assistant OR Hebrew–English Code Assistant</p>
+          <p><strong>Review at Week 48</strong></p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 49–52: Portfolio & Final Polish</h4>
+          <p>Bilingual blogs, architecture diagrams, documentation</p>
+          <p><strong>Final assessment</strong></p>
+        </div>
+      </div>
+      <div class="callout callout-warning">
+        <div class="callout-title">⏸️ Buffer Weeks</div>
+        <p><strong>Light/catch-up weeks:</strong> Weeks 7, 18, 26–28 (Bagrut prep), 41</p>
+      </div>
+    </section>
+    
+    <!-- 5. Detailed Weekly Plan -->
+    <section id="weekly-plan" class="content-section">
+      <div class="section-header">
+        <h2>5. Detailed Weekly Plan (Condensed)</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      
       <div class="card">
-        <h4 style="margin:0 0 8px 0;color:#fff">Run the Python game (local)</h4>
-        <ol style="color:var(--muted);font-size:14px;padding-left:16px;margin:0">
-          <li>Create venv: <code>python -m venv .venv</code></li>
-          <li>Activate: <code>source .venv/bin/activate</code> (mac/linux) or <code>.venv\\Scripts\\activate</code> (Windows)</li>
-          <li>Install deps: <code>pip install -r requirements.txt</code></li>
-          <li>Run: <code>python main.py</code></li>
+        <div class="card-header">
+          <h3 class="card-title">Weeks 1–6: Math + Python-for-Data</h3>
+        </div>
+        <ul>
+          <li>DataCamp: NumPy, Intermediate Python, Visualization, Statistics</li>
+          <li>Notebooks: vectors→eigenvalues, probability simulations, manual gradients</li>
+          <li><strong>Week 6 mandatory review:</strong>
+            <ul>
+              <li>Quiz ≥16/20</li>
+              <li>Linear regression from scratch with R²&gt;0.90</li>
+              <li>PCA from scratch</li>
+              <li>foundations_summary.md ≥5 pages</li>
+            </ul>
+          </li>
+          <li>Extend 2–4 weeks if needed</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Week 7: Buffer & Structure</h3>
+        </div>
+        <ul>
+          <li>Setup: pytest + black</li>
+          <li>Deepnote migration</li>
+          <li>Start weekly logs</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Weeks 8–10: Classical ML</h3>
+        </div>
+        <ul>
+          <li>Sklearn: classifiers, regressors, pipelines</li>
+          <li>Metrics: accuracy, precision, recall, F1, ROC-AUC</li>
+          <li>Cross-validation and learning curves</li>
+          <li>Deliverable: <code>classical_ml_report.md</code></li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Weeks 11–17: Deep Learning Core</h3>
+        </div>
+        <ul>
+          <li>PyTorch: MLP/CNN architectures</li>
+          <li>Stability tactics: learning rate scheduling, gradient clipping, normalization</li>
+          <li>Activation/gradient visualization</li>
+          <li>Kaggle GPU sprint for CIFAR-10</li>
+          <li>Deliverable: <code>deep_learning_health_check.md</code></li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Week 18: Buffer & NLP Warmup</h3>
+        </div>
+        <ul>
+          <li>Tiny character dataset</li>
+          <li>Optional: tiny RNN experiment</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Weeks 19–22: Transformer Fundamentals</h3>
+        </div>
+        <ul>
+          <li>Attention mechanism, Multi-Head Attention (MHA)</li>
+          <li>Positional encoding, Pre-LN blocks</li>
+          <li>Unit tests for attention</li>
+          <li>Attention heatmaps visualization</li>
+          <li>Papers: "Attention Is All You Need" (AIAIN) + BERT</li>
+          <li>Deliverable: <code>transformer_fundamentals_summary.md</code></li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Weeks 23–28: GPT from Scratch (Char)</h3>
+        </div>
+        <ul>
+          <li>Full training loop with gradient accumulation and mixed precision</li>
+          <li>Sampling strategies: greedy, temperature, top-k, top-p</li>
+          <li>Repetition penalty implementation</li>
+          <li>Colab Pro month for 5–20M parameter models</li>
+          <li>Papers: GPT-2, GPT-3</li>
+          <li>Deliverable: <code>scaling_report_v1.md</code></li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Weeks 29–33: BPE Tokenizer + Data + Scaling Laws</h3>
+        </div>
+        <ul>
+          <li>Train BPE tokenizer with 16k vocab</li>
+          <li>Data curation: normalize, deduplicate, filter</li>
+          <li>Create <code>dataset_report.md</code></li>
+          <li>Small-scale scaling laws: 1M/3M/10M/20M/30M parameter models</li>
+          <li>Track compute vs loss curves</li>
+          <li>Paper: Chinchilla</li>
+          <li>Deliverable: <code>tokenizer_data_scaling_summary.md</code></li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Weeks 34–36: Ethics/Safety + MVP Serving</h3>
+        </div>
+        <ul>
+          <li>Create <code>safety.md</code> and <code>filtering.py</code></li>
+          <li>Red-team with 100 prompts</li>
+          <li>MVP serving: FastAPI, Docker, DigitalOcean, HTTPS, Sentry</li>
+          <li>Minimal UI (FrontendMasters guidance)</li>
+          <li>Deliverable: <code>deployment_mvp_report.md</code></li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Weeks 37–40: PEFT/QLoRA + Inference Optimization</h3>
+        </div>
+        <ul>
+          <li>Fine-tune 3B–7B models with LoRA/QLoRA</li>
+          <li>Quantization: 8-bit and 4-bit</li>
+          <li>KV-cache implementation</li>
+          <li>Azure budget: $40–$60 reserved</li>
+          <li>Papers: LoRA, FlashAttention</li>
+          <li>Deliverable: <code>peft_inference_summary.md</code></li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Week 41: Buffer</h3>
+        </div>
+        <ul>
+          <li>Cleanup and refactoring</li>
+          <li>Tests for tokenizer/sampling</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Weeks 42–44: MLOps Essentials</h3>
+        </div>
+        <ul>
+          <li>Pytest, black, GitHub Actions CI</li>
+          <li>Simple YAML configs</li>
+          <li>Cleanup scripts</li>
+          <li>JSONL logging</li>
+          <li>Optional: torch.profiler / torch.compile</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Weeks 45–48: Capstone (Choose ONE)</h3>
+        </div>
+        <p><strong>Option A: Math Study Assistant</strong></p>
+        <ul>
+          <li>10–20M parameter model</li>
+          <li>500–1000 Q&A pairs</li>
+          <li>Evaluate on 100 problems</li>
+          <li>Success: ≥60% correct, explanations ≥3.5/5</li>
+        </ul>
+        <p><strong>Option B: Hebrew–English Code Assistant</strong></p>
+        <ul>
+          <li>15–25M parameter model</li>
+          <li>Bilingual coding tasks</li>
+          <li>Success: ≥50% tasks pass, explanations ≥3.5/5</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Weeks 49–52: Portfolio & Polish</h3>
+        </div>
+        <ul>
+          <li>Write bilingual blogs (Hebrew + English):
+            <ul>
+              <li>Scaling lessons learned</li>
+              <li>BPE tokenizer pitfalls</li>
+              <li>MVP shipping process</li>
+            </ul>
+          </li>
+          <li>Create architecture diagrams</li>
+          <li>Final deliverable: <code>master_summary.txt</code></li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- 6. Israeli Context Integration -->
+    <section id="israeli-context" class="content-section">
+      <div class="section-header">
+        <h2>6. Israeli Context Integration</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3 class="card-title">📚 Bagrut Buffers</h3>
+          <p><strong>Weeks 26–28:</strong> Maintenance mode</p>
+          <ul>
+            <li>15–30 minutes per day</li>
+            <li>Focus: paper reading, logs, light refactoring</li>
+            <li>No new implementation during exam period</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🎖️ IDF Positioning</h3>
+          <p><strong>Target completion:</strong> Week 40</p>
+          <ul>
+            <li>Security/privacy focus in projects</li>
+            <li>Systems thinking demonstrations</li>
+            <li>Prepare portfolio presentation</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🎓 University Programs</h3>
+          <p><strong>Application prep:</strong> Week 44</p>
+          <ul>
+            <li>HUJI "Mahar" program</li>
+            <li>TAU "Alpha" program</li>
+            <li>Portfolio and achievements documentation</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🌐 Community & Language</h3>
+          <p><strong>Target:</strong> By Week 52</p>
+          <ul>
+            <li>PyData TLV meetups</li>
+            <li>AI Israel community</li>
+            <li>3 Hebrew blog posts</li>
+            <li>3 English blog posts</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 7. Optimized GPU Strategy -->
+    <section id="gpu-strategy" class="content-section">
+      <div class="section-header">
+        <h2>7. Optimized GPU Strategy</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      <div class="card">
+        <h3>Budget Allocation & Priority</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Resource</th>
+              <th>Budget</th>
+              <th>Usage Window</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kaggle (free T4)</td>
+              <td>Free</td>
+              <td>Default</td>
+              <td>Prototypes, CIFAR, many scaling runs</td>
+            </tr>
+            <tr>
+              <td>Colab Pro</td>
+              <td>~$10</td>
+              <td>ONE month (Weeks 23–33)</td>
+              <td>Pretraining and scaling experiments</td>
+            </tr>
+            <tr>
+              <td>Azure Credit</td>
+              <td>$40–$60</td>
+              <td>Weeks 37–40</td>
+              <td>QLoRA fine-tuning</td>
+            </tr>
+            <tr>
+              <td>Azure Buffer</td>
+              <td>~$40</td>
+              <td>Emergency only</td>
+              <td>Critical experiments if blocked</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="callout callout-warning">
+        <div class="callout-title">⚡ Priority Ladder When GPU Constrained</div>
+        <ol>
+          <li>Use Kaggle free T4</li>
+          <li>Use Colab Free tier</li>
+          <li>Shrink model size / context length / batch size</li>
+          <li>Reduce training steps</li>
+          <li>Focus on documentation and evaluation</li>
+          <li>Use Colab Pro (if within budget window)</li>
+          <li>Use Azure credit (emergency only)</li>
         </ol>
-        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
-        <div style="font-size:13px;color:var(--muted)">
-          If the 3D mode doesn't appear the game will automatically fall back to a high-quality 2D mode. NumPy recommended for audio.
-        </div>
       </div>
-
-      <div style="height:12px"></div>
-
+      
+      <div class="callout callout-info">
+        <div class="callout-title">📊 Tracking Requirement</div>
+        <p><strong>Maintain <code>docs/gpu_log.md</code></strong> to track minutes used on each platform, experiment purpose, and costs.</p>
+      </div>
+    </section>
+    
+    <!-- 8. Research Paper Reading Protocol -->
+    <section id="research" class="content-section">
+      <div class="section-header">
+        <h2>8. Research Paper Reading Protocol</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
       <div class="card">
-        <h4 style="margin:0 0 8px 0;color:#fff">Source & Issues</h4>
-        <div style="color:var(--muted);font-size:13px">
-          Repository: <a href="https://github.com/DovJNash/DovJNash.github.io" target="_blank">DovJNash/DovJNash.github.io</a><br>
-          Open an issue to report bugs or request enhancements.
+        <div class="card-header">
+          <h3 class="card-title">Reading Methodology</h3>
+        </div>
+        <p><strong>Week 11:</strong> Read Keshav's "How to Read a Paper" (3-pass method)</p>
+      </div>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <h4>Weeks 19–20: "Attention Is All You Need"</h4>
+          <p>3-pass deep read, implement attention from scratch</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 21–22: BERT</h4>
+          <p>Understand bidirectional training, MLM objective</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 25–26: GPT-2</h4>
+          <p>Autoregressive pretraining, model architecture details</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 27–28: GPT-3</h4>
+          <p>Scaling laws, few-shot learning, emergent abilities</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 31–32: Chinchilla</h4>
+          <p>Compute-optimal training, data vs parameters trade-offs</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 37–38: LoRA</h4>
+          <p>Low-rank adaptation, parameter-efficient fine-tuning</p>
+        </div>
+        <div class="timeline-item">
+          <h4>Weeks 39–40: FlashAttention</h4>
+          <p>IO-aware attention, memory optimization techniques</p>
         </div>
       </div>
-    </aside>
-  </div>
+      
+      <div class="callout callout-success">
+        <div class="callout-title">📝 Note-Taking</div>
+        <p>Store notes per paper in Notion with:</p>
+        <ul>
+          <li>Key contributions and insights</li>
+          <li>Implementation details</li>
+          <li>Questions and unclear points</li>
+          <li>Connections to other papers</li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- 9. Community & Mentorship Structure -->
+    <section id="community" class="content-section">
+      <div class="section-header">
+        <h2>9. Community & Mentorship Structure</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🚀 Immediate Actions</h3>
+        </div>
+        <ul>
+          <li>Join Hugging Face Discord</li>
+          <li>Join EleutherAI Discord</li>
+          <li>Subscribe to r/LocalLLaMA</li>
+          <li>Follow key voices:
+            <ul>
+              <li>@karpathy (Andrej Karpathy)</li>
+              <li>@srush_nlp (Sasha Rush)</li>
+              <li>@ykilcher (Yannic Kilcher)</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="card-grid">
+        <div class="card">
+          <h3 class="card-title">📅 Weekly (from Week 4)</h3>
+          <ul>
+            <li>Post one progress update</li>
+            <li>Ask one thoughtful question</li>
+            <li>Answer one community question</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🗓️ Monthly (from Week 8)</h3>
+          <ul>
+            <li>Connect with study partner</li>
+            <li>Schedule mentor call by Week 12</li>
+            <li>Review progress and adjust plan</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">📊 Quarterly</h3>
+          <ul>
+            <li>Present work to community</li>
+            <li>Gather feedback on projects</li>
+            <li>Update portfolio publicly</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 10. Success Criteria (Phase Gates) -->
+    <section id="success-criteria" class="content-section">
+      <div class="section-header">
+        <h2>10. Success Criteria (Phase Gates)</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">📐 Foundations (Week 6)</h3>
+        </div>
+        <ul>
+          <li>Quiz score ≥16/20</li>
+          <li>Linear regression (NumPy only) with R²&gt;0.90</li>
+          <li>PCA implementation from scratch</li>
+          <li>Explain backprop basics clearly</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🤖 Classical ML (Week 10)</h3>
+        </div>
+        <ul>
+          <li>MNIST classification ≥85% accuracy (sklearn)</li>
+          <li>Demonstrate proper learning curves</li>
+          <li>Cross-validation implementation</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🧠 Deep Learning (Week 17)</h3>
+        </div>
+        <ul>
+          <li>MLP on MNIST ≥97% accuracy</li>
+          <li>CIFAR-10 CNN ≥70% accuracy</li>
+          <li>Logs include: loss, accuracy, learning rate, gradient norms</li>
+          <li>No NaN losses during training</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🔄 Transformers (Week 22)</h3>
+        </div>
+        <ul>
+          <li>Custom attention matches PyTorch MHA on small tests</li>
+          <li>Causal masking implemented correctly</li>
+          <li>Explain sqrt(d_k) scaling clearly</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🚀 GPT Implementation (Week 28)</h3>
+        </div>
+        <ul>
+          <li>Smooth loss curve for ≥10k steps</li>
+          <li>Validation perplexity &lt; 2× training perplexity</li>
+          <li>All sampling strategies work correctly</li>
+          <li>Checkpoint save/resume tested</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🔤 Tokenizer & Scaling (Week 33)</h3>
+        </div>
+        <ul>
+          <li>BPE tokenizer with 16k vocabulary trained</li>
+          <li>Character vs BPE comparison documented</li>
+          <li>≥5 model sizes with loss vs compute curves</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🌐 Serving & Safety (Week 36)</h3>
+        </div>
+        <ul>
+          <li>p95 first-token latency &lt;450ms</li>
+          <li>Handle ≥10 requests/min</li>
+          <li>Safety filter: FN&lt;2%, FP&lt;5%</li>
+          <li>HTTPS endpoint live and accessible</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">⚡ PEFT & Optimization (Week 40)</h3>
+        </div>
+        <ul>
+          <li>LoRA/QLoRA improves task performance</li>
+          <li>Quantization saves ≥40% memory with &lt;10% quality loss</li>
+          <li>KV-cache reduces latency ≥30%</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🎯 Capstone (Week 48)</h3>
+        </div>
+        <ul>
+          <li>Meets option-specific metrics (see Weekly Plan)</li>
+          <li>Reliable demo that doesn't crash</li>
+          <li>Proper repository documentation</li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- 11. Failure Scenarios & Recovery Protocols -->
+    <section id="failure-recovery" class="content-section">
+      <div class="section-header">
+        <h2>11. Failure Scenarios & Recovery Protocols</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🔥 Training Instability</h3>
+        </div>
+        <p><strong>Symptoms:</strong> Loss spikes, NaN values, exploding gradients</p>
+        <p><strong>Recovery steps:</strong></p>
+        <ol>
+          <li>Lower learning rate by 10×</li>
+          <li>Enable gradient clipping (max_norm=1.0)</li>
+          <li>Check normalization layers (LayerNorm positions)</li>
+          <li>Switch to AdamW with warmup</li>
+          <li>Inspect input data for anomalies</li>
+          <li>Adjust mixed precision settings (try fp32 for debugging)</li>
+          <li>Post minimal reproducible example (MRE) in community</li>
+        </ol>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">❌ Model Not Learning</h3>
+        </div>
+        <p><strong>Symptoms:</strong> Loss doesn't decrease, validation = random</p>
+        <p><strong>Recovery steps:</strong></p>
+        <ol>
+          <li>Assert all tensor shapes explicitly</li>
+          <li>Sample and inspect model outputs frequently</li>
+          <li>Verify causal mask is applied correctly</li>
+          <li>Spot-check loss calculation manually</li>
+          <li>Confirm gradients are flowing (use hooks)</li>
+          <li>Try tiny model + tiny dataset (overfit test)</li>
+          <li>Compare implementation to nanoGPT or minGPT</li>
+        </ol>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">💻 GPU Exhausted</h3>
+        </div>
+        <p><strong>Symptoms:</strong> Out of credits or quota limits</p>
+        <p><strong>Recovery steps:</strong></p>
+        <ol>
+          <li>Follow GPU priority ladder (see GPU Strategy section)</li>
+          <li>Continue documentation and evaluation work if training paused</li>
+          <li>Log all usage in <code>docs/gpu_log.md</code></li>
+          <li>Wait for quota resets (Kaggle: weekly, Colab: varies)</li>
+        </ol>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">📚 Exams / Illness</h3>
+        </div>
+        <p><strong>Triggers:</strong> Bagrut exams, sick days, emergencies</p>
+        <p><strong>Maintenance mode protocol:</strong></p>
+        <ul>
+          <li>Reduce to 15–30 minutes per day</li>
+          <li>Focus on: reading papers, updating logs, light refactoring</li>
+          <li>No new implementations during this period</li>
+          <li>Resume full schedule when recovered</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">😰 Burnout</h3>
+        </div>
+        <p><strong>Symptoms:</strong> Dread, procrastination, exhaustion, loss of interest</p>
+        <p><strong>Recovery protocol:</strong></p>
+        <ol>
+          <li>Take 3 full days off (complete break)</li>
+          <li>Do a fun mini-project (game, art, anything unrelated)</li>
+          <li>Review list of wins and progress made</li>
+          <li>Reduce weekly load by 25–50%</li>
+          <li>Add buffer weeks to schedule</li>
+          <li>Tell mentor and/or study partner</li>
+          <li>Consider professional help if symptoms persist</li>
+        </ol>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🤔 Concept Doesn't Click</h3>
+        </div>
+        <p><strong>Symptoms:</strong> Stuck on concept for multiple days</p>
+        <p><strong>Recovery steps:</strong></p>
+        <ol>
+          <li>Find 3 different explanations (blog, video, paper)</li>
+          <li>Implement the simplest possible version</li>
+          <li>Draw diagrams and visualizations</li>
+          <li>Ask specific question with MRE in community</li>
+          <li>Park the concept and revisit in 1–2 weeks</li>
+        </ol>
+      </div>
+    </section>
+    
+    <!-- 12. MLOps Essentials (Simplified) -->
+    <section id="mlops" class="content-section">
+      <div class="section-header">
+        <h2>12. MLOps Essentials (Simplified)</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      
+      <div class="callout callout-info">
+        <div class="callout-title">🎯 Focus: Essential Tools Only</div>
+        <p>Streamlined to core practices. Optional tooling clearly marked.</p>
+      </div>
+      
+      <div class="card-grid">
+        <div class="card">
+          <h3 class="card-title">✅ Testing</h3>
+          <ul>
+            <li><strong>Pytest</strong> for unit tests</li>
+            <li>Test critical functions: tokenizer, attention, sampling</li>
+            <li>Integration tests for training loops</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🎨 Code Quality</h3>
+          <ul>
+            <li><strong>Black</strong> for formatting</li>
+            <li>Pre-commit hooks (optional)</li>
+            <li>Consistent style across codebase</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🔄 CI/CD</h3>
+          <ul>
+            <li><strong>GitHub Actions</strong> for CI</li>
+            <li>Run tests on push</li>
+            <li>Format checks</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">⚙️ Configuration</h3>
+          <ul>
+            <li>Simple <strong>YAML files</strong> for hyperparameters</li>
+            <li>No complex framework required</li>
+            <li>Version control all configs</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">📊 Logging</h3>
+          <ul>
+            <li><strong>JSONL format</strong> for experiments</li>
+            <li>Track: loss, metrics, hyperparams, timestamps</li>
+            <li>Easy to parse and analyze</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🧹 Cleanup</h3>
+          <ul>
+            <li>Scripts to delete old checkpoints</li>
+            <li>Keep only best/recent checkpoints</li>
+            <li>Manage disk space proactively</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="callout callout-warning">
+        <div class="callout-title">⚡ Optional Tools</div>
+        <ul>
+          <li><strong>torch.profiler:</strong> For performance bottleneck analysis</li>
+          <li><strong>torch.compile:</strong> For inference speedup (PyTorch 2.0+)</li>
+          <li>Use only if time permits and clear benefit</li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- 13. Removed/Changed Items -->
+    <section id="changes" class="content-section">
+      <div class="section-header">
+        <h2>13. Removed/Changed Items</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">❌ Removed from Plan</h3>
+        </div>
+        <ul>
+          <li><strong>RAG (Retrieval-Augmented Generation):</strong> Removed from core path, stretch goal only</li>
+          <li><strong>Multiple tokenizer sizes:</strong> Single BPE with 16k vocabulary (simplified)</li>
+          <li><strong>DVC (Data Version Control):</strong> Removed by default, not essential for learning</li>
+          <li><strong>Bandit security scanner:</strong> Removed by default</li>
+          <li><strong>Mypy type checking:</strong> Removed by default</li>
+          <li><strong>GitHub certification:</strong> Not required</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">📝 Simplified Items</h3>
+        </div>
+        <ul>
+          <li><strong>MLOps:</strong> Reduced to essentials only (pytest, black, CI, YAML, JSONL)</li>
+          <li><strong>torch.compile:</strong> Now optional</li>
+          <li><strong>Multiple BPE experiments:</strong> Focus on one working implementation</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🔄 What Changed from v3</h3>
+        </div>
+        <ul>
+          <li>Robotics and control systems completely removed</li>
+          <li>Pure LLM focus from start to finish</li>
+          <li>GPU strategy optimized with clear budget allocation</li>
+          <li>Israeli context (Bagrut, IDF, university) explicitly integrated</li>
+          <li>Clearer buffer weeks and review gates</li>
+          <li>More realistic timelines based on prior feedback</li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- 14. Repo Structure -->
+    <section id="repo-structure" class="content-section">
+      <div class="section-header">
+        <h2>14. Repository Structure</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      
+      <div class="code-block">
+        <div class="code-block-header">
+          <span>Updated Repository Tree</span>
+        </div>
+        <pre><code>llm-mastery-plan/
+├── README.md                      # Main project overview
+├── .gitignore
+├── .github/
+│   └── workflows/
+│       └── ci.yml                 # GitHub Actions CI pipeline
+├── requirements.txt               # Python dependencies
+├── setup.py                       # Package setup (optional)
+│
+├── docs/                          # All documentation
+│   ├── foundations_summary.md
+│   ├── classical_ml_report.md
+│   ├── deep_learning_health_check.md
+│   ├── transformer_fundamentals_summary.md
+│   ├── scaling_report_v1.md
+│   ├── tokenizer_data_scaling_summary.md
+│   ├── deployment_mvp_report.md
+│   ├── peft_inference_summary.md
+│   ├── master_summary.txt
+│   ├── dataset_report.md
+│   ├── safety.md
+│   ├── gpu_log.md                # Track GPU usage
+│   ├── weekly_logs/              # Weekly progress logs
+│   │   ├── week_01.md
+│   │   ├── week_02.md
+│   │   └── ...
+│   └── papers/                   # Paper notes
+│       ├── attention_is_all_you_need.md
+│       ├── bert.md
+│       ├── gpt2.md
+│       ├── gpt3.md
+│       ├── chinchilla.md
+│       ├── lora.md
+│       └── flash_attention.md
+│
+├── notebooks/                     # Jupyter/Deepnote notebooks
+│   ├── foundations/
+│   ├── classical_ml/
+│   ├── deep_learning/
+│   ├── transformers/
+│   └── experiments/
+│
+├── src/                          # Source code
+│   ├── __init__.py
+│   ├── tokenizer/
+│   │   ├── __init__.py
+│   │   ├── bpe.py
+│   │   └── utils.py
+│   ├── model/
+│   │   ├── __init__.py
+│   │   ├── attention.py
+│   │   ├── transformer.py
+│   │   ├── gpt.py
+│   │   └── config.py
+│   ├── training/
+│   │   ├── __init__.py
+│   │   ├── trainer.py
+│   │   ├── loss.py
+│   │   └── optimizer.py
+│   ├── data/
+│   │   ├── __init__.py
+│   │   ├── dataset.py
+│   │   ├── preprocessing.py
+│   │   └── augmentation.py
+│   ├── evaluation/
+│   │   ├── __init__.py
+│   │   ├── metrics.py
+│   │   └── harness.py
+│   ├── serving/
+│   │   ├── __init__.py
+│   │   ├── api.py
+│   │   ├── inference.py
+│   │   └── filtering.py
+│   └── utils/
+│       ├── __init__.py
+│       ├── logging.py
+│       └── checkpoints.py
+│
+├── tests/                        # Test suite
+│   ├── test_tokenizer.py
+│   ├── test_attention.py
+│   ├── test_model.py
+│   ├── test_training.py
+│   └── test_serving.py
+│
+├── configs/                      # YAML configuration files
+│   ├── base.yaml
+│   ├── small.yaml
+│   ├── medium.yaml
+│   └── serving.yaml
+│
+├── scripts/                      # Utility scripts
+│   ├── train.py
+│   ├── evaluate.py
+│   ├── serve.py
+│   ├── cleanup_checkpoints.py
+│   └── export_model.py
+│
+├── data/                         # Data directory (gitignored)
+│   ├── raw/
+│   ├── processed/
+│   └── tokenized/
+│
+├── checkpoints/                  # Model checkpoints (gitignored)
+│   ├── gpt-1m/
+│   ├── gpt-3m/
+│   └── ...
+│
+├── logs/                         # Experiment logs (gitignored)
+│   └── experiments.jsonl
+│
+└── deployment/                   # Deployment configs
+    ├── Dockerfile
+    ├── docker-compose.yml
+    └── nginx.conf</code></pre>
+      </div>
+    </section>
+    
+    <!-- 15. Immediate Next Actions -->
+    <section id="next-actions" class="content-section">
+      <div class="section-header">
+        <h2>15. Immediate Next Actions (This Week)</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      
+      <div class="callout callout-success">
+        <div class="callout-title">🎯 Week 1 Priorities</div>
+        <p>These tasks establish the foundation for the entire plan. Complete within 7 days.</p>
+      </div>
+      
+      <div class="card-grid">
+        <div class="card">
+          <h3 class="card-title">📁 Setup</h3>
+          <ul>
+            <li>Create <code>docs/</code> directory with all template files</li>
+            <li>Initialize <code>docs/gpu_log.md</code></li>
+            <li>Create <code>docs/weekly_logs/week_01.md</code></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">🔐 Security</h3>
+          <ul>
+            <li>Set up 1Password account</li>
+            <li>Store all API keys and tokens</li>
+            <li>Never commit secrets to git</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">👥 Community</h3>
+          <ul>
+            <li>Join Hugging Face Discord</li>
+            <li>Join EleutherAI Discord</li>
+            <li>Subscribe to r/LocalLLaMA</li>
+            <li>Follow @karpathy, @srush_nlp, @ykilcher</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">📓 Tools</h3>
+          <ul>
+            <li>Migrate notebooks to Deepnote</li>
+            <li>Set up Notion workspace</li>
+            <li>Configure VS Code with Copilot Pro</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">📚 Learning</h3>
+          <ul>
+            <li>Start DataCamp NumPy course</li>
+            <li>Complete first 2–3 modules</li>
+            <li>Practice in Deepnote notebook</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title">✍️ Writing</h3>
+          <ul>
+            <li>Write weekly log for Week 1</li>
+            <li>Publish intro post (blog or community)</li>
+            <li>Share plan with mentor/community</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 16. Mindset -->
+    <section id="mindset" class="content-section">
+      <div class="section-header">
+        <h2>16. Mindset</h2>
+        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
+      </div>
+      
+      <div class="card">
+        <h3 class="text-gradient" style="font-size: 2rem; text-align: center; margin-bottom: 2rem;">Core Principles</h3>
+        
+        <div class="callout callout-info">
+          <div class="callout-title">🎓 Depth Over Speed</div>
+          <p>Understanding the fundamentals deeply is more valuable than rushing through topics. If you need extra time on a concept, take it. The goal is mastery, not completion.</p>
+        </div>
+        
+        <div class="callout callout-success">
+          <div class="callout-title">👥 Community Over Isolation</div>
+          <p>Learning in public and engaging with the community accelerates growth. Share your work, ask questions, help others. You'll learn more by teaching and discussing.</p>
+        </div>
+        
+        <div class="callout callout-warning">
+          <div class="callout-title">📈 Progress Over Perfection</div>
+          <p>Ship working code, even if it's not perfect. Iterate and improve. "Done is better than perfect" — you can always refactor later. The key is to keep moving forward.</p>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🛡️ Burnout Prevention</h3>
+        </div>
+        <ul>
+          <li><strong>During exam periods (Weeks 26–28):</strong> Switch to maintenance mode
+            <ul>
+              <li>15–30 minutes per day maximum</li>
+              <li>Light activities: reading, logging, small refactors</li>
+              <li>Resume full schedule after exams</li>
+            </ul>
+          </li>
+          <li><strong>Regular breaks:</strong> Take at least one full day off per week</li>
+          <li><strong>Variety:</strong> Mix theory, coding, writing, and experiments</li>
+          <li><strong>Celebrate wins:</strong> Acknowledge progress, no matter how small</li>
+          <li><strong>Ask for help:</strong> Don't struggle alone for more than 2–3 days</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">🌟 Long-Term Vision</h3>
+        </div>
+        <p>This 12-month plan is just the beginning. The skills and knowledge you build will compound over years. Stay curious, stay humble, and keep building.</p>
+        <p><strong>Remember:</strong> Every expert was once a beginner. Your consistent effort over 12 months will transform you into someone who can contribute meaningfully to the field of AI and LLMs.</p>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <p>&copy; 2025 DovJNash. AI & Machine Learning Mastery Plan — Revision 4 (LLM-Focused)</p>
+    <div class="footer-links">
+      <a href="https://github.com/DovJNash" target="_blank" rel="noopener">GitHub</a>
+      <a href="#direction">Back to Top</a>
+    </div>
+    <p style="margin-top: 1rem; font-size: 0.75rem; opacity: 0.7;">
+      Built with semantic HTML, CSS, and vanilla JavaScript. No build step required.
+    </p>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="/assets/js/main.js"></script>
 </body>
 </html>
