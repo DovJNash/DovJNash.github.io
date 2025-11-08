@@ -1,8 +1,56 @@
 // AI & Machine Learning Mastery Plan - Main JavaScript
 // Handles navigation, smooth scrolling, scrollspy, and mobile menu
+// Dark theme by default
 
 (function() {
   'use strict';
+
+  // === Dropdown Navigation ===
+  function initDropdowns() {
+    const dropdownToggles = document.querySelectorAll('.nav-dropdown-toggle');
+    
+    dropdownToggles.forEach(toggle => {
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const menu = this.nextElementSibling;
+        const isOpen = this.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other dropdowns
+        document.querySelectorAll('.nav-dropdown-toggle').forEach(otherToggle => {
+          if (otherToggle !== toggle) {
+            otherToggle.setAttribute('aria-expanded', 'false');
+            const otherMenu = otherToggle.nextElementSibling;
+            if (otherMenu) otherMenu.classList.remove('open');
+          }
+        });
+        
+        // Toggle current dropdown
+        toggle.setAttribute('aria-expanded', !isOpen);
+        menu.classList.toggle('open');
+      });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown-toggle').forEach(toggle => {
+          toggle.setAttribute('aria-expanded', 'false');
+          const menu = toggle.nextElementSibling;
+          if (menu) menu.classList.remove('open');
+        });
+      }
+    });
+    
+    // Close dropdown when clicking a link inside it
+    document.querySelectorAll('.nav-dropdown-menu a').forEach(link => {
+      link.addEventListener('click', function() {
+        const toggle = this.closest('.nav-dropdown').querySelector('.nav-dropdown-toggle');
+        const menu = toggle.nextElementSibling;
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+      });
+    });
+  }
 
   // === Mobile Navigation Toggle ===
   function initMobileNav() {
@@ -230,6 +278,7 @@
 
   // === Initialize Everything When DOM is Ready ===
   function init() {
+    initDropdowns();
     initMobileNav();
     initSmoothScrolling();
     initScrollspy();
@@ -238,7 +287,7 @@
     initBackToTop();
     handleInitialHash();
     
-    console.log('AI & ML Mastery Plan site initialized');
+    console.log('AI & ML Mastery Plan site initialized (Dark theme)');
   }
 
   // Run initialization
