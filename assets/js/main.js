@@ -228,6 +228,39 @@
     });
   }
 
+  // === Daily Breakdown Collapsible Phases ===
+  function initDailyBreakdown() {
+    const phaseHeaders = document.querySelectorAll('.phase-header');
+    
+    phaseHeaders.forEach(header => {
+      header.addEventListener('click', function() {
+        const phaseId = this.getAttribute('data-phase');
+        const content = document.getElementById(phaseId);
+        
+        // Toggle collapsed state
+        this.classList.toggle('collapsed');
+        content.classList.toggle('collapsed');
+        
+        // Update ARIA attribute for accessibility
+        const isCollapsed = this.classList.contains('collapsed');
+        this.setAttribute('aria-expanded', !isCollapsed);
+      });
+      
+      // Initialize all phases as collapsed except the first one
+      const phaseId = header.getAttribute('data-phase');
+      if (phaseId !== 'phase1') {
+        header.classList.add('collapsed');
+        const content = document.getElementById(phaseId);
+        if (content) {
+          content.classList.add('collapsed');
+        }
+        header.setAttribute('aria-expanded', 'false');
+      } else {
+        header.setAttribute('aria-expanded', 'true');
+      }
+    });
+  }
+
   // === Initialize Everything When DOM is Ready ===
   function init() {
     initMobileNav();
@@ -236,6 +269,7 @@
     initAnchorLinks();
     initTabs();
     initBackToTop();
+    initDailyBreakdown();
     handleInitialHash();
     
     console.log('AI & ML Mastery Plan site initialized');
