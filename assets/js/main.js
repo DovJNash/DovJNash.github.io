@@ -464,15 +464,17 @@
               let domain = 'Link';
               try {
                 const url = new URL(link);
-                domain = url.hostname.replace('www.', '');
-                if (domain.includes('datacamp.com')) domain = 'DataCamp';
-                else if (domain.includes('youtube.com') || domain.includes('youtu.be')) domain = 'YouTube';
-                else if (domain.includes('khanacademy.org')) domain = 'Khan Academy';
-                else if (domain.includes('numpy.org')) domain = 'NumPy Docs';
-                else if (domain.includes('pytorch.org')) domain = 'PyTorch Docs';
-                else if (domain.includes('huggingface.co')) domain = 'Hugging Face';
-                else if (domain.includes('3blue1brown.com')) domain = '3Blue1Brown';
-                else if (domain.includes('arxiv.org')) domain = 'arXiv';
+                const hostname = url.hostname.replace('www.', '');
+                // Check exact match or subdomain (ends with the domain)
+                if (hostname === 'datacamp.com' || hostname.endsWith('.datacamp.com')) domain = 'DataCamp';
+                else if (hostname === 'youtube.com' || hostname.endsWith('.youtube.com') || hostname === 'youtu.be') domain = 'YouTube';
+                else if (hostname === 'khanacademy.org' || hostname.endsWith('.khanacademy.org')) domain = 'Khan Academy';
+                else if (hostname === 'numpy.org' || hostname.endsWith('.numpy.org')) domain = 'NumPy Docs';
+                else if (hostname === 'pytorch.org' || hostname.endsWith('.pytorch.org')) domain = 'PyTorch Docs';
+                else if (hostname === 'huggingface.co' || hostname.endsWith('.huggingface.co')) domain = 'Hugging Face';
+                else if (hostname === '3blue1brown.com' || hostname === 'www.3blue1brown.com' || hostname.endsWith('.3blue1brown.com')) domain = '3Blue1Brown';
+                else if (hostname === 'arxiv.org' || hostname.endsWith('.arxiv.org')) domain = 'arXiv';
+                else domain = hostname; // Use actual hostname if no match
               } catch (e) {
                 // Invalid URL, use generic label
               }
