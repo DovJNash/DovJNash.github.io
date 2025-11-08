@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Phase 4: Deep Learning Core - Daily breakdown with interactive checkboxes">
+  <meta name="author" content="DovJNash">
+  <title>Phase 4: Deep Learning Core | AI & ML Mastery Plan</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body class="phase-page">
+  <!-- Skip to Content Link -->
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+  
+  <!-- Header with Navigation -->
+  <header class="header phase-header" role="banner">
+    <div class="header-container">
+      <h1 class="site-title">
+        <a href="/index.html">← AI & ML Mastery Plan</a>
+      </h1>
+      <h2 class="phase-page-title">Phase 4: Deep Learning Core</h2>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main id="main-content" class="main-content phase-content" role="main">
+    
+    <!-- Phase Info Card -->
+    <div class="phase-info-card">
+      <div class="phase-meta">
+        <span><strong>Duration:</strong> Weeks 11-17 (49 days)</span>
+        <span><strong>Focus:</strong> PyTorch, CNNs</span>
+      </div>
+      <div class="phase-description">
+        <p>Master PyTorch fundamentals and build CNNs from scratch.</p>
+      </div>
+    </div>
+    
+    <!-- Progress Summary -->
+    <div class="progress-summary" role="status" aria-live="polite">
+      <h3>Progress</h3>
+      <div class="progress-stats">
+        <div class="stat">
+          <span class="stat-value" id="completed-tasks">0</span>
+          <span class="stat-label">Tasks Completed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="total-tasks">0</span>
+          <span class="stat-label">Total Tasks</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="completion-percent">0%</span>
+          <span class="stat-label">Progress</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="days-completed">0</span>
+          <span class="stat-label">Days Complete</span>
+        </div>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <!-- Control Bar -->
+    <div class="control-bar">
+      <button class="btn btn-secondary" id="expand-all" aria-label="Expand all days">
+        Expand All
+      </button>
+      <button class="btn btn-secondary" id="collapse-all" aria-label="Collapse all days">
+        Collapse All
+      </button>
+      <button class="btn btn-primary" id="mark-all" aria-label="Mark all tasks in this phase as complete">
+        Mark All Complete
+      </button>
+      <button class="btn btn-danger" id="clear-all" aria-label="Clear all tasks in this phase">
+        Clear All
+      </button>
+      <button class="btn btn-secondary" id="export-status" aria-label="Export day completion status">
+        Export Status
+      </button>
+    </div>
+    
+    <!-- Daily Breakdown Table -->
+    <div class="daily-table-wrapper">
+      <table class="daily-table" data-phase="tbl4">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Week</th>
+            <th>Tasks</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Day 1 -->
+          <tr class="day-row" data-day="1">
+            <td class="day-cell">
+              <strong>1</strong>
+            </td>
+            <td>Week 11</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day1_task1" data-task-id="tbl4_day1_task1">
+                <label for="tbl4_day1_task1">PyTorch fundamentals: tensors, autograd - Day 1</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day1_task2" data-task-id="tbl4_day1_task2">
+                <label for="tbl4_day1_task2">Practice tensor operations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day1_task3" data-task-id="tbl4_day1_task3">
+                <label for="tbl4_day1_task3">Complete and document: PyTorch basics notebooks (7)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> PyTorch basics notebooks (7)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 2 -->
+          <tr class="day-row" data-day="2">
+            <td class="day-cell">
+              <strong>2</strong>
+            </td>
+            <td>Week 11</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day2_task1" data-task-id="tbl4_day2_task1">
+                <label for="tbl4_day2_task1">PyTorch fundamentals: tensors, autograd - Day 2</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day2_task2" data-task-id="tbl4_day2_task2">
+                <label for="tbl4_day2_task2">Practice tensor operations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day2_task3" data-task-id="tbl4_day2_task3">
+                <label for="tbl4_day2_task3">Complete and document: PyTorch basics notebooks (7)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> PyTorch basics notebooks (7)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 3 -->
+          <tr class="day-row" data-day="3">
+            <td class="day-cell">
+              <strong>3</strong>
+            </td>
+            <td>Week 11</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day3_task1" data-task-id="tbl4_day3_task1">
+                <label for="tbl4_day3_task1">PyTorch fundamentals: tensors, autograd - Day 3</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day3_task2" data-task-id="tbl4_day3_task2">
+                <label for="tbl4_day3_task2">Practice tensor operations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day3_task3" data-task-id="tbl4_day3_task3">
+                <label for="tbl4_day3_task3">Complete and document: PyTorch basics notebooks (7)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> PyTorch basics notebooks (7)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 4 -->
+          <tr class="day-row" data-day="4">
+            <td class="day-cell">
+              <strong>4</strong>
+            </td>
+            <td>Week 11</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day4_task1" data-task-id="tbl4_day4_task1">
+                <label for="tbl4_day4_task1">PyTorch fundamentals: tensors, autograd - Day 4</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day4_task2" data-task-id="tbl4_day4_task2">
+                <label for="tbl4_day4_task2">Practice tensor operations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day4_task3" data-task-id="tbl4_day4_task3">
+                <label for="tbl4_day4_task3">Complete and document: PyTorch basics notebooks (7)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> PyTorch basics notebooks (7)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 5 -->
+          <tr class="day-row" data-day="5">
+            <td class="day-cell">
+              <strong>5</strong>
+            </td>
+            <td>Week 11</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day5_task1" data-task-id="tbl4_day5_task1">
+                <label for="tbl4_day5_task1">PyTorch fundamentals: tensors, autograd - Day 5</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day5_task2" data-task-id="tbl4_day5_task2">
+                <label for="tbl4_day5_task2">Practice tensor operations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day5_task3" data-task-id="tbl4_day5_task3">
+                <label for="tbl4_day5_task3">Complete and document: PyTorch basics notebooks (7)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> PyTorch basics notebooks (7)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 6 -->
+          <tr class="day-row" data-day="6">
+            <td class="day-cell">
+              <strong>6</strong>
+            </td>
+            <td>Week 11</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day6_task1" data-task-id="tbl4_day6_task1">
+                <label for="tbl4_day6_task1">PyTorch fundamentals: tensors, autograd - Day 6</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day6_task2" data-task-id="tbl4_day6_task2">
+                <label for="tbl4_day6_task2">Practice tensor operations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day6_task3" data-task-id="tbl4_day6_task3">
+                <label for="tbl4_day6_task3">Complete and document: PyTorch basics notebooks (7)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> PyTorch basics notebooks (7)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 7 -->
+          <tr class="day-row" data-day="7">
+            <td class="day-cell">
+              <strong>7</strong>
+            </td>
+            <td>Week 11</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day7_task1" data-task-id="tbl4_day7_task1">
+                <label for="tbl4_day7_task1">PyTorch fundamentals: tensors, autograd - Day 7</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day7_task2" data-task-id="tbl4_day7_task2">
+                <label for="tbl4_day7_task2">Practice tensor operations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day7_task3" data-task-id="tbl4_day7_task3">
+                <label for="tbl4_day7_task3">Complete and document: PyTorch basics notebooks (7)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> PyTorch basics notebooks (7)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 8 -->
+          <tr class="day-row" data-day="8">
+            <td class="day-cell">
+              <strong>8</strong>
+            </td>
+            <td>Week 12</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day8_task1" data-task-id="tbl4_day8_task1">
+                <label for="tbl4_day8_task1">Build MLP from scratch - Day 8</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day8_task2" data-task-id="tbl4_day8_task2">
+                <label for="tbl4_day8_task2">Train on MNIST digits</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day8_task3" data-task-id="tbl4_day8_task3">
+                <label for="tbl4_day8_task3">Complete and document: Working MLP implementation</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working MLP implementation<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 9 -->
+          <tr class="day-row" data-day="9">
+            <td class="day-cell">
+              <strong>9</strong>
+            </td>
+            <td>Week 12</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day9_task1" data-task-id="tbl4_day9_task1">
+                <label for="tbl4_day9_task1">Build MLP from scratch - Day 9</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day9_task2" data-task-id="tbl4_day9_task2">
+                <label for="tbl4_day9_task2">Train on MNIST digits</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day9_task3" data-task-id="tbl4_day9_task3">
+                <label for="tbl4_day9_task3">Complete and document: Working MLP implementation</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working MLP implementation<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 10 -->
+          <tr class="day-row" data-day="10">
+            <td class="day-cell">
+              <strong>10</strong>
+            </td>
+            <td>Week 12</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day10_task1" data-task-id="tbl4_day10_task1">
+                <label for="tbl4_day10_task1">Build MLP from scratch - Day 10</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day10_task2" data-task-id="tbl4_day10_task2">
+                <label for="tbl4_day10_task2">Train on MNIST digits</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day10_task3" data-task-id="tbl4_day10_task3">
+                <label for="tbl4_day10_task3">Complete and document: Working MLP implementation</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working MLP implementation<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 11 -->
+          <tr class="day-row" data-day="11">
+            <td class="day-cell">
+              <strong>11</strong>
+            </td>
+            <td>Week 12</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day11_task1" data-task-id="tbl4_day11_task1">
+                <label for="tbl4_day11_task1">Build MLP from scratch - Day 11</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day11_task2" data-task-id="tbl4_day11_task2">
+                <label for="tbl4_day11_task2">Train on MNIST digits</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day11_task3" data-task-id="tbl4_day11_task3">
+                <label for="tbl4_day11_task3">Complete and document: Working MLP implementation</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working MLP implementation<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 12 -->
+          <tr class="day-row" data-day="12">
+            <td class="day-cell">
+              <strong>12</strong>
+            </td>
+            <td>Week 12</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day12_task1" data-task-id="tbl4_day12_task1">
+                <label for="tbl4_day12_task1">Build MLP from scratch - Day 12</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day12_task2" data-task-id="tbl4_day12_task2">
+                <label for="tbl4_day12_task2">Train on MNIST digits</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day12_task3" data-task-id="tbl4_day12_task3">
+                <label for="tbl4_day12_task3">Complete and document: Working MLP implementation</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working MLP implementation<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 13 -->
+          <tr class="day-row" data-day="13">
+            <td class="day-cell">
+              <strong>13</strong>
+            </td>
+            <td>Week 12</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day13_task1" data-task-id="tbl4_day13_task1">
+                <label for="tbl4_day13_task1">Build MLP from scratch - Day 13</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day13_task2" data-task-id="tbl4_day13_task2">
+                <label for="tbl4_day13_task2">Train on MNIST digits</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day13_task3" data-task-id="tbl4_day13_task3">
+                <label for="tbl4_day13_task3">Complete and document: Working MLP implementation</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working MLP implementation<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 14 -->
+          <tr class="day-row" data-day="14">
+            <td class="day-cell">
+              <strong>14</strong>
+            </td>
+            <td>Week 12</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day14_task1" data-task-id="tbl4_day14_task1">
+                <label for="tbl4_day14_task1">Build MLP from scratch - Day 14</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day14_task2" data-task-id="tbl4_day14_task2">
+                <label for="tbl4_day14_task2">Train on MNIST digits</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day14_task3" data-task-id="tbl4_day14_task3">
+                <label for="tbl4_day14_task3">Complete and document: Working MLP implementation</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working MLP implementation<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 15 -->
+          <tr class="day-row" data-day="15">
+            <td class="day-cell">
+              <strong>15</strong>
+            </td>
+            <td>Week 13</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day15_task1" data-task-id="tbl4_day15_task1">
+                <label for="tbl4_day15_task1">CNN architecture basics - Day 15</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day15_task2" data-task-id="tbl4_day15_task2">
+                <label for="tbl4_day15_task2">Conv layers, pooling, batch norm</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day15_task3" data-task-id="tbl4_day15_task3">
+                <label for="tbl4_day15_task3">Complete and document: CNN components notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> CNN components notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 16 -->
+          <tr class="day-row" data-day="16">
+            <td class="day-cell">
+              <strong>16</strong>
+            </td>
+            <td>Week 13</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day16_task1" data-task-id="tbl4_day16_task1">
+                <label for="tbl4_day16_task1">CNN architecture basics - Day 16</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day16_task2" data-task-id="tbl4_day16_task2">
+                <label for="tbl4_day16_task2">Conv layers, pooling, batch norm</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day16_task3" data-task-id="tbl4_day16_task3">
+                <label for="tbl4_day16_task3">Complete and document: CNN components notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> CNN components notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 17 -->
+          <tr class="day-row" data-day="17">
+            <td class="day-cell">
+              <strong>17</strong>
+            </td>
+            <td>Week 13</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day17_task1" data-task-id="tbl4_day17_task1">
+                <label for="tbl4_day17_task1">CNN architecture basics - Day 17</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day17_task2" data-task-id="tbl4_day17_task2">
+                <label for="tbl4_day17_task2">Conv layers, pooling, batch norm</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day17_task3" data-task-id="tbl4_day17_task3">
+                <label for="tbl4_day17_task3">Complete and document: CNN components notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> CNN components notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 18 -->
+          <tr class="day-row" data-day="18">
+            <td class="day-cell">
+              <strong>18</strong>
+            </td>
+            <td>Week 13</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day18_task1" data-task-id="tbl4_day18_task1">
+                <label for="tbl4_day18_task1">CNN architecture basics - Day 18</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day18_task2" data-task-id="tbl4_day18_task2">
+                <label for="tbl4_day18_task2">Conv layers, pooling, batch norm</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day18_task3" data-task-id="tbl4_day18_task3">
+                <label for="tbl4_day18_task3">Complete and document: CNN components notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> CNN components notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 19 -->
+          <tr class="day-row" data-day="19">
+            <td class="day-cell">
+              <strong>19</strong>
+            </td>
+            <td>Week 13</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day19_task1" data-task-id="tbl4_day19_task1">
+                <label for="tbl4_day19_task1">CNN architecture basics - Day 19</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day19_task2" data-task-id="tbl4_day19_task2">
+                <label for="tbl4_day19_task2">Conv layers, pooling, batch norm</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day19_task3" data-task-id="tbl4_day19_task3">
+                <label for="tbl4_day19_task3">Complete and document: CNN components notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> CNN components notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 20 -->
+          <tr class="day-row" data-day="20">
+            <td class="day-cell">
+              <strong>20</strong>
+            </td>
+            <td>Week 13</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day20_task1" data-task-id="tbl4_day20_task1">
+                <label for="tbl4_day20_task1">CNN architecture basics - Day 20</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day20_task2" data-task-id="tbl4_day20_task2">
+                <label for="tbl4_day20_task2">Conv layers, pooling, batch norm</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day20_task3" data-task-id="tbl4_day20_task3">
+                <label for="tbl4_day20_task3">Complete and document: CNN components notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> CNN components notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 21 -->
+          <tr class="day-row" data-day="21">
+            <td class="day-cell">
+              <strong>21</strong>
+            </td>
+            <td>Week 13</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day21_task1" data-task-id="tbl4_day21_task1">
+                <label for="tbl4_day21_task1">CNN architecture basics - Day 21</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day21_task2" data-task-id="tbl4_day21_task2">
+                <label for="tbl4_day21_task2">Conv layers, pooling, batch norm</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day21_task3" data-task-id="tbl4_day21_task3">
+                <label for="tbl4_day21_task3">Complete and document: CNN components notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> CNN components notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 22 -->
+          <tr class="day-row" data-day="22">
+            <td class="day-cell">
+              <strong>22</strong>
+            </td>
+            <td>Week 14</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day22_task1" data-task-id="tbl4_day22_task1">
+                <label for="tbl4_day22_task1">Build CNN for CIFAR-10 - Day 22</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day22_task2" data-task-id="tbl4_day22_task2">
+                <label for="tbl4_day22_task2">Experiment with architectures</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day22_task3" data-task-id="tbl4_day22_task3">
+                <label for="tbl4_day22_task3">Complete and document: Working CNN model</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working CNN model<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 23 -->
+          <tr class="day-row" data-day="23">
+            <td class="day-cell">
+              <strong>23</strong>
+            </td>
+            <td>Week 14</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day23_task1" data-task-id="tbl4_day23_task1">
+                <label for="tbl4_day23_task1">Build CNN for CIFAR-10 - Day 23</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day23_task2" data-task-id="tbl4_day23_task2">
+                <label for="tbl4_day23_task2">Experiment with architectures</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day23_task3" data-task-id="tbl4_day23_task3">
+                <label for="tbl4_day23_task3">Complete and document: Working CNN model</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working CNN model<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 24 -->
+          <tr class="day-row" data-day="24">
+            <td class="day-cell">
+              <strong>24</strong>
+            </td>
+            <td>Week 14</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day24_task1" data-task-id="tbl4_day24_task1">
+                <label for="tbl4_day24_task1">Build CNN for CIFAR-10 - Day 24</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day24_task2" data-task-id="tbl4_day24_task2">
+                <label for="tbl4_day24_task2">Experiment with architectures</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day24_task3" data-task-id="tbl4_day24_task3">
+                <label for="tbl4_day24_task3">Complete and document: Working CNN model</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working CNN model<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 25 -->
+          <tr class="day-row" data-day="25">
+            <td class="day-cell">
+              <strong>25</strong>
+            </td>
+            <td>Week 14</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day25_task1" data-task-id="tbl4_day25_task1">
+                <label for="tbl4_day25_task1">Build CNN for CIFAR-10 - Day 25</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day25_task2" data-task-id="tbl4_day25_task2">
+                <label for="tbl4_day25_task2">Experiment with architectures</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day25_task3" data-task-id="tbl4_day25_task3">
+                <label for="tbl4_day25_task3">Complete and document: Working CNN model</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working CNN model<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 26 -->
+          <tr class="day-row" data-day="26">
+            <td class="day-cell">
+              <strong>26</strong>
+            </td>
+            <td>Week 14</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day26_task1" data-task-id="tbl4_day26_task1">
+                <label for="tbl4_day26_task1">Build CNN for CIFAR-10 - Day 26</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day26_task2" data-task-id="tbl4_day26_task2">
+                <label for="tbl4_day26_task2">Experiment with architectures</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day26_task3" data-task-id="tbl4_day26_task3">
+                <label for="tbl4_day26_task3">Complete and document: Working CNN model</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working CNN model<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 27 -->
+          <tr class="day-row" data-day="27">
+            <td class="day-cell">
+              <strong>27</strong>
+            </td>
+            <td>Week 14</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day27_task1" data-task-id="tbl4_day27_task1">
+                <label for="tbl4_day27_task1">Build CNN for CIFAR-10 - Day 27</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day27_task2" data-task-id="tbl4_day27_task2">
+                <label for="tbl4_day27_task2">Experiment with architectures</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day27_task3" data-task-id="tbl4_day27_task3">
+                <label for="tbl4_day27_task3">Complete and document: Working CNN model</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working CNN model<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 28 -->
+          <tr class="day-row" data-day="28">
+            <td class="day-cell">
+              <strong>28</strong>
+            </td>
+            <td>Week 14</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day28_task1" data-task-id="tbl4_day28_task1">
+                <label for="tbl4_day28_task1">Build CNN for CIFAR-10 - Day 28</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day28_task2" data-task-id="tbl4_day28_task2">
+                <label for="tbl4_day28_task2">Experiment with architectures</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day28_task3" data-task-id="tbl4_day28_task3">
+                <label for="tbl4_day28_task3">Complete and document: Working CNN model</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Working CNN model<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 29 -->
+          <tr class="day-row" data-day="29">
+            <td class="day-cell">
+              <strong>29</strong>
+            </td>
+            <td>Week 15</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day29_task1" data-task-id="tbl4_day29_task1">
+                <label for="tbl4_day29_task1">Training stability: LR scheduling - Day 29</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day29_task2" data-task-id="tbl4_day29_task2">
+                <label for="tbl4_day29_task2">Gradient clipping, normalization</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day29_task3" data-task-id="tbl4_day29_task3">
+                <label for="tbl4_day29_task3">Complete and document: Stability techniques notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Stability techniques notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 30 -->
+          <tr class="day-row" data-day="30">
+            <td class="day-cell">
+              <strong>30</strong>
+            </td>
+            <td>Week 15</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day30_task1" data-task-id="tbl4_day30_task1">
+                <label for="tbl4_day30_task1">Training stability: LR scheduling - Day 30</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day30_task2" data-task-id="tbl4_day30_task2">
+                <label for="tbl4_day30_task2">Gradient clipping, normalization</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day30_task3" data-task-id="tbl4_day30_task3">
+                <label for="tbl4_day30_task3">Complete and document: Stability techniques notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Stability techniques notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 31 -->
+          <tr class="day-row" data-day="31">
+            <td class="day-cell">
+              <strong>31</strong>
+            </td>
+            <td>Week 15</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day31_task1" data-task-id="tbl4_day31_task1">
+                <label for="tbl4_day31_task1">Training stability: LR scheduling - Day 31</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day31_task2" data-task-id="tbl4_day31_task2">
+                <label for="tbl4_day31_task2">Gradient clipping, normalization</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day31_task3" data-task-id="tbl4_day31_task3">
+                <label for="tbl4_day31_task3">Complete and document: Stability techniques notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Stability techniques notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 32 -->
+          <tr class="day-row" data-day="32">
+            <td class="day-cell">
+              <strong>32</strong>
+            </td>
+            <td>Week 15</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day32_task1" data-task-id="tbl4_day32_task1">
+                <label for="tbl4_day32_task1">Training stability: LR scheduling - Day 32</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day32_task2" data-task-id="tbl4_day32_task2">
+                <label for="tbl4_day32_task2">Gradient clipping, normalization</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day32_task3" data-task-id="tbl4_day32_task3">
+                <label for="tbl4_day32_task3">Complete and document: Stability techniques notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Stability techniques notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 33 -->
+          <tr class="day-row" data-day="33">
+            <td class="day-cell">
+              <strong>33</strong>
+            </td>
+            <td>Week 15</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day33_task1" data-task-id="tbl4_day33_task1">
+                <label for="tbl4_day33_task1">Training stability: LR scheduling - Day 33</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day33_task2" data-task-id="tbl4_day33_task2">
+                <label for="tbl4_day33_task2">Gradient clipping, normalization</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day33_task3" data-task-id="tbl4_day33_task3">
+                <label for="tbl4_day33_task3">Complete and document: Stability techniques notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Stability techniques notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 34 -->
+          <tr class="day-row" data-day="34">
+            <td class="day-cell">
+              <strong>34</strong>
+            </td>
+            <td>Week 15</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day34_task1" data-task-id="tbl4_day34_task1">
+                <label for="tbl4_day34_task1">Training stability: LR scheduling - Day 34</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day34_task2" data-task-id="tbl4_day34_task2">
+                <label for="tbl4_day34_task2">Gradient clipping, normalization</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day34_task3" data-task-id="tbl4_day34_task3">
+                <label for="tbl4_day34_task3">Complete and document: Stability techniques notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Stability techniques notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 35 -->
+          <tr class="day-row" data-day="35">
+            <td class="day-cell">
+              <strong>35</strong>
+            </td>
+            <td>Week 15</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day35_task1" data-task-id="tbl4_day35_task1">
+                <label for="tbl4_day35_task1">Training stability: LR scheduling - Day 35</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day35_task2" data-task-id="tbl4_day35_task2">
+                <label for="tbl4_day35_task2">Gradient clipping, normalization</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day35_task3" data-task-id="tbl4_day35_task3">
+                <label for="tbl4_day35_task3">Complete and document: Stability techniques notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Stability techniques notebook<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 36 -->
+          <tr class="day-row" data-day="36">
+            <td class="day-cell">
+              <strong>36</strong>
+            </td>
+            <td>Week 16</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day36_task1" data-task-id="tbl4_day36_task1">
+                <label for="tbl4_day36_task1">Activation/gradient visualization - Day 36</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day36_task2" data-task-id="tbl4_day36_task2">
+                <label for="tbl4_day36_task2">Diagnose training issues</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day36_task3" data-task-id="tbl4_day36_task3">
+                <label for="tbl4_day36_task3">Complete and document: Visualization tools</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Visualization tools<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 37 -->
+          <tr class="day-row" data-day="37">
+            <td class="day-cell">
+              <strong>37</strong>
+            </td>
+            <td>Week 16</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day37_task1" data-task-id="tbl4_day37_task1">
+                <label for="tbl4_day37_task1">Activation/gradient visualization - Day 37</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day37_task2" data-task-id="tbl4_day37_task2">
+                <label for="tbl4_day37_task2">Diagnose training issues</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day37_task3" data-task-id="tbl4_day37_task3">
+                <label for="tbl4_day37_task3">Complete and document: Visualization tools</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Visualization tools<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 38 -->
+          <tr class="day-row" data-day="38">
+            <td class="day-cell">
+              <strong>38</strong>
+            </td>
+            <td>Week 16</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day38_task1" data-task-id="tbl4_day38_task1">
+                <label for="tbl4_day38_task1">Activation/gradient visualization - Day 38</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day38_task2" data-task-id="tbl4_day38_task2">
+                <label for="tbl4_day38_task2">Diagnose training issues</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day38_task3" data-task-id="tbl4_day38_task3">
+                <label for="tbl4_day38_task3">Complete and document: Visualization tools</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Visualization tools<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 39 -->
+          <tr class="day-row" data-day="39">
+            <td class="day-cell">
+              <strong>39</strong>
+            </td>
+            <td>Week 16</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day39_task1" data-task-id="tbl4_day39_task1">
+                <label for="tbl4_day39_task1">Activation/gradient visualization - Day 39</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day39_task2" data-task-id="tbl4_day39_task2">
+                <label for="tbl4_day39_task2">Diagnose training issues</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day39_task3" data-task-id="tbl4_day39_task3">
+                <label for="tbl4_day39_task3">Complete and document: Visualization tools</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Visualization tools<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 40 -->
+          <tr class="day-row" data-day="40">
+            <td class="day-cell">
+              <strong>40</strong>
+            </td>
+            <td>Week 16</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day40_task1" data-task-id="tbl4_day40_task1">
+                <label for="tbl4_day40_task1">Activation/gradient visualization - Day 40</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day40_task2" data-task-id="tbl4_day40_task2">
+                <label for="tbl4_day40_task2">Diagnose training issues</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day40_task3" data-task-id="tbl4_day40_task3">
+                <label for="tbl4_day40_task3">Complete and document: Visualization tools</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Visualization tools<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 41 -->
+          <tr class="day-row" data-day="41">
+            <td class="day-cell">
+              <strong>41</strong>
+            </td>
+            <td>Week 16</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day41_task1" data-task-id="tbl4_day41_task1">
+                <label for="tbl4_day41_task1">Activation/gradient visualization - Day 41</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day41_task2" data-task-id="tbl4_day41_task2">
+                <label for="tbl4_day41_task2">Diagnose training issues</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day41_task3" data-task-id="tbl4_day41_task3">
+                <label for="tbl4_day41_task3">Complete and document: Visualization tools</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Visualization tools<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 42 -->
+          <tr class="day-row" data-day="42">
+            <td class="day-cell">
+              <strong>42</strong>
+            </td>
+            <td>Week 16</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day42_task1" data-task-id="tbl4_day42_task1">
+                <label for="tbl4_day42_task1">Activation/gradient visualization - Day 42</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day42_task2" data-task-id="tbl4_day42_task2">
+                <label for="tbl4_day42_task2">Diagnose training issues</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day42_task3" data-task-id="tbl4_day42_task3">
+                <label for="tbl4_day42_task3">Complete and document: Visualization tools</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Visualization tools<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 43 -->
+          <tr class="day-row" data-day="43">
+            <td class="day-cell">
+              <strong>43</strong>
+            </td>
+            <td>Week 17</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day43_task1" data-task-id="tbl4_day43_task1">
+                <label for="tbl4_day43_task1">Kaggle GPU sprint on CIFAR-10 - Day 43</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day43_task2" data-task-id="tbl4_day43_task2">
+                <label for="tbl4_day43_task2">Write deep_learning_health_check.md</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day43_task3" data-task-id="tbl4_day43_task3">
+                <label for="tbl4_day43_task3">Complete and document: Kaggle submission + report</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Kaggle submission + report<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 44 -->
+          <tr class="day-row" data-day="44">
+            <td class="day-cell">
+              <strong>44</strong>
+            </td>
+            <td>Week 17</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day44_task1" data-task-id="tbl4_day44_task1">
+                <label for="tbl4_day44_task1">Kaggle GPU sprint on CIFAR-10 - Day 44</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day44_task2" data-task-id="tbl4_day44_task2">
+                <label for="tbl4_day44_task2">Write deep_learning_health_check.md</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day44_task3" data-task-id="tbl4_day44_task3">
+                <label for="tbl4_day44_task3">Complete and document: Kaggle submission + report</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Kaggle submission + report<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 45 -->
+          <tr class="day-row" data-day="45">
+            <td class="day-cell">
+              <strong>45</strong>
+            </td>
+            <td>Week 17</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day45_task1" data-task-id="tbl4_day45_task1">
+                <label for="tbl4_day45_task1">Kaggle GPU sprint on CIFAR-10 - Day 45</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day45_task2" data-task-id="tbl4_day45_task2">
+                <label for="tbl4_day45_task2">Write deep_learning_health_check.md</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day45_task3" data-task-id="tbl4_day45_task3">
+                <label for="tbl4_day45_task3">Complete and document: Kaggle submission + report</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Kaggle submission + report<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 46 -->
+          <tr class="day-row" data-day="46">
+            <td class="day-cell">
+              <strong>46</strong>
+            </td>
+            <td>Week 17</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day46_task1" data-task-id="tbl4_day46_task1">
+                <label for="tbl4_day46_task1">Kaggle GPU sprint on CIFAR-10 - Day 46</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day46_task2" data-task-id="tbl4_day46_task2">
+                <label for="tbl4_day46_task2">Write deep_learning_health_check.md</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day46_task3" data-task-id="tbl4_day46_task3">
+                <label for="tbl4_day46_task3">Complete and document: Kaggle submission + report</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Kaggle submission + report<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 47 -->
+          <tr class="day-row" data-day="47">
+            <td class="day-cell">
+              <strong>47</strong>
+            </td>
+            <td>Week 17</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day47_task1" data-task-id="tbl4_day47_task1">
+                <label for="tbl4_day47_task1">Kaggle GPU sprint on CIFAR-10 - Day 47</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day47_task2" data-task-id="tbl4_day47_task2">
+                <label for="tbl4_day47_task2">Write deep_learning_health_check.md</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day47_task3" data-task-id="tbl4_day47_task3">
+                <label for="tbl4_day47_task3">Complete and document: Kaggle submission + report</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Kaggle submission + report<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 48 -->
+          <tr class="day-row" data-day="48">
+            <td class="day-cell">
+              <strong>48</strong>
+            </td>
+            <td>Week 17</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day48_task1" data-task-id="tbl4_day48_task1">
+                <label for="tbl4_day48_task1">Kaggle GPU sprint on CIFAR-10 - Day 48</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day48_task2" data-task-id="tbl4_day48_task2">
+                <label for="tbl4_day48_task2">Write deep_learning_health_check.md</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day48_task3" data-task-id="tbl4_day48_task3">
+                <label for="tbl4_day48_task3">Complete and document: Kaggle submission + report</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Kaggle submission + report<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 49 -->
+          <tr class="day-row" data-day="49">
+            <td class="day-cell">
+              <strong>49</strong>
+            </td>
+            <td>Week 17</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day49_task1" data-task-id="tbl4_day49_task1">
+                <label for="tbl4_day49_task1">Kaggle GPU sprint on CIFAR-10 - Day 49</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day49_task2" data-task-id="tbl4_day49_task2">
+                <label for="tbl4_day49_task2">Write deep_learning_health_check.md</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl4_day49_task3" data-task-id="tbl4_day49_task3">
+                <label for="tbl4_day49_task3">Complete and document: Kaggle submission + report</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Kaggle submission + report<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Back to Main Link -->
+    <div class="back-to-main">
+      <a href="/index.html" class="btn btn-secondary">← Back to Main Plan</a>
+    </div>
+    
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+      <p>&copy; 2025 DovJNash. AI & Machine Learning Mastery Plan.</p>
+      <p>
+        <a href="/index.html">Main Plan</a> | 
+        <a href="https://github.com/DovJNash">GitHub</a>
+      </p>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
