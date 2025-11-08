@@ -1,76 +1,41 @@
 // AI & Machine Learning Mastery Plan - Main JavaScript
-// Handles tab navigation, more menu, smooth scrolling, and daily breakdown
+// Handles navigation, smooth scrolling, scrollspy, and mobile menu
 
 (function() {
   'use strict';
 
-  // === More Menu Toggle ===
-  function initMoreMenu() {
-    const moreToggle = document.querySelector('.nav-more-toggle');
-    const moreMenu = document.getElementById('moreMenu');
-    const closeButton = document.querySelector('.more-menu-close');
+  // === Mobile Navigation Toggle ===
+  function initMobileNav() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const mainNav = document.querySelector('.main-nav');
     
-    if (!moreToggle || !moreMenu) return;
+    if (!navToggle || !mainNav) return;
     
-    // Open more menu
-    moreToggle.addEventListener('click', function(e) {
-      e.stopPropagation();
-      moreMenu.classList.add('open');
-      document.body.style.overflow = 'hidden';
+    navToggle.addEventListener('click', function() {
+      const isOpen = mainNav.classList.contains('open');
+      mainNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', !isOpen);
+      navToggle.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
     });
     
-    // Close more menu
-    function closeMoreMenu() {
-      moreMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+    // Close mobile nav when clicking a link
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mainNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
     
-    if (closeButton) {
-      closeButton.addEventListener('click', closeMoreMenu);
-    }
-    
-    // Close on overlay click
-    moreMenu.addEventListener('click', function(e) {
-      if (e.target === moreMenu) {
-        closeMoreMenu();
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!mainNav.contains(e.target) && !navToggle.contains(e.target) && mainNav.classList.contains('open')) {
+        mainNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
       }
-    });
-    
-    // Close on escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && moreMenu.classList.contains('open')) {
-        closeMoreMenu();
-      }
-    });
-    
-    // Close when clicking a menu item
-    const menuItems = moreMenu.querySelectorAll('.more-menu-item');
-    menuItems.forEach(item => {
-      item.addEventListener('click', closeMoreMenu);
     });
   }
 
-  // === Mobile Navigation Toggle ===
-  function initMobileNav() {
-    const mobileToggle = document.querySelector('.mobile-nav-toggle');
-    const moreMenu = document.getElementById('moreMenu');
-    
-    if (!mobileToggle || !moreMenu) return;
-    
-    mobileToggle.addEventListener('click', function() {
-      const isOpen = moreMenu.classList.contains('open');
-      
-      if (!isOpen) {
-        moreMenu.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        mobileToggle.setAttribute('aria-expanded', 'true');
-      } else {
-        moreMenu.classList.remove('open');
-        document.body.style.overflow = '';
-        mobileToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
   // === Smooth Scrolling for Anchor Links ===
   function initSmoothScrolling() {
     const links = document.querySelectorAll('a[href^="#"]');
@@ -265,7 +230,6 @@
 
   // === Initialize Everything When DOM is Ready ===
   function init() {
-    initMoreMenu();
     initMobileNav();
     initSmoothScrolling();
     initScrollspy();
@@ -274,7 +238,7 @@
     initBackToTop();
     handleInitialHash();
     
-    console.log('AI & ML Mastery Plan site initialized (Dark theme with tab navigation)');
+    console.log('AI & ML Mastery Plan site initialized');
   }
 
   // Run initialization
@@ -285,219 +249,3 @@
   }
 
 })();
-
-// ========================================================================
-// Daily Breakdown Interactive Features
-// ========================================================================
-
-/**
- * Initialize daily breakdown tables with localStorage persistence
- */
-function initDailyTables() {
-  console.log('Initializing daily breakdown tables...');
-  
-  // Restore checkbox states from localStorage
-  const checkboxes = document.querySelectorAll('.task-box');
-  checkboxes.forEach(checkbox => {
-    const key = getCheckboxKey(checkbox);
-    const saved = localStorage.getItem(key);
-    if (saved === 'true') {
-      checkbox.checked = true;
-    }
-  });
-  
-  // Update progress summary
-  updateProgressSummary();
-  
-  // Setup event listeners
-  setupDailyBreakdownListeners();
-  
-  console.log(`Loaded ${checkboxes.length} task checkboxes`);
-}
-
-/**
- * Generate localStorage key for a checkbox
- */
-function getCheckboxKey(checkbox) {
-  const table = checkbox.dataset.table;
-  const day = checkbox.dataset.day;
-  const task = checkbox.dataset.task;
-  return `dailyTbl_${table}_day_${day}_${task}`;
-}
-
-/**
- * Setup event listeners for daily breakdown controls
- */
-function setupDailyBreakdownListeners() {
-  // Event delegation for all checkboxes
-  document.addEventListener('change', (e) => {
-    if (e.target.classList.contains('task-box')) {
-      handleCheckboxChange(e);
-    }
-  });
-  
-  // Event delegation for control buttons
-  document.addEventListener('click', (e) => {
-    const button = e.target.closest('.btn-control');
-    if (!button) return;
-    
-    const action = button.dataset.action;
-    const tableId = button.dataset.table;
-    
-    if (action === 'toggle') {
-      toggleTable(tableId, button);
-    } else if (action === 'markAll') {
-      markAll(tableId);
-    } else if (action === 'clearAll') {
-      clearAll(tableId);
-    }
-  });
-}
-
-/**
- * Handle checkbox state change
- */
-function handleCheckboxChange(e) {
-  const checkbox = e.target;
-  const key = getCheckboxKey(checkbox);
-  
-  // Save to localStorage
-  localStorage.setItem(key, checkbox.checked);
-  
-  // Update day completion status
-  updateDayCompletionStatus(checkbox);
-  
-  // Update progress summary
-  updateProgressSummary();
-  
-  console.log(`Task ${key}: ${checkbox.checked ? 'completed' : 'uncompleted'}`);
-}
-
-/**
- * Update day completion status (all tasks checked = day completed)
- */
-function updateDayCompletionStatus(checkbox) {
-  const row = checkbox.closest('tr[data-day]');
-  if (!row) return;
-  
-  const dayCheckboxes = row.querySelectorAll('.task-box');
-  const allChecked = Array.from(dayCheckboxes).every(cb => cb.checked);
-  
-  if (allChecked) {
-    row.classList.add('day-completed');
-  } else {
-    row.classList.remove('day-completed');
-  }
-}
-
-/**
- * Update progress summary with current statistics
- */
-function updateProgressSummary() {
-  const allCheckboxes = document.querySelectorAll('.task-box');
-  const checkedCheckboxes = document.querySelectorAll('.task-box:checked');
-  
-  const totalTasks = allCheckboxes.length;
-  const completedTasks = checkedCheckboxes.length;
-  const percentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
-  
-  // Count completed days (days where all tasks are checked)
-  const allRows = document.querySelectorAll('tr[data-day]');
-  let completedDays = 0;
-  
-  allRows.forEach(row => {
-    const dayCheckboxes = row.querySelectorAll('.task-box');
-    if (dayCheckboxes.length > 0) {
-      const allChecked = Array.from(dayCheckboxes).every(cb => cb.checked);
-      if (allChecked) {
-        completedDays++;
-        row.classList.add('day-completed');
-      } else {
-        row.classList.remove('day-completed');
-      }
-    }
-  });
-  
-  // Update DOM elements
-  const daysCompletedEl = document.getElementById('days-completed');
-  const tasksCompletedEl = document.getElementById('tasks-completed');
-  const tasksTotalEl = document.getElementById('tasks-total');
-  const percentageEl = document.getElementById('overall-percentage');
-  const progressBar = document.getElementById('overall-progress-bar');
-  
-  if (daysCompletedEl) daysCompletedEl.textContent = completedDays;
-  if (tasksCompletedEl) tasksCompletedEl.textContent = completedTasks;
-  if (tasksTotalEl) tasksCompletedEl.textContent = `${completedTasks} / ${totalTasks}`;
-  if (percentageEl) percentageEl.textContent = `${percentage}%`;
-  if (progressBar) progressBar.style.width = `${percentage}%`;
-  
-  console.log(`Progress: ${completedDays} days, ${completedTasks}/${totalTasks} tasks (${percentage}%)`);
-}
-
-/**
- * Toggle table visibility (expand/collapse)
- */
-function toggleTable(tableId, button) {
-  const tableBody = document.querySelector(`[data-table-body="${tableId}"]`);
-  if (!tableBody) return;
-  
-  const isCollapsed = tableBody.classList.contains('collapsed');
-  
-  if (isCollapsed) {
-    tableBody.classList.remove('collapsed');
-    button.classList.remove('collapsed');
-  } else {
-    tableBody.classList.add('collapsed');
-    button.classList.add('collapsed');
-  }
-  
-  console.log(`Table ${tableId}: ${isCollapsed ? 'expanded' : 'collapsed'}`);
-}
-
-/**
- * Mark all checkboxes in a table
- */
-function markAll(tableId) {
-  const checkboxes = document.querySelectorAll(`.task-box[data-table="${tableId}"]`);
-  
-  checkboxes.forEach(checkbox => {
-    if (!checkbox.checked) {
-      checkbox.checked = true;
-      const key = getCheckboxKey(checkbox);
-      localStorage.setItem(key, 'true');
-      updateDayCompletionStatus(checkbox);
-    }
-  });
-  
-  updateProgressSummary();
-  console.log(`Marked all tasks in table ${tableId}`);
-}
-
-/**
- * Clear all checkboxes in a table
- */
-function clearAll(tableId) {
-  const checkboxes = document.querySelectorAll(`.task-box[data-table="${tableId}"]`);
-  
-  checkboxes.forEach(checkbox => {
-    if (checkbox.checked) {
-      checkbox.checked = false;
-      const key = getCheckboxKey(checkbox);
-      localStorage.setItem(key, 'false');
-      updateDayCompletionStatus(checkbox);
-    }
-  });
-  
-  updateProgressSummary();
-  console.log(`Cleared all tasks in table ${tableId}`);
-}
-
-// Initialize daily tables when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    // Small delay to ensure all other init functions run first
-    setTimeout(initDailyTables, 100);
-  });
-} else {
-  setTimeout(initDailyTables, 100);
-}
