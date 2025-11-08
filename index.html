@@ -1348,6 +1348,35 @@
   
   </div>
   
+  <!-- Floating Progress HUD -->
+  <div id="progressHUD" class="progress-hud collapsed">
+    <div class="progress-hud-header">
+      <h4>📊 Progress Tracker</h4>
+      <button id="hudToggle" class="hud-toggle" aria-label="Toggle progress HUD">−</button>
+    </div>
+    <div class="progress-hud-content">
+      <div class="hud-stat">
+        <div class="hud-stat-value" id="hud-percent">0%</div>
+        <div class="hud-stat-label">Complete</div>
+      </div>
+      <div class="hud-stat">
+        <div class="hud-stat-value" id="hud-tasks"><span id="hud-completed">0</span>/<span id="hud-total">0</span></div>
+        <div class="hud-stat-label">Tasks</div>
+      </div>
+      <div class="hud-stat">
+        <div class="hud-stat-value" id="hud-days">0</div>
+        <div class="hud-stat-label">Days Done</div>
+      </div>
+      <div class="hud-phase-progress">
+        <div class="hud-phase-label">Current Phase</div>
+        <div class="hud-phase-bar">
+          <div class="hud-phase-fill" id="hud-phase-fill" style="width: 0%"></div>
+        </div>
+        <div class="hud-phase-text" id="hud-phase-text">0%</div>
+      </div>
+    </div>
+  </div>
+  
   <!-- JavaScript -->
   <script src="/assets/js/main.js"></script>
 </body>

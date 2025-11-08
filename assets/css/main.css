@@ -1774,3 +1774,141 @@ tbody tr:hover {
     width: 100%;
   }
 }
+
+/* === Floating Progress HUD === */
+.progress-hud {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 280px;
+  z-index: 1000;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.progress-hud.collapsed .progress-hud-content {
+  display: none;
+}
+
+.progress-hud.collapsed {
+  width: auto;
+}
+
+.progress-hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  user-select: none;
+}
+
+.progress-hud-header h4 {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.hud-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.hud-toggle:hover {
+  background-color: var(--slate-100);
+}
+
+.progress-hud-content {
+  padding: 16px;
+}
+
+.hud-stat {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.hud-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--blue-accent);
+  line-height: 1.2;
+}
+
+.hud-stat-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+.hud-phase-progress {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.hud-phase-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.hud-phase-bar {
+  height: 8px;
+  background: var(--slate-200);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.hud-phase-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue-accent), var(--purple-accent));
+  transition: width 0.3s ease;
+}
+
+.hud-phase-text {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+/* Mobile adjustments for HUD */
+@media (max-width: 768px) {
+  .progress-hud {
+    bottom: 10px;
+    right: 10px;
+    width: 240px;
+  }
+  
+  .hud-stat-value {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .progress-hud {
+    width: calc(100vw - 20px);
+    left: 10px;
+    right: 10px;
+  }
+}

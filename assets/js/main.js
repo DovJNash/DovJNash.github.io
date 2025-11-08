@@ -522,7 +522,7 @@
   function updateGlobalProgress() {
     const progress = computeGlobalProgress();
     
-    // Update stats
+    // Update main stats
     const completedEl = document.getElementById('global-completed');
     const totalEl = document.getElementById('global-total');
     const daysEl = document.getElementById('global-days');
@@ -542,6 +542,9 @@
       ringCircle.style.strokeDashoffset = offset;
     }
     
+    // Update HUD
+    updateProgressHUD(progress);
+    
     // Update week progress
     Object.keys(PLAN).forEach(weekKey => {
       const weekPercent = computeWeekProgress(weekKey);
@@ -553,6 +556,56 @@
     
     // Announce to screen readers
     announceProgress(`Progress updated: ${progress.completed} of ${progress.total} tasks completed, ${progress.percent}%`);
+  }
+
+  function updateProgressHUD(progress) {
+    // Update HUD elements
+    const hudPercent = document.getElementById('hud-percent');
+    const hudCompleted = document.getElementById('hud-completed');
+    const hudTotal = document.getElementById('hud-total');
+    const hudDays = document.getElementById('hud-days');
+    const hudPhaseFill = document.getElementById('hud-phase-fill');
+    const hudPhaseText = document.getElementById('hud-phase-text');
+    
+    if (hudPercent) hudPercent.textContent = `${progress.percent}%`;
+    if (hudCompleted) hudCompleted.textContent = progress.completed;
+    if (hudTotal) hudTotal.textContent = progress.total;
+    if (hudDays) hudDays.textContent = progress.days;
+    
+    // Calculate current phase progress (for now, using week 1-2 as current phase)
+    const currentPhasePercent = progress.percent; // Can be enhanced to track actual current phase
+    if (hudPhaseFill) hudPhaseFill.style.width = `${currentPhasePercent}%`;
+    if (hudPhaseText) hudPhaseText.textContent = `${currentPhasePercent}%`;
+  }
+
+  function initProgressHUD() {
+    const hud = document.getElementById('progressHUD');
+    const hudToggle = document.getElementById('hudToggle');
+    const hudHeader = hud ? hud.querySelector('.progress-hud-header') : null;
+    
+    if (!hud || !hudToggle || !hudHeader) return;
+    
+    // Load collapsed state from localStorage
+    const isCollapsed = localStorage.getItem('llmPlan.hud.collapsed') === 'true';
+    if (isCollapsed) {
+      hud.classList.add('collapsed');
+      hudToggle.textContent = '+';
+    } else {
+      hud.classList.remove('collapsed');
+      hudToggle.textContent = '−';
+    }
+    
+    // Toggle HUD
+    hudHeader.addEventListener('click', () => {
+      hud.classList.toggle('collapsed');
+      const collapsed = hud.classList.contains('collapsed');
+      hudToggle.textContent = collapsed ? '+' : '−';
+      localStorage.setItem('llmPlan.hud.collapsed', collapsed);
+    });
+    
+    // Initial update
+    const progress = computeGlobalProgress();
+    updateProgressHUD(progress);
   }
 
   const debouncedUpdateProgress = debounce(updateGlobalProgress, 300);
@@ -752,6 +805,9 @@
   function init() {
     // Initialize daily breakdown
     initPlan();
+    
+    // Initialize Progress HUD
+    initProgressHUD();
     
     // Initialize sidebar and scrollspy
     initSidebar();
