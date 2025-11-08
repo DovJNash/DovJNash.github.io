@@ -407,7 +407,16 @@ Estimated time: [Realistic time estimate]
   - Day 47: ✅ Repo structure audit & housekeeping (README sections, LICENSE)
   - Day 48: ✅ Buffer day plan with light tasks
   - Day 49: ✅ Week 7 review + readiness checklist for Classical ML
-- **Remaining Phases:** Structure in place, ready for detail expansion following established pattern
+- **Phase 3 Classical ML (Days 50-70):** ✅ Complete with comprehensive details (≥120 words each)
+  - Week 8 (Days 50-57): ✅ Complete - sklearn introduction, LogisticRegression on Iris, classification metrics, confusion matrices, precision/recall/F1, ROC-AUC curves, stratified k-fold cross-validation, learning curves, model selection
+  - Week 9 (Days 58-64): ✅ Complete - Support Vector Machines (linear & RBF kernels), Decision Trees (splitting criteria, pruning), Random Forests (ensemble methods, feature importance), Gradient Boosting (XGBoost fundamentals), bias-variance tradeoff analysis, permutation importance
+  - Week 10 (Days 65-70): ✅ Complete - Unsupervised learning (K-Means clustering, elbow method), PCA application (dimensionality reduction, visualization), classical ML mini-project with full pipeline, comprehensive project report with model selection justification
+- **Phase 4 Deep Learning Core (Days 71-119):** ✅ Complete with comprehensive details (≥120 words each)
+  - Week 11 (Days 71-78): ✅ Complete - PyTorch tensors & GPU acceleration, torch.autograd mechanics, manual gradient descent, nn.Module patterns, Dataset/DataLoader, training loops with evaluation, checkpointing & reproducibility (seeds, deterministic flags)
+  - Week 12-13 (Days 79-92): ✅ Complete - MLP on MNIST (≥97% accuracy target), activation functions (ReLU, LeakyReLU, GELU), initialization schemes (Xavier, He), normalization (BatchNorm, LayerNorm), regularization (dropout, weight decay), learning rate schedulers, gradient clipping
+  - Week 14-16 (Days 93-113): ✅ Complete - CNNs on CIFAR-10 (≥70% by epoch 12), convolutional layers, pooling operations, data augmentation (transforms, Albumentations), training stability techniques, mixed precision training (torch.cuda.amp), TensorBoard logging, loss curve analysis, early stopping
+  - Week 17 (Days 114-119): ✅ Complete - Performance optimization (DataLoader workers, pin_memory, torch.backends.cudnn settings), device/dtype consistency, profiling basics, error analysis, confusion matrices for deep learning, checkpointing strategies, model serialization
+- **Remaining Phases (5-14):** Structure in place, ready for detail expansion following established pattern
 
 ## Browser Support
 

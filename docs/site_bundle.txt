@@ -473,3 +473,24 @@ Each detailed task includes:
 - **Sources:** 2-6 authoritative links (official docs, courses, Khan Academy, 3Blue1Brown, arXiv)
 
 All links open in new tabs with rel="noreferrer" for security.
+
+
+## Phase 3 & 4 Task Details (Sample)
+
+### Phase 3: Classical ML Fundamentals (Day 50)
+**Title:** Sklearn Introduction & First Classifier
+**Task:** DataCamp: Introduction to Machine Learning with scikit-learn Chapter 1
+**Details (excerpt):** <strong>Action:</strong> Complete <a href="https://www.datacamp.com/courses/supervised-learning-with-scikit-learn" target="_blank" rel="noopener">DataCamp: Introduction to Machine Learning with scikit-learn Chapter 1</a>, focusing on the sklearn API pattern (fit, predict, score), supervised learning...
+
+### Phase 4: Deep Learning Core (Day 71)
+**Title:** PyTorch Tensors & Autograd
+**Task:** Complete PyTorch 60-minute blitz tutorial
+**Details (excerpt):** <strong>Action:</strong> Complete the <a href="https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html" target="_blank" rel="noopener">PyTorch 60-minute blitz tutorial</a>, focusing on tensor fundamentals, autograd basics, and neural network building blocks. Work through all sections: ...
+
+**Note:** All 214 tasks in Phase 3 (Days 50-70) and Phase 4 (Days 71-119) now have comprehensive 120-300 word details including:
+- Action: Specific steps, file paths, datasets, parameters
+- Boundaries: Scope limits, what NOT to do
+- Deliverables: Exact file names and artifacts
+- Verification: Concrete success criteria and metrics
+- Pitfalls: Common mistakes and fixes
+- Resources: 2+ authoritative links (sklearn docs, PyTorch docs, research papers)
