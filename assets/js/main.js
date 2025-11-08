@@ -1,89 +1,76 @@
 // AI & Machine Learning Mastery Plan - Main JavaScript
-// Handles navigation, smooth scrolling, scrollspy, and mobile menu
-// Dark theme by default
+// Handles tab navigation, more menu, smooth scrolling, and daily breakdown
 
 (function() {
   'use strict';
 
-  // === Dropdown Navigation ===
-  function initDropdowns() {
-    const dropdownToggles = document.querySelectorAll('.nav-dropdown-toggle');
+  // === More Menu Toggle ===
+  function initMoreMenu() {
+    const moreToggle = document.querySelector('.nav-more-toggle');
+    const moreMenu = document.getElementById('moreMenu');
+    const closeButton = document.querySelector('.more-menu-close');
     
-    dropdownToggles.forEach(toggle => {
-      toggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const menu = this.nextElementSibling;
-        const isOpen = this.getAttribute('aria-expanded') === 'true';
-        
-        // Close all other dropdowns
-        document.querySelectorAll('.nav-dropdown-toggle').forEach(otherToggle => {
-          if (otherToggle !== toggle) {
-            otherToggle.setAttribute('aria-expanded', 'false');
-            const otherMenu = otherToggle.nextElementSibling;
-            if (otherMenu) otherMenu.classList.remove('open');
-          }
-        });
-        
-        // Toggle current dropdown
-        toggle.setAttribute('aria-expanded', !isOpen);
-        menu.classList.toggle('open');
-      });
+    if (!moreToggle || !moreMenu) return;
+    
+    // Open more menu
+    moreToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      moreMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
     });
     
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.nav-dropdown')) {
-        document.querySelectorAll('.nav-dropdown-toggle').forEach(toggle => {
-          toggle.setAttribute('aria-expanded', 'false');
-          const menu = toggle.nextElementSibling;
-          if (menu) menu.classList.remove('open');
-        });
+    // Close more menu
+    function closeMoreMenu() {
+      moreMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    
+    if (closeButton) {
+      closeButton.addEventListener('click', closeMoreMenu);
+    }
+    
+    // Close on overlay click
+    moreMenu.addEventListener('click', function(e) {
+      if (e.target === moreMenu) {
+        closeMoreMenu();
       }
     });
     
-    // Close dropdown when clicking a link inside it
-    document.querySelectorAll('.nav-dropdown-menu a').forEach(link => {
-      link.addEventListener('click', function() {
-        const toggle = this.closest('.nav-dropdown').querySelector('.nav-dropdown-toggle');
-        const menu = toggle.nextElementSibling;
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('open');
-      });
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && moreMenu.classList.contains('open')) {
+        closeMoreMenu();
+      }
+    });
+    
+    // Close when clicking a menu item
+    const menuItems = moreMenu.querySelectorAll('.more-menu-item');
+    menuItems.forEach(item => {
+      item.addEventListener('click', closeMoreMenu);
     });
   }
 
   // === Mobile Navigation Toggle ===
   function initMobileNav() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const mainNav = document.querySelector('.main-nav');
+    const mobileToggle = document.querySelector('.mobile-nav-toggle');
+    const moreMenu = document.getElementById('moreMenu');
     
-    if (!navToggle || !mainNav) return;
+    if (!mobileToggle || !moreMenu) return;
     
-    navToggle.addEventListener('click', function() {
-      const isOpen = mainNav.classList.contains('open');
-      mainNav.classList.toggle('open');
-      navToggle.setAttribute('aria-expanded', !isOpen);
-      navToggle.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
-    });
-    
-    // Close mobile nav when clicking a link
-    const navLinks = mainNav.querySelectorAll('a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        mainNav.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-    
-    // Close mobile nav when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!mainNav.contains(e.target) && !navToggle.contains(e.target) && mainNav.classList.contains('open')) {
-        mainNav.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
+    mobileToggle.addEventListener('click', function() {
+      const isOpen = moreMenu.classList.contains('open');
+      
+      if (!isOpen) {
+        moreMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        mobileToggle.setAttribute('aria-expanded', 'true');
+      } else {
+        moreMenu.classList.remove('open');
+        document.body.style.overflow = '';
+        mobileToggle.setAttribute('aria-expanded', 'false');
       }
     });
   }
-
   // === Smooth Scrolling for Anchor Links ===
   function initSmoothScrolling() {
     const links = document.querySelectorAll('a[href^="#"]');
@@ -278,7 +265,7 @@
 
   // === Initialize Everything When DOM is Ready ===
   function init() {
-    initDropdowns();
+    initMoreMenu();
     initMobileNav();
     initSmoothScrolling();
     initScrollspy();
@@ -287,7 +274,7 @@
     initBackToTop();
     handleInitialHash();
     
-    console.log('AI & ML Mastery Plan site initialized (Dark theme)');
+    console.log('AI & ML Mastery Plan site initialized (Dark theme with tab navigation)');
   }
 
   // Run initialization
