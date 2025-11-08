@@ -89,7 +89,6 @@
     let totalDays = 0;
     let completedDays = 0;
     
-<<<<<<< HEAD
     if (typeof PLAN !== 'undefined' && PLAN.phases) {
       PLAN.phases.forEach(phase => {
         if (phase.days) {
@@ -105,231 +104,6 @@
               if (allTasksComplete) {
                 completedDays++;
               }
-=======
-    return { total: totalTasks, completed: completedTasks, percent, days: completedDays };
-  }
-
-  function computeWeekProgress(weekId) {
-    const week = PLAN[weekId];
-    if (!week) return 0;
-    
-    const allTaskIds = [];
-    week.days.forEach(day => {
-      day.tasks.forEach((task, idx) => {
-        allTaskIds.push(getTaskId(week.id, day.globalDay, idx));
-      });
-    });
-    
-    const total = allTaskIds.length;
-    const completed = allTaskIds.filter(id => loadTaskState(id)).length;
-    return total > 0 ? Math.round((completed / total) * 100) : 0;
-  }
-
-  function updateGlobalProgress() {
-    const progress = computeGlobalProgress();
-    
-    // Update main stats
-    const completedEl = document.getElementById('global-completed');
-    const totalEl = document.getElementById('global-total');
-    const daysEl = document.getElementById('global-days');
-    
-    if (completedEl) completedEl.textContent = progress.completed;
-    if (totalEl) totalEl.textContent = progress.total;
-    if (daysEl) daysEl.textContent = progress.days;
-    
-    // Update progress ring
-    const ringText = document.getElementById('progress-ring-percent');
-    const ringCircle = document.getElementById('progress-ring-value');
-    
-    if (ringText) ringText.textContent = `${progress.percent}%`;
-    if (ringCircle) {
-      const circumference = 2 * Math.PI * 90; // radius = 90
-      const offset = circumference - (progress.percent / 100) * circumference;
-      ringCircle.style.strokeDashoffset = offset;
-    }
-    
-    // Update HUD
-    updateProgressHUD(progress);
-    
-    // Update week progress
-    Object.keys(PLAN).forEach(weekKey => {
-      const weekPercent = computeWeekProgress(weekKey);
-      const weekProgressEl = document.getElementById(`week-${weekKey}-progress`);
-      if (weekProgressEl) {
-        weekProgressEl.textContent = `${weekPercent}%`;
-      }
-    });
-    
-    // Announce to screen readers
-    announceProgress(`Progress updated: ${progress.completed} of ${progress.total} tasks completed, ${progress.percent}%`);
-  }
-
-  function updateProgressHUD(progress) {
-    // Update HUD elements
-    const hudPercent = document.getElementById('hud-percent');
-    const hudCompleted = document.getElementById('hud-completed');
-    const hudTotal = document.getElementById('hud-total');
-    const hudDays = document.getElementById('hud-days');
-    const hudPhaseFill = document.getElementById('hud-phase-fill');
-    const hudPhaseText = document.getElementById('hud-phase-text');
-    
-    if (hudPercent) hudPercent.textContent = `${progress.percent}%`;
-    if (hudCompleted) hudCompleted.textContent = progress.completed;
-    if (hudTotal) hudTotal.textContent = progress.total;
-    if (hudDays) hudDays.textContent = progress.days;
-    
-    // Calculate current phase progress (for now, using week 1-2 as current phase)
-    const currentPhasePercent = progress.percent; // Can be enhanced to track actual current phase
-    if (hudPhaseFill) hudPhaseFill.style.width = `${currentPhasePercent}%`;
-    if (hudPhaseText) hudPhaseText.textContent = `${currentPhasePercent}%`;
-  }
-
-  function initProgressHUD() {
-    const hud = document.getElementById('progressHUD');
-    const hudToggle = document.getElementById('hudToggle');
-    const hudHeader = hud ? hud.querySelector('.progress-hud-header') : null;
-    
-    if (!hud || !hudToggle || !hudHeader) return;
-    
-    // Load collapsed state from localStorage
-    const isCollapsed = localStorage.getItem('llmPlan.hud.collapsed') === 'true';
-    if (isCollapsed) {
-      hud.classList.add('collapsed');
-      hudToggle.textContent = '+';
-    } else {
-      hud.classList.remove('collapsed');
-      hudToggle.textContent = '−';
-    }
-    
-    // Toggle HUD
-    hudHeader.addEventListener('click', () => {
-      hud.classList.toggle('collapsed');
-      const collapsed = hud.classList.contains('collapsed');
-      hudToggle.textContent = collapsed ? '+' : '−';
-      localStorage.setItem('llmPlan.hud.collapsed', collapsed);
-    });
-    
-    // Initial update
-    const progress = computeGlobalProgress();
-    updateProgressHUD(progress);
-  }
-
-  const debouncedUpdateProgress = debounce(updateGlobalProgress, 300);
-
-  // === Event Handlers ===
-  function handleCheckboxChange(event) {
-    const checkbox = event.target;
-    if (checkbox.type === 'checkbox' && checkbox.dataset.taskId) {
-      const taskId = checkbox.dataset.taskId;
-      saveTaskState(taskId, checkbox.checked);
-      debouncedUpdateProgress();
-    }
-  }
-
-  function resetProgress() {
-    const confirmed = confirm('Reset ALL progress? Type "RESET" in the next prompt to confirm.');
-    if (!confirmed) return;
-    
-    const secondConfirm = prompt('Type RESET to confirm resetting all progress:');
-    if (secondConfirm !== 'RESET') {
-      alert('Reset cancelled.');
-      return;
-    }
-    
-    // Clear only llmPlan.* keys
-    const keys = Object.keys(localStorage);
-    keys.forEach(key => {
-      if (key.startsWith('llmPlan.')) {
-        localStorage.removeItem(key);
-      }
-    });
-    
-    // Uncheck all checkboxes
-    document.querySelectorAll('input[type="checkbox"][data-task-id]').forEach(cb => {
-      cb.checked = false;
-    });
-    
-    updateGlobalProgress();
-    alert('All progress has been reset.');
-  }
-
-  function exportProgress() {
-    const progress = computeGlobalProgress();
-    
-    const exportData = {
-      exportDate: new Date().toISOString(),
-      globalProgress: {
-        totalTasks: progress.total,
-        completedTasks: progress.completed,
-        percent: progress.percent,
-        daysComplete: progress.days
-      },
-      weeks: {}
-    };
-    
-    Object.keys(PLAN).forEach(weekKey => {
-      const week = PLAN[weekKey];
-      const weekProgress = computeWeekProgress(weekKey);
-      
-      exportData.weeks[weekKey] = {
-        title: week.title,
-        progress: weekProgress,
-        days: week.days.map(day => {
-          const dayTaskIds = day.tasks.map((task, idx) => getTaskId(week.id, day.globalDay, idx));
-          const completed = dayTaskIds.filter(id => loadTaskState(id)).length;
-          const total = dayTaskIds.length;
-          
-          return {
-            day: day.day,
-            globalDay: day.globalDay,
-            title: day.title,
-            totalTasks: total,
-            completedTasks: completed,
-            percent: total > 0 ? Math.round((completed / total) * 100) : 0,
-            complete: completed === total && total > 0
-          };
-        })
-      };
-    });
-    
-    // Download as JSON
-    const dataStr = JSON.stringify(exportData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `llm-mastery-progress-${new Date().toISOString().split('T')[0]}.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-    
-    alert('Progress exported successfully!');
-  }
-
-  // === Sidebar & Scrollspy ===
-  function initSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    if (!sidebar) return;
-    
-    const sidebarLinks = sidebar.querySelectorAll('a[href^="#"]');
-    const sections = document.querySelectorAll('.content-section[id]');
-    
-    if (sections.length === 0) return;
-    
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -70% 0px',
-      threshold: 0
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          sidebarLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${id}`) {
-              link.classList.add('active');
->>>>>>> main
             }
           });
         }
@@ -1054,7 +828,6 @@
   function init() {
     console.log('Initializing AI & ML Mastery Plan (Tabbed Interface)...');
     
-<<<<<<< HEAD
     // Initialize tabs
     initTabs();
     
@@ -1065,12 +838,6 @@
     initSearchModal();
     
     // Initialize sidebar and legacy features
-=======
-    // Initialize Progress HUD
-    initProgressHUD();
-    
-    // Initialize sidebar and scrollspy
->>>>>>> main
     initSidebar();
     initAnchorLinks();
     
