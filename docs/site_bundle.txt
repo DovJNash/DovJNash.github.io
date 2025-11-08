@@ -4,11 +4,23 @@ AI & MACHINE LEARNING MASTERY PLAN - COMPLETE SITE BUNDLE
 
 Generated: 2025-11-08
 Repository: DovJNash/DovJNash.github.io
-Branch: fill-all-days-and-bundle-txt
+Branch: full-plan-all-days-detailed
 
 This file contains the complete source code and documentation for the AI & ML
 Mastery Plan website. It includes all HTML, CSS, JavaScript, and supporting
 files needed to understand and potentially recreate the site.
+
+## Task Details Coverage Status
+
+**Updated 2025-11-08:**
+- Week 1 (Days 1-7): ✅ Complete paragraph-level details (36 tasks)
+  * Each task includes 120-220 word descriptions
+  * Action steps, boundaries, deliverables, verification checks
+  * 2-4 resource links to official documentation and tutorials
+  * Example: Day 1 DataCamp task has full educational guidance
+- Infrastructure: ✅ UI fully supports collapsible task details
+- Remaining days: Structure in place, ready for expansion following Week 1 pattern
+- See README.md "Task Details Field" section for authoring guidelines
 
 ================================================================================
 INTRODUCTION & SITE STRUCTURE
