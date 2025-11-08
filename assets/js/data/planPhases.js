@@ -572,7 +572,7 @@ const PLAN = {
           reflectionPrompt: 'Why is testing important even for learning projects?'
         },
                 {
-          globalDayglobalDay: 44,
+          globalDay: 44,
           week: 7,
           title: 'Black formatter',
           priority: 'HIGH',
@@ -667,7 +667,7 @@ const PLAN = {
           reflectionPrompt: 'How does sklearn abstract away the math we learned in foundations?'
         },
                 {
-          globalDayglobalDay: 51,
+          globalDay: 51,
           week: 8,
           title: 'Classification',
           priority: 'HIGH',
@@ -930,7 +930,7 @@ const PLAN = {
           reflectionPrompt: 'How does autograd differ from manual gradient computation?'
         },
                 {
-          globalDayglobalDay: 72,
+          globalDay: 72,
           week: 11,
           title: 'PyTorch',
           priority: 'HIGH',
@@ -1529,7 +1529,7 @@ const PLAN = {
           reflectionPrompt: 'How does character-level differ from word-level tokenization?'
         },
                 {
-          globalDayglobalDay: 121,
+          globalDay: 121,
           week: 18,
           title: 'Char data',
           priority: 'HIGH',
@@ -1624,7 +1624,7 @@ const PLAN = {
           reflectionPrompt: 'Why is scaling by sqrt(d_k) necessary?'
         },
                 {
-          globalDayglobalDay: 128,
+          globalDay: 128,
           week: 19,
           title: 'Attention',
           priority: 'HIGH',
@@ -1971,7 +1971,7 @@ const PLAN = {
           reflectionPrompt: 'What are the key differences between GPT and BERT architectures?'
         },
                 {
-          globalDayglobalDay: 156,
+          globalDay: 156,
           week: 23,
           title: 'Architecture',
           priority: 'HIGH',
@@ -2486,7 +2486,7 @@ const PLAN = {
           reflectionPrompt: 'Why does BPE handle rare words better than word-level tokenization?'
         },
                 {
-          globalDayglobalDay: 198,
+          globalDay: 198,
           week: 29,
           title: 'BPE',
           priority: 'HIGH',
@@ -2917,7 +2917,7 @@ const PLAN = {
           reflectionPrompt: 'What are the most critical safety concerns for a student LLM project?'
         },
                 {
-          globalDayglobalDay: 233,
+          globalDay: 233,
           week: 34,
           title: 'Safety',
           priority: 'HIGH',
@@ -3180,7 +3180,7 @@ const PLAN = {
           reflectionPrompt: 'Why does low-rank adaptation work so well for fine-tuning?'
         },
                 {
-          globalDayglobalDay: 254,
+          globalDay: 254,
           week: 37,
           title: 'LoRA',
           priority: 'HIGH',
@@ -3527,7 +3527,7 @@ const PLAN = {
           reflectionPrompt: 'What patterns emerged that could be abstracted?'
         },
                 {
-          globalDayglobalDay: 282,
+          globalDay: 282,
           week: 41,
           title: 'Code cleanup',
           priority: 'HIGH',
@@ -3622,7 +3622,7 @@ const PLAN = {
           reflectionPrompt: 'Which components are hardest to test? Why?'
         },
                 {
-          globalDayglobalDay: 289,
+          globalDay: 289,
           week: 42,
           title: 'Pytest',
           priority: 'HIGH',
@@ -3885,7 +3885,7 @@ const PLAN = {
           reflectionPrompt: 'Why did you choose this capstone? What excites you most?'
         },
                 {
-          globalDayglobalDay: 310,
+          globalDay: 310,
           week: 45,
           title: 'Planning',
           priority: 'HIGH',
