@@ -261,6 +261,255 @@
     });
   }
 
+  // === Phase Page Functionality ===
+  
+  // Initialize phase page with checkbox persistence
+  function initPhasePage() {
+    const phaseTable = document.querySelector('.daily-table[data-phase]');
+    if (!phaseTable) return;
+    
+    const phaseId = phaseTable.getAttribute('data-phase');
+    
+    // Load all task states from localStorage
+    loadTasks(phaseId);
+    
+    // Add event listeners to all checkboxes
+    const checkboxes = phaseTable.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        saveTaskState(this);
+        updateProgress();
+      });
+    });
+    
+    // Initialize control bar buttons
+    initControlBar(phaseId);
+    
+    // Initial progress calculation
+    updateProgress();
+  }
+  
+  // Load task states from localStorage
+  function loadTasks(phaseId) {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-task-id]');
+    checkboxes.forEach(checkbox => {
+      const taskId = checkbox.getAttribute('data-task-id');
+      const storageKey = `llmPlan_${taskId}`;
+      const isChecked = localStorage.getItem(storageKey) === 'true';
+      checkbox.checked = isChecked;
+    });
+  }
+  
+  // Save individual task state to localStorage
+  function saveTaskState(checkbox) {
+    const taskId = checkbox.getAttribute('data-task-id');
+    const storageKey = `llmPlan_${taskId}`;
+    localStorage.setItem(storageKey, checkbox.checked);
+  }
+  
+  // Calculate and update progress display
+  function updateProgress() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-task-id]');
+    const totalTasks = checkboxes.length;
+    const completedTasks = Array.from(checkboxes).filter(cb => cb.checked).length;
+    const percentComplete = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+    
+    // Count fully completed days
+    const dayRows = document.querySelectorAll('.day-row');
+    let daysCompleted = 0;
+    dayRows.forEach(row => {
+      const rowCheckboxes = row.querySelectorAll('input[type="checkbox"]');
+      const allChecked = Array.from(rowCheckboxes).every(cb => cb.checked);
+      if (allChecked && rowCheckboxes.length > 0) {
+        daysCompleted++;
+      }
+    });
+    
+    // Update UI
+    const completedEl = document.getElementById('completed-tasks');
+    const totalEl = document.getElementById('total-tasks');
+    const percentEl = document.getElementById('completion-percent');
+    const daysEl = document.getElementById('days-completed');
+    const progressBar = document.getElementById('progress-bar');
+    
+    if (completedEl) completedEl.textContent = completedTasks;
+    if (totalEl) totalEl.textContent = totalTasks;
+    if (percentEl) percentEl.textContent = `${percentComplete}%`;
+    if (daysEl) daysEl.textContent = daysCompleted;
+    if (progressBar) progressBar.style.width = `${percentComplete}%`;
+  }
+  
+  // Debounced progress update
+  let progressUpdateTimer;
+  function debouncedProgressUpdate() {
+    clearTimeout(progressUpdateTimer);
+    progressUpdateTimer = setTimeout(updateProgress, 100);
+  }
+  
+  // Initialize control bar buttons
+  function initControlBar(phaseId) {
+    const expandAllBtn = document.getElementById('expand-all');
+    const collapseAllBtn = document.getElementById('collapse-all');
+    const markAllBtn = document.getElementById('mark-all');
+    const clearAllBtn = document.getElementById('clear-all');
+    const exportBtn = document.getElementById('export-status');
+    
+    if (expandAllBtn) {
+      expandAllBtn.addEventListener('click', function() {
+        // Future: implement collapsible day rows if needed
+        console.log('Expand all days');
+      });
+    }
+    
+    if (collapseAllBtn) {
+      collapseAllBtn.addEventListener('click', function() {
+        // Future: implement collapsible day rows if needed
+        console.log('Collapse all days');
+      });
+    }
+    
+    if (markAllBtn) {
+      markAllBtn.addEventListener('click', function() {
+        if (confirm('Mark all tasks in this phase as complete?')) {
+          const checkboxes = document.querySelectorAll('input[type="checkbox"][data-task-id]');
+          checkboxes.forEach(checkbox => {
+            checkbox.checked = true;
+            saveTaskState(checkbox);
+          });
+          updateProgress();
+        }
+      });
+    }
+    
+    if (clearAllBtn) {
+      clearAllBtn.addEventListener('click', function() {
+        if (confirm('Clear all tasks in this phase? This cannot be undone.')) {
+          const checkboxes = document.querySelectorAll('input[type="checkbox"][data-task-id]');
+          checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+            saveTaskState(checkbox);
+          });
+          updateProgress();
+        }
+      });
+    }
+    
+    if (exportBtn) {
+      exportBtn.addEventListener('click', function() {
+        exportPhaseStatus(phaseId);
+      });
+    }
+  }
+  
+  // Export phase status as JSON
+  function exportPhaseStatus(phaseId) {
+    const dayRows = document.querySelectorAll('.day-row');
+    const statusData = {
+      phase: phaseId,
+      exportDate: new Date().toISOString(),
+      days: []
+    };
+    
+    dayRows.forEach(row => {
+      const dayNum = row.getAttribute('data-day');
+      const checkboxes = row.querySelectorAll('input[type="checkbox"]');
+      const totalTasks = checkboxes.length;
+      const completedTasks = Array.from(checkboxes).filter(cb => cb.checked).length;
+      const isComplete = totalTasks > 0 && completedTasks === totalTasks;
+      
+      statusData.days.push({
+        day: parseInt(dayNum),
+        totalTasks: totalTasks,
+        completedTasks: completedTasks,
+        complete: isComplete,
+        progress: totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0
+      });
+    });
+    
+    // Download as JSON file
+    const dataStr = JSON.stringify(statusData, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${phaseId}_status_${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+  
+  // Compute global progress across all phases
+  function computeGlobalProgress() {
+    const allKeys = Object.keys(localStorage);
+    const taskKeys = allKeys.filter(key => key.startsWith('llmPlan_tbl'));
+    
+    const totalTasks = taskKeys.length;
+    const completedTasks = taskKeys.filter(key => localStorage.getItem(key) === 'true').length;
+    const percentComplete = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+    
+    return {
+      total: totalTasks,
+      completed: completedTasks,
+      percent: percentComplete
+    };
+  }
+  
+  // Reset all progress
+  function resetProgress() {
+    if (!confirm('Reset ALL progress across ALL phases? This cannot be undone!')) {
+      return;
+    }
+    
+    const allKeys = Object.keys(localStorage);
+    const taskKeys = allKeys.filter(key => key.startsWith('llmPlan_tbl'));
+    
+    taskKeys.forEach(key => {
+      localStorage.removeItem(key);
+    });
+    
+    // Uncheck all checkboxes on current page
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-task-id]');
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = false;
+    });
+    
+    // Update progress display if on phase page
+    if (typeof updateProgress === 'function') {
+      updateProgress();
+    }
+    
+    alert('All progress has been reset.');
+  }
+  
+  // Initialize global progress on index page
+  function initGlobalProgress() {
+    const globalProgressEl = document.getElementById('global-progress');
+    if (!globalProgressEl) return;
+    
+    const progress = computeGlobalProgress();
+    globalProgressEl.innerHTML = `
+      <div class="progress-stat">
+        <span class="stat-value">${progress.completed}</span>
+        <span class="stat-label">Tasks Completed</span>
+      </div>
+      <div class="progress-stat">
+        <span class="stat-value">${progress.total}</span>
+        <span class="stat-label">Total Tasks</span>
+      </div>
+      <div class="progress-stat">
+        <span class="stat-value">${progress.percent}%</span>
+        <span class="stat-label">Overall Progress</span>
+      </div>
+    `;
+  }
+  
+  // Initialize reset button on index page
+  function initResetButton() {
+    const resetBtn = document.getElementById('reset-progress-btn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', resetProgress);
+    }
+  }
+
   // === Initialize Everything When DOM is Ready ===
   function init() {
     initMobileNav();
@@ -271,6 +520,17 @@
     initBackToTop();
     initDailyBreakdown();
     handleInitialHash();
+    
+    // Phase page specific initialization
+    if (document.body.classList.contains('phase-page')) {
+      initPhasePage();
+    }
+    
+    // Index page specific initialization
+    if (document.getElementById('global-progress')) {
+      initGlobalProgress();
+      initResetButton();
+    }
     
     console.log('AI & ML Mastery Plan site initialized');
   }

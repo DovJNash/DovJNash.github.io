@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Phase 2: Buffer & Structure Setup - Daily breakdown with interactive checkboxes">
+  <meta name="author" content="DovJNash">
+  <title>Phase 2: Buffer & Structure Setup | AI & ML Mastery Plan</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body class="phase-page">
+  <!-- Skip to Content Link -->
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+  
+  <!-- Header with Navigation -->
+  <header class="header phase-header" role="banner">
+    <div class="header-container">
+      <h1 class="site-title">
+        <a href="/index.html">← AI & ML Mastery Plan</a>
+      </h1>
+      <h2 class="phase-page-title">Phase 2: Buffer & Structure Setup</h2>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main id="main-content" class="main-content phase-content" role="main">
+    
+    <!-- Phase Info Card -->
+    <div class="phase-info-card">
+      <div class="phase-meta">
+        <span><strong>Duration:</strong> Week 7 (7 days)</span>
+        <span><strong>Focus:</strong> Testing, Code Quality</span>
+      </div>
+      <div class="phase-description">
+        <p>Set up testing infrastructure, code formatting, and repository structure.</p>
+      </div>
+    </div>
+    
+    <!-- Progress Summary -->
+    <div class="progress-summary" role="status" aria-live="polite">
+      <h3>Progress</h3>
+      <div class="progress-stats">
+        <div class="stat">
+          <span class="stat-value" id="completed-tasks">0</span>
+          <span class="stat-label">Tasks Completed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="total-tasks">0</span>
+          <span class="stat-label">Total Tasks</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="completion-percent">0%</span>
+          <span class="stat-label">Progress</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="days-completed">0</span>
+          <span class="stat-label">Days Complete</span>
+        </div>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <!-- Control Bar -->
+    <div class="control-bar">
+      <button class="btn btn-secondary" id="expand-all" aria-label="Expand all days">
+        Expand All
+      </button>
+      <button class="btn btn-secondary" id="collapse-all" aria-label="Collapse all days">
+        Collapse All
+      </button>
+      <button class="btn btn-primary" id="mark-all" aria-label="Mark all tasks in this phase as complete">
+        Mark All Complete
+      </button>
+      <button class="btn btn-danger" id="clear-all" aria-label="Clear all tasks in this phase">
+        Clear All
+      </button>
+      <button class="btn btn-secondary" id="export-status" aria-label="Export day completion status">
+        Export Status
+      </button>
+    </div>
+    
+    <!-- Daily Breakdown Table -->
+    <div class="daily-table-wrapper">
+      <table class="daily-table" data-phase="tbl2">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Week</th>
+            <th>Tasks</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Day 1 -->
+          <tr class="day-row" data-day="1">
+            <td class="day-cell">
+              <strong>1</strong>
+            </td>
+            <td>Week 7</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day1_task1" data-task-id="tbl2_day1_task1">
+                <label for="tbl2_day1_task1">Install pytest</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day1_task2" data-task-id="tbl2_day1_task2">
+                <label for="tbl2_day1_task2">Learn pytest basics</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day1_task3" data-task-id="tbl2_day1_task3">
+                <label for="tbl2_day1_task3">Complete and document: Test setup complete</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Test setup complete<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 2 -->
+          <tr class="day-row" data-day="2">
+            <td class="day-cell">
+              <strong>2</strong>
+            </td>
+            <td>Week 7</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day2_task1" data-task-id="tbl2_day2_task1">
+                <label for="tbl2_day2_task1">Install black formatter</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day2_task2" data-task-id="tbl2_day2_task2">
+                <label for="tbl2_day2_task2">Configure pre-commit hooks</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day2_task3" data-task-id="tbl2_day2_task3">
+                <label for="tbl2_day2_task3">Complete and document: Code formatter configured</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Code formatter configured<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 3 -->
+          <tr class="day-row" data-day="3">
+            <td class="day-cell">
+              <strong>3</strong>
+            </td>
+            <td>Week 7</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day3_task1" data-task-id="tbl2_day3_task1">
+                <label for="tbl2_day3_task1">Setup Deepnote workspace</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day3_task2" data-task-id="tbl2_day3_task2">
+                <label for="tbl2_day3_task2">Migrate key notebooks</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day3_task3" data-task-id="tbl2_day3_task3">
+                <label for="tbl2_day3_task3">Complete and document: Deepnote environment ready</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Deepnote environment ready<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 4 -->
+          <tr class="day-row" data-day="4">
+            <td class="day-cell">
+              <strong>4</strong>
+            </td>
+            <td>Week 7</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day4_task1" data-task-id="tbl2_day4_task1">
+                <label for="tbl2_day4_task1">Organize repository structure</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day4_task2" data-task-id="tbl2_day4_task2">
+                <label for="tbl2_day4_task2">Create folder hierarchy</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day4_task3" data-task-id="tbl2_day4_task3">
+                <label for="tbl2_day4_task3">Complete and document: Clean repo organization</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Clean repo organization<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 5 -->
+          <tr class="day-row" data-day="5">
+            <td class="day-cell">
+              <strong>5</strong>
+            </td>
+            <td>Week 7</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day5_task1" data-task-id="tbl2_day5_task1">
+                <label for="tbl2_day5_task1">Start weekly log template</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day5_task2" data-task-id="tbl2_day5_task2">
+                <label for="tbl2_day5_task2">Define log format</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day5_task3" data-task-id="tbl2_day5_task3">
+                <label for="tbl2_day5_task3">Complete and document: Weekly log Week_07.md</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Weekly log Week_07.md<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 6 -->
+          <tr class="day-row" data-day="6">
+            <td class="day-cell">
+              <strong>6</strong>
+            </td>
+            <td>Week 7</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day6_task1" data-task-id="tbl2_day6_task1">
+                <label for="tbl2_day6_task1">Write tests for Phase 1 code</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day6_task2" data-task-id="tbl2_day6_task2">
+                <label for="tbl2_day6_task2">Ensure all tests pass</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day6_task3" data-task-id="tbl2_day6_task3">
+                <label for="tbl2_day6_task3">Complete and document: Test suite (≥10 tests)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Test suite (≥10 tests)<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 7 -->
+          <tr class="day-row" data-day="7">
+            <td class="day-cell">
+              <strong>7</strong>
+            </td>
+            <td>Week 7</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day7_task1" data-task-id="tbl2_day7_task1">
+                <label for="tbl2_day7_task1">Buffer day / catch up</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day7_task2" data-task-id="tbl2_day7_task2">
+                <label for="tbl2_day7_task2">Review and plan Phase 3</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl2_day7_task3" data-task-id="tbl2_day7_task3">
+                <label for="tbl2_day7_task3">Complete and document: Phase 2 completion report</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Phase 2 completion report<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Back to Main Link -->
+    <div class="back-to-main">
+      <a href="/index.html" class="btn btn-secondary">← Back to Main Plan</a>
+    </div>
+    
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+      <p>&copy; 2025 DovJNash. AI & Machine Learning Mastery Plan.</p>
+      <p>
+        <a href="/index.html">Main Plan</a> | 
+        <a href="https://github.com/DovJNash">GitHub</a>
+      </p>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

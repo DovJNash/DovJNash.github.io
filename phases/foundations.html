@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Phase 1: Math + Python-for-Data Foundations - Daily breakdown with interactive checkboxes">
+  <meta name="author" content="DovJNash">
+  <title>Phase 1: Foundations | AI & ML Mastery Plan</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body class="phase-page">
+  <!-- Skip to Content Link -->
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+  
+  <!-- Header with Navigation -->
+  <header class="header phase-header" role="banner">
+    <div class="header-container">
+      <h1 class="site-title">
+        <a href="/index.html">← AI & ML Mastery Plan</a>
+      </h1>
+      <h2 class="phase-page-title">Phase 1: Math + Python-for-Data Foundations</h2>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main id="main-content" class="main-content phase-content" role="main">
+    
+    <!-- Phase Info Card -->
+    <div class="phase-info-card">
+      <div class="phase-meta">
+        <span><strong>Duration:</strong> Weeks 1-6 (42 days)</span>
+        <span><strong>Focus:</strong> Mathematics, Python, Classical ML</span>
+      </div>
+      <div class="phase-description">
+        <p>Build strong foundations in linear algebra, calculus, probability, and Python programming for data science. Master NumPy, Pandas, and implement core algorithms from scratch.</p>
+      </div>
+    </div>
+    
+    <!-- Progress Summary -->
+    <div class="progress-summary" role="status" aria-live="polite">
+      <h3>Progress</h3>
+      <div class="progress-stats">
+        <div class="stat">
+          <span class="stat-value" id="completed-tasks">0</span>
+          <span class="stat-label">Tasks Completed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="total-tasks">0</span>
+          <span class="stat-label">Total Tasks</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="completion-percent">0%</span>
+          <span class="stat-label">Progress</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="days-completed">0</span>
+          <span class="stat-label">Days Complete</span>
+        </div>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <!-- Control Bar -->
+    <div class="control-bar">
+      <button class="btn btn-secondary" id="expand-all" aria-label="Expand all days">
+        Expand All
+      </button>
+      <button class="btn btn-secondary" id="collapse-all" aria-label="Collapse all days">
+        Collapse All
+      </button>
+      <button class="btn btn-primary" id="mark-all" aria-label="Mark all tasks in this phase as complete">
+        Mark All Complete
+      </button>
+      <button class="btn btn-danger" id="clear-all" aria-label="Clear all tasks in this phase">
+        Clear All
+      </button>
+      <button class="btn btn-secondary" id="export-status" aria-label="Export day completion status">
+        Export Status
+      </button>
+    </div>
+    
+    <!-- Daily Breakdown Table -->
+    <div class="daily-table-wrapper">
+      <table class="daily-table" data-phase="tbl1">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Week</th>
+            <th>Tasks</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <!-- Day 1 -->
+          <tr class="day-row" data-day="1">
+            <td class="day-cell">
+              <strong>1</strong>
+            </td>
+            <td>Week 1</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day1_task1" data-task-id="tbl1_day1_task1">
+                <label for="tbl1_day1_task1">DataCamp: Intro to Python</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day1_task2" data-task-id="tbl1_day1_task2">
+                <label for="tbl1_day1_task2">Setup development environment</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day1_task3" data-task-id="tbl1_day1_task3">
+                <label for="tbl1_day1_task3">Complete and document: Python basics notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Python basics notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 2 -->
+          <tr class="day-row" data-day="2">
+            <td class="day-cell">
+              <strong>2</strong>
+            </td>
+            <td>Week 1</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day2_task1" data-task-id="tbl1_day2_task1">
+                <label for="tbl1_day2_task1">DataCamp: NumPy arrays basics</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day2_task2" data-task-id="tbl1_day2_task2">
+                <label for="tbl1_day2_task2">Install Jupyter/VS Code</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day2_task3" data-task-id="tbl1_day2_task3">
+                <label for="tbl1_day2_task3">Complete and document: NumPy exercises (10 problems)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> NumPy exercises (10 problems)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 3 -->
+          <tr class="day-row" data-day="3">
+            <td class="day-cell">
+              <strong>3</strong>
+            </td>
+            <td>Week 1</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day3_task1" data-task-id="tbl1_day3_task1">
+                <label for="tbl1_day3_task1">DataCamp: NumPy operations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day3_task2" data-task-id="tbl1_day3_task2">
+                <label for="tbl1_day3_task2">Vector math review</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day3_task3" data-task-id="tbl1_day3_task3">
+                <label for="tbl1_day3_task3">Complete and document: Vector operations notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Vector operations notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 4 -->
+          <tr class="day-row" data-day="4">
+            <td class="day-cell">
+              <strong>4</strong>
+            </td>
+            <td>Week 1</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day4_task1" data-task-id="tbl1_day4_task1">
+                <label for="tbl1_day4_task1">DataCamp: Array indexing & slicing</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day4_task2" data-task-id="tbl1_day4_task2">
+                <label for="tbl1_day4_task2">Practice array manipulations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day4_task3" data-task-id="tbl1_day4_task3">
+                <label for="tbl1_day4_task3">Complete and document: Array manipulation exercises</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Array manipulation exercises<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 5 -->
+          <tr class="day-row" data-day="5">
+            <td class="day-cell">
+              <strong>5</strong>
+            </td>
+            <td>Week 1</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day5_task1" data-task-id="tbl1_day5_task1">
+                <label for="tbl1_day5_task1">DataCamp: Broadcasting</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day5_task2" data-task-id="tbl1_day5_task2">
+                <label for="tbl1_day5_task2">Matrix multiplication practice</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day5_task3" data-task-id="tbl1_day5_task3">
+                <label for="tbl1_day5_task3">Complete and document: Broadcasting examples notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Broadcasting examples notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 6 -->
+          <tr class="day-row" data-day="6">
+            <td class="day-cell">
+              <strong>6</strong>
+            </td>
+            <td>Week 1</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day6_task1" data-task-id="tbl1_day6_task1">
+                <label for="tbl1_day6_task1">Linear algebra foundations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day6_task2" data-task-id="tbl1_day6_task2">
+                <label for="tbl1_day6_task2">Khan Academy: vectors</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day6_task3" data-task-id="tbl1_day6_task3">
+                <label for="tbl1_day6_task3">Complete and document: Vector addition/scaling examples</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Vector addition/scaling examples<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 7 -->
+          <tr class="day-row" data-day="7">
+            <td class="day-cell">
+              <strong>7</strong>
+            </td>
+            <td>Week 1</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day7_task1" data-task-id="tbl1_day7_task1">
+                <label for="tbl1_day7_task1">Review Week 1, catch up</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day7_task2" data-task-id="tbl1_day7_task2">
+                <label for="tbl1_day7_task2">Practice problems</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day7_task3" data-task-id="tbl1_day7_task3">
+                <label for="tbl1_day7_task3">Complete and document: Week 1 summary notes</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Week 1 summary notes<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 8 -->
+          <tr class="day-row" data-day="8">
+            <td class="day-cell">
+              <strong>8</strong>
+            </td>
+            <td>Week 2</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day8_task1" data-task-id="tbl1_day8_task1">
+                <label for="tbl1_day8_task1">DataCamp: Intermediate Python (loops)</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day8_task2" data-task-id="tbl1_day8_task2">
+                <label for="tbl1_day8_task2">Matrix operations practice</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day8_task3" data-task-id="tbl1_day8_task3">
+                <label for="tbl1_day8_task3">Complete and document: Python control flow notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Python control flow notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 9 -->
+          <tr class="day-row" data-day="9">
+            <td class="day-cell">
+              <strong>9</strong>
+            </td>
+            <td>Week 2</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day9_task1" data-task-id="tbl1_day9_task1">
+                <label for="tbl1_day9_task1">DataCamp: Functions & modules</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day9_task2" data-task-id="tbl1_day9_task2">
+                <label for="tbl1_day9_task2">Create utility functions</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day9_task3" data-task-id="tbl1_day9_task3">
+                <label for="tbl1_day9_task3">Complete and document: Custom math functions</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Custom math functions<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 10 -->
+          <tr class="day-row" data-day="10">
+            <td class="day-cell">
+              <strong>10</strong>
+            </td>
+            <td>Week 2</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day10_task1" data-task-id="tbl1_day10_task1">
+                <label for="tbl1_day10_task1">DataCamp: Matplotlib basics</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day10_task2" data-task-id="tbl1_day10_task2">
+                <label for="tbl1_day10_task2">Plot vectors and functions</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day10_task3" data-task-id="tbl1_day10_task3">
+                <label for="tbl1_day10_task3">Complete and document: Basic plotting notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Basic plotting notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 11 -->
+          <tr class="day-row" data-day="11">
+            <td class="day-cell">
+              <strong>11</strong>
+            </td>
+            <td>Week 2</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day11_task1" data-task-id="tbl1_day11_task1">
+                <label for="tbl1_day11_task1">DataCamp: Data visualization</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day11_task2" data-task-id="tbl1_day11_task2">
+                <label for="tbl1_day11_task2">Matrix eigenvalue intro</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day11_task3" data-task-id="tbl1_day11_task3">
+                <label for="tbl1_day11_task3">Complete and document: Visualization exercises</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Visualization exercises<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 12 -->
+          <tr class="day-row" data-day="12">
+            <td class="day-cell">
+              <strong>12</strong>
+            </td>
+            <td>Week 2</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day12_task1" data-task-id="tbl1_day12_task1">
+                <label for="tbl1_day12_task1">Linear algebra: eigenvalues</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day12_task2" data-task-id="tbl1_day12_task2">
+                <label for="tbl1_day12_task2">Khan Academy: eigenvectors</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day12_task3" data-task-id="tbl1_day12_task3">
+                <label for="tbl1_day12_task3">Complete and document: Eigenvalue computation notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Eigenvalue computation notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 13 -->
+          <tr class="day-row" data-day="13">
+            <td class="day-cell">
+              <strong>13</strong>
+            </td>
+            <td>Week 2</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day13_task1" data-task-id="tbl1_day13_task1">
+                <label for="tbl1_day13_task1">Implement eigenvalue solver</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day13_task2" data-task-id="tbl1_day13_task2">
+                <label for="tbl1_day13_task2">Visualize eigenvectors</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day13_task3" data-task-id="tbl1_day13_task3">
+                <label for="tbl1_day13_task3">Complete and document: Manual eigenvalue code</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Manual eigenvalue code<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 14 -->
+          <tr class="day-row" data-day="14">
+            <td class="day-cell">
+              <strong>14</strong>
+            </td>
+            <td>Week 2</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day14_task1" data-task-id="tbl1_day14_task1">
+                <label for="tbl1_day14_task1">Review Week 2, practice</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day14_task2" data-task-id="tbl1_day14_task2">
+                <label for="tbl1_day14_task2">Consolidate notes</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day14_task3" data-task-id="tbl1_day14_task3">
+                <label for="tbl1_day14_task3">Complete and document: Week 2 summary</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Week 2 summary<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 15 -->
+          <tr class="day-row" data-day="15">
+            <td class="day-cell">
+              <strong>15</strong>
+            </td>
+            <td>Week 3</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day15_task1" data-task-id="tbl1_day15_task1">
+                <label for="tbl1_day15_task1">DataCamp: Statistics fundamentals</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day15_task2" data-task-id="tbl1_day15_task2">
+                <label for="tbl1_day15_task2">Probability theory basics</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day15_task3" data-task-id="tbl1_day15_task3">
+                <label for="tbl1_day15_task3">Complete and document: Stats concepts notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Stats concepts notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 16 -->
+          <tr class="day-row" data-day="16">
+            <td class="day-cell">
+              <strong>16</strong>
+            </td>
+            <td>Week 3</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day16_task1" data-task-id="tbl1_day16_task1">
+                <label for="tbl1_day16_task1">Probability distributions</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day16_task2" data-task-id="tbl1_day16_task2">
+                <label for="tbl1_day16_task2">Monte Carlo simulations intro</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day16_task3" data-task-id="tbl1_day16_task3">
+                <label for="tbl1_day16_task3">Complete and document: Distribution plots</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Distribution plots<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 17 -->
+          <tr class="day-row" data-day="17">
+            <td class="day-cell">
+              <strong>17</strong>
+            </td>
+            <td>Week 3</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day17_task1" data-task-id="tbl1_day17_task1">
+                <label for="tbl1_day17_task1">Monte Carlo simulation practice</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day17_task2" data-task-id="tbl1_day17_task2">
+                <label for="tbl1_day17_task2">Random sampling exercises</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day17_task3" data-task-id="tbl1_day17_task3">
+                <label for="tbl1_day17_task3">Complete and document: 3 simulation notebooks</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> 3 simulation notebooks<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 18 -->
+          <tr class="day-row" data-day="18">
+            <td class="day-cell">
+              <strong>18</strong>
+            </td>
+            <td>Week 3</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day18_task1" data-task-id="tbl1_day18_task1">
+                <label for="tbl1_day18_task1">DataCamp: Pandas basics</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day18_task2" data-task-id="tbl1_day18_task2">
+                <label for="tbl1_day18_task2">Data manipulation practice</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day18_task3" data-task-id="tbl1_day18_task3">
+                <label for="tbl1_day18_task3">Complete and document: Pandas exercises</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Pandas exercises<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 19 -->
+          <tr class="day-row" data-day="19">
+            <td class="day-cell">
+              <strong>19</strong>
+            </td>
+            <td>Week 3</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day19_task1" data-task-id="tbl1_day19_task1">
+                <label for="tbl1_day19_task1">DataCamp: Data cleaning</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day19_task2" data-task-id="tbl1_day19_task2">
+                <label for="tbl1_day19_task2">Work with real datasets</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day19_task3" data-task-id="tbl1_day19_task3">
+                <label for="tbl1_day19_task3">Complete and document: Data cleaning notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Data cleaning notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 20 -->
+          <tr class="day-row" data-day="20">
+            <td class="day-cell">
+              <strong>20</strong>
+            </td>
+            <td>Week 3</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day20_task1" data-task-id="tbl1_day20_task1">
+                <label for="tbl1_day20_task1">Calculus: derivatives review</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day20_task2" data-task-id="tbl1_day20_task2">
+                <label for="tbl1_day20_task2">Khan Academy: chain rule</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day20_task3" data-task-id="tbl1_day20_task3">
+                <label for="tbl1_day20_task3">Complete and document: Derivative examples</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Derivative examples<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 21 -->
+          <tr class="day-row" data-day="21">
+            <td class="day-cell">
+              <strong>21</strong>
+            </td>
+            <td>Week 3</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day21_task1" data-task-id="tbl1_day21_task1">
+                <label for="tbl1_day21_task1">Review Week 3</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day21_task2" data-task-id="tbl1_day21_task2">
+                <label for="tbl1_day21_task2">Practice problems</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day21_task3" data-task-id="tbl1_day21_task3">
+                <label for="tbl1_day21_task3">Complete and document: Week 3 summary</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Week 3 summary<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 22 -->
+          <tr class="day-row" data-day="22">
+            <td class="day-cell">
+              <strong>22</strong>
+            </td>
+            <td>Week 4</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day22_task1" data-task-id="tbl1_day22_task1">
+                <label for="tbl1_day22_task1">Calculus: gradients manually</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day22_task2" data-task-id="tbl1_day22_task2">
+                <label for="tbl1_day22_task2">Partial derivatives practice</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day22_task3" data-task-id="tbl1_day22_task3">
+                <label for="tbl1_day22_task3">Complete and document: Manual gradient computation</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Manual gradient computation<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 23 -->
+          <tr class="day-row" data-day="23">
+            <td class="day-cell">
+              <strong>23</strong>
+            </td>
+            <td>Week 4</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day23_task1" data-task-id="tbl1_day23_task1">
+                <label for="tbl1_day23_task1">Implement gradient descent</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day23_task2" data-task-id="tbl1_day23_task2">
+                <label for="tbl1_day23_task2">Optimize simple functions</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day23_task3" data-task-id="tbl1_day23_task3">
+                <label for="tbl1_day23_task3">Complete and document: Gradient descent from scratch</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Gradient descent from scratch<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 24 -->
+          <tr class="day-row" data-day="24">
+            <td class="day-cell">
+              <strong>24</strong>
+            </td>
+            <td>Week 4</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day24_task1" data-task-id="tbl1_day24_task1">
+                <label for="tbl1_day24_task1">Loss function visualization</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day24_task2" data-task-id="tbl1_day24_task2">
+                <label for="tbl1_day24_task2">Contour plots</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day24_task3" data-task-id="tbl1_day24_task3">
+                <label for="tbl1_day24_task3">Complete and document: Loss landscape plots</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Loss landscape plots<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 25 -->
+          <tr class="day-row" data-day="25">
+            <td class="day-cell">
+              <strong>25</strong>
+            </td>
+            <td>Week 4</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day25_task1" data-task-id="tbl1_day25_task1">
+                <label for="tbl1_day25_task1">Matrix calculus basics</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day25_task2" data-task-id="tbl1_day25_task2">
+                <label for="tbl1_day25_task2">Jacobian matrices</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day25_task3" data-task-id="tbl1_day25_task3">
+                <label for="tbl1_day25_task3">Complete and document: Matrix calculus examples</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Matrix calculus examples<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 26 -->
+          <tr class="day-row" data-day="26">
+            <td class="day-cell">
+              <strong>26</strong>
+            </td>
+            <td>Week 4</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day26_task1" data-task-id="tbl1_day26_task1">
+                <label for="tbl1_day26_task1">Linear regression theory</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day26_task2" data-task-id="tbl1_day26_task2">
+                <label for="tbl1_day26_task2">Least squares derivation</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day26_task3" data-task-id="tbl1_day26_task3">
+                <label for="tbl1_day26_task3">Complete and document: Linear regression notes</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Linear regression notes<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 27 -->
+          <tr class="day-row" data-day="27">
+            <td class="day-cell">
+              <strong>27</strong>
+            </td>
+            <td>Week 4</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day27_task1" data-task-id="tbl1_day27_task1">
+                <label for="tbl1_day27_task1">Implement linear regression</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day27_task2" data-task-id="tbl1_day27_task2">
+                <label for="tbl1_day27_task2">Test on sample data</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day27_task3" data-task-id="tbl1_day27_task3">
+                <label for="tbl1_day27_task3">Complete and document: Linear regression from scratch</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Linear regression from scratch<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 28 -->
+          <tr class="day-row" data-day="28">
+            <td class="day-cell">
+              <strong>28</strong>
+            </td>
+            <td>Week 4</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day28_task1" data-task-id="tbl1_day28_task1">
+                <label for="tbl1_day28_task1">Review Week 4</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day28_task2" data-task-id="tbl1_day28_task2">
+                <label for="tbl1_day28_task2">Improve implementations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day28_task3" data-task-id="tbl1_day28_task3">
+                <label for="tbl1_day28_task3">Complete and document: Week 4 summary</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Week 4 summary<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 29 -->
+          <tr class="day-row" data-day="29">
+            <td class="day-cell">
+              <strong>29</strong>
+            </td>
+            <td>Week 5</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day29_task1" data-task-id="tbl1_day29_task1">
+                <label for="tbl1_day29_task1">PCA theory and math</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day29_task2" data-task-id="tbl1_day29_task2">
+                <label for="tbl1_day29_task2">Covariance matrix review</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day29_task3" data-task-id="tbl1_day29_task3">
+                <label for="tbl1_day29_task3">Complete and document: PCA derivation notes</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> PCA derivation notes<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 30 -->
+          <tr class="day-row" data-day="30">
+            <td class="day-cell">
+              <strong>30</strong>
+            </td>
+            <td>Week 5</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day30_task1" data-task-id="tbl1_day30_task1">
+                <label for="tbl1_day30_task1">Implement PCA from scratch</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day30_task2" data-task-id="tbl1_day30_task2">
+                <label for="tbl1_day30_task2">Test on MNIST subset</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day30_task3" data-task-id="tbl1_day30_task3">
+                <label for="tbl1_day30_task3">Complete and document: PCA implementation</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> PCA implementation<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 31 -->
+          <tr class="day-row" data-day="31">
+            <td class="day-cell">
+              <strong>31</strong>
+            </td>
+            <td>Week 5</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day31_task1" data-task-id="tbl1_day31_task1">
+                <label for="tbl1_day31_task1">Visualize PCA components</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day31_task2" data-task-id="tbl1_day31_task2">
+                <label for="tbl1_day31_task2">Dimensionality reduction</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day31_task3" data-task-id="tbl1_day31_task3">
+                <label for="tbl1_day31_task3">Complete and document: PCA visualization notebook</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> PCA visualization notebook<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 32 -->
+          <tr class="day-row" data-day="32">
+            <td class="day-cell">
+              <strong>32</strong>
+            </td>
+            <td>Week 5</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day32_task1" data-task-id="tbl1_day32_task1">
+                <label for="tbl1_day32_task1">Improve linear regression</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day32_task2" data-task-id="tbl1_day32_task2">
+                <label for="tbl1_day32_task2">Achieve R² > 0.90</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day32_task3" data-task-id="tbl1_day32_task3">
+                <label for="tbl1_day32_task3">Complete and document: Optimized regression model</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Optimized regression model<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 33 -->
+          <tr class="day-row" data-day="33">
+            <td class="day-cell">
+              <strong>33</strong>
+            </td>
+            <td>Week 5</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day33_task1" data-task-id="tbl1_day33_task1">
+                <label for="tbl1_day33_task1">Start foundations_summary.md</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day33_task2" data-task-id="tbl1_day33_task2">
+                <label for="tbl1_day33_task2">Organize all notebooks</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day33_task3" data-task-id="tbl1_day33_task3">
+                <label for="tbl1_day33_task3">Complete and document: Summary outline (2 pages)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Summary outline (2 pages)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 34 -->
+          <tr class="day-row" data-day="34">
+            <td class="day-cell">
+              <strong>34</strong>
+            </td>
+            <td>Week 5</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day34_task1" data-task-id="tbl1_day34_task1">
+                <label for="tbl1_day34_task1">Continue summary document</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day34_task2" data-task-id="tbl1_day34_task2">
+                <label for="tbl1_day34_task2">Add visualizations</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day34_task3" data-task-id="tbl1_day34_task3">
+                <label for="tbl1_day34_task3">Complete and document: Summary draft (4 pages)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Summary draft (4 pages)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 35 -->
+          <tr class="day-row" data-day="35">
+            <td class="day-cell">
+              <strong>35</strong>
+            </td>
+            <td>Week 5</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day35_task1" data-task-id="tbl1_day35_task1">
+                <label for="tbl1_day35_task1">Review Week 5, prep for Week 6</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day35_task2" data-task-id="tbl1_day35_task2">
+                <label for="tbl1_day35_task2">Identify weak areas</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day35_task3" data-task-id="tbl1_day35_task3">
+                <label for="tbl1_day35_task3">Complete and document: Week 5 summary</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Week 5 summary<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 36 -->
+          <tr class="day-row" data-day="36">
+            <td class="day-cell">
+              <strong>36</strong>
+            </td>
+            <td>Week 6</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day36_task1" data-task-id="tbl1_day36_task1">
+                <label for="tbl1_day36_task1">Final review: linear algebra</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day36_task2" data-task-id="tbl1_day36_task2">
+                <label for="tbl1_day36_task2">Practice problems</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day36_task3" data-task-id="tbl1_day36_task3">
+                <label for="tbl1_day36_task3">Complete and document: LA practice set</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> LA practice set<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 37 -->
+          <tr class="day-row" data-day="37">
+            <td class="day-cell">
+              <strong>37</strong>
+            </td>
+            <td>Week 6</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day37_task1" data-task-id="tbl1_day37_task1">
+                <label for="tbl1_day37_task1">Final review: calculus</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day37_task2" data-task-id="tbl1_day37_task2">
+                <label for="tbl1_day37_task2">Gradient practice</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day37_task3" data-task-id="tbl1_day37_task3">
+                <label for="tbl1_day37_task3">Complete and document: Calculus practice set</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Calculus practice set<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 38 -->
+          <tr class="day-row" data-day="38">
+            <td class="day-cell">
+              <strong>38</strong>
+            </td>
+            <td>Week 6</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day38_task1" data-task-id="tbl1_day38_task1">
+                <label for="tbl1_day38_task1">Final review: probability</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day38_task2" data-task-id="tbl1_day38_task2">
+                <label for="tbl1_day38_task2">Statistics problems</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day38_task3" data-task-id="tbl1_day38_task3">
+                <label for="tbl1_day38_task3">Complete and document: Probability practice set</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Probability practice set<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 39 -->
+          <tr class="day-row" data-day="39">
+            <td class="day-cell">
+              <strong>39</strong>
+            </td>
+            <td>Week 6</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day39_task1" data-task-id="tbl1_day39_task1">
+                <label for="tbl1_day39_task1">Complete foundations_summary.md</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day39_task2" data-task-id="tbl1_day39_task2">
+                <label for="tbl1_day39_task2">Polish all sections</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day39_task3" data-task-id="tbl1_day39_task3">
+                <label for="tbl1_day39_task3">Complete and document: Summary (≥5 pages)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Summary (≥5 pages)<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 40 -->
+          <tr class="day-row" data-day="40">
+            <td class="day-cell">
+              <strong>40</strong>
+            </td>
+            <td>Week 6</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day40_task1" data-task-id="tbl1_day40_task1">
+                <label for="tbl1_day40_task1">Take assessment quiz</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day40_task2" data-task-id="tbl1_day40_task2">
+                <label for="tbl1_day40_task2">Review incorrect answers</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day40_task3" data-task-id="tbl1_day40_task3">
+                <label for="tbl1_day40_task3">Complete and document: Quiz results (target ≥16/20)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Quiz results (target ≥16/20)<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 41 -->
+          <tr class="day-row" data-day="41">
+            <td class="day-cell">
+              <strong>41</strong>
+            </td>
+            <td>Week 6</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day41_task1" data-task-id="tbl1_day41_task1">
+                <label for="tbl1_day41_task1">Final implementations check</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day41_task2" data-task-id="tbl1_day41_task2">
+                <label for="tbl1_day41_task2">Test all code</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day41_task3" data-task-id="tbl1_day41_task3">
+                <label for="tbl1_day41_task3">Complete and document: Clean, working notebooks</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Clean, working notebooks<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 42 -->
+          <tr class="day-row" data-day="42">
+            <td class="day-cell">
+              <strong>42</strong>
+            </td>
+            <td>Week 6</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day42_task1" data-task-id="tbl1_day42_task1">
+                <label for="tbl1_day42_task1">Phase 1 review & decision</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day42_task2" data-task-id="tbl1_day42_task2">
+                <label for="tbl1_day42_task2">Determine if extension needed</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl1_day42_task3" data-task-id="tbl1_day42_task3">
+                <label for="tbl1_day42_task3">Complete and document: Phase 1 completion report</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Phase 1 completion report<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Back to Main Link -->
+    <div class="back-to-main">
+      <a href="/index.html" class="btn btn-secondary">← Back to Main Plan</a>
+    </div>
+    
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+      <p>&copy; 2025 DovJNash. AI & Machine Learning Mastery Plan.</p>
+      <p>
+        <a href="/index.html">Main Plan</a> | 
+        <a href="https://github.com/DovJNash">GitHub</a>
+      </p>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

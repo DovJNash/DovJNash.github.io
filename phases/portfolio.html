@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Phase 14: Portfolio & Polish - Daily breakdown with interactive checkboxes">
+  <meta name="author" content="DovJNash">
+  <title>Phase 14: Portfolio & Polish | AI & ML Mastery Plan</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body class="phase-page">
+  <!-- Skip to Content Link -->
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+  
+  <!-- Header with Navigation -->
+  <header class="header phase-header" role="banner">
+    <div class="header-container">
+      <h1 class="site-title">
+        <a href="/index.html">← AI & ML Mastery Plan</a>
+      </h1>
+      <h2 class="phase-page-title">Phase 14: Portfolio & Polish</h2>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <main id="main-content" class="main-content phase-content" role="main">
+    
+    <!-- Phase Info Card -->
+    <div class="phase-info-card">
+      <div class="phase-meta">
+        <span><strong>Duration:</strong> Weeks 49-52 (28 days)</span>
+        <span><strong>Focus:</strong> Blog Posts, Demos</span>
+      </div>
+      <div class="phase-description">
+        <p>Create bilingual blog posts and polish all projects.</p>
+      </div>
+    </div>
+    
+    <!-- Progress Summary -->
+    <div class="progress-summary" role="status" aria-live="polite">
+      <h3>Progress</h3>
+      <div class="progress-stats">
+        <div class="stat">
+          <span class="stat-value" id="completed-tasks">0</span>
+          <span class="stat-label">Tasks Completed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="total-tasks">0</span>
+          <span class="stat-label">Total Tasks</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="completion-percent">0%</span>
+          <span class="stat-label">Progress</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="days-completed">0</span>
+          <span class="stat-label">Days Complete</span>
+        </div>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <!-- Control Bar -->
+    <div class="control-bar">
+      <button class="btn btn-secondary" id="expand-all" aria-label="Expand all days">
+        Expand All
+      </button>
+      <button class="btn btn-secondary" id="collapse-all" aria-label="Collapse all days">
+        Collapse All
+      </button>
+      <button class="btn btn-primary" id="mark-all" aria-label="Mark all tasks in this phase as complete">
+        Mark All Complete
+      </button>
+      <button class="btn btn-danger" id="clear-all" aria-label="Clear all tasks in this phase">
+        Clear All
+      </button>
+      <button class="btn btn-secondary" id="export-status" aria-label="Export day completion status">
+        Export Status
+      </button>
+    </div>
+    
+    <!-- Daily Breakdown Table -->
+    <div class="daily-table-wrapper">
+      <table class="daily-table" data-phase="tbl14">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Week</th>
+            <th>Tasks</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Day 1 -->
+          <tr class="day-row" data-day="1">
+            <td class="day-cell">
+              <strong>1</strong>
+            </td>
+            <td>Week 49</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day1_task1" data-task-id="tbl14_day1_task1">
+                <label for="tbl14_day1_task1">Blog: Scaling lessons learned - Day 1</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day1_task2" data-task-id="tbl14_day1_task2">
+                <label for="tbl14_day1_task2">Write in Hebrew and English</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day1_task3" data-task-id="tbl14_day1_task3">
+                <label for="tbl14_day1_task3">Complete and document: Blog post 1 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 1 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 2 -->
+          <tr class="day-row" data-day="2">
+            <td class="day-cell">
+              <strong>2</strong>
+            </td>
+            <td>Week 49</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day2_task1" data-task-id="tbl14_day2_task1">
+                <label for="tbl14_day2_task1">Blog: Scaling lessons learned - Day 2</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day2_task2" data-task-id="tbl14_day2_task2">
+                <label for="tbl14_day2_task2">Write in Hebrew and English</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day2_task3" data-task-id="tbl14_day2_task3">
+                <label for="tbl14_day2_task3">Complete and document: Blog post 1 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 1 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 3 -->
+          <tr class="day-row" data-day="3">
+            <td class="day-cell">
+              <strong>3</strong>
+            </td>
+            <td>Week 49</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day3_task1" data-task-id="tbl14_day3_task1">
+                <label for="tbl14_day3_task1">Blog: Scaling lessons learned - Day 3</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day3_task2" data-task-id="tbl14_day3_task2">
+                <label for="tbl14_day3_task2">Write in Hebrew and English</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day3_task3" data-task-id="tbl14_day3_task3">
+                <label for="tbl14_day3_task3">Complete and document: Blog post 1 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 1 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 4 -->
+          <tr class="day-row" data-day="4">
+            <td class="day-cell">
+              <strong>4</strong>
+            </td>
+            <td>Week 49</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day4_task1" data-task-id="tbl14_day4_task1">
+                <label for="tbl14_day4_task1">Blog: Scaling lessons learned - Day 4</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day4_task2" data-task-id="tbl14_day4_task2">
+                <label for="tbl14_day4_task2">Write in Hebrew and English</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day4_task3" data-task-id="tbl14_day4_task3">
+                <label for="tbl14_day4_task3">Complete and document: Blog post 1 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 1 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 5 -->
+          <tr class="day-row" data-day="5">
+            <td class="day-cell">
+              <strong>5</strong>
+            </td>
+            <td>Week 49</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day5_task1" data-task-id="tbl14_day5_task1">
+                <label for="tbl14_day5_task1">Blog: Scaling lessons learned - Day 5</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day5_task2" data-task-id="tbl14_day5_task2">
+                <label for="tbl14_day5_task2">Write in Hebrew and English</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day5_task3" data-task-id="tbl14_day5_task3">
+                <label for="tbl14_day5_task3">Complete and document: Blog post 1 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 1 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 6 -->
+          <tr class="day-row" data-day="6">
+            <td class="day-cell">
+              <strong>6</strong>
+            </td>
+            <td>Week 49</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day6_task1" data-task-id="tbl14_day6_task1">
+                <label for="tbl14_day6_task1">Blog: Scaling lessons learned - Day 6</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day6_task2" data-task-id="tbl14_day6_task2">
+                <label for="tbl14_day6_task2">Write in Hebrew and English</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day6_task3" data-task-id="tbl14_day6_task3">
+                <label for="tbl14_day6_task3">Complete and document: Blog post 1 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 1 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 7 -->
+          <tr class="day-row" data-day="7">
+            <td class="day-cell">
+              <strong>7</strong>
+            </td>
+            <td>Week 49</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day7_task1" data-task-id="tbl14_day7_task1">
+                <label for="tbl14_day7_task1">Blog: Scaling lessons learned - Day 7</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day7_task2" data-task-id="tbl14_day7_task2">
+                <label for="tbl14_day7_task2">Write in Hebrew and English</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day7_task3" data-task-id="tbl14_day7_task3">
+                <label for="tbl14_day7_task3">Complete and document: Blog post 1 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 1 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 8 -->
+          <tr class="day-row" data-day="8">
+            <td class="day-cell">
+              <strong>8</strong>
+            </td>
+            <td>Week 50</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day8_task1" data-task-id="tbl14_day8_task1">
+                <label for="tbl14_day8_task1">Blog: BPE tokenizer pitfalls - Day 8</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day8_task2" data-task-id="tbl14_day8_task2">
+                <label for="tbl14_day8_task2">Include code examples</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day8_task3" data-task-id="tbl14_day8_task3">
+                <label for="tbl14_day8_task3">Complete and document: Blog post 2 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 2 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 9 -->
+          <tr class="day-row" data-day="9">
+            <td class="day-cell">
+              <strong>9</strong>
+            </td>
+            <td>Week 50</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day9_task1" data-task-id="tbl14_day9_task1">
+                <label for="tbl14_day9_task1">Blog: BPE tokenizer pitfalls - Day 9</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day9_task2" data-task-id="tbl14_day9_task2">
+                <label for="tbl14_day9_task2">Include code examples</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day9_task3" data-task-id="tbl14_day9_task3">
+                <label for="tbl14_day9_task3">Complete and document: Blog post 2 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 2 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 10 -->
+          <tr class="day-row" data-day="10">
+            <td class="day-cell">
+              <strong>10</strong>
+            </td>
+            <td>Week 50</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day10_task1" data-task-id="tbl14_day10_task1">
+                <label for="tbl14_day10_task1">Blog: BPE tokenizer pitfalls - Day 10</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day10_task2" data-task-id="tbl14_day10_task2">
+                <label for="tbl14_day10_task2">Include code examples</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day10_task3" data-task-id="tbl14_day10_task3">
+                <label for="tbl14_day10_task3">Complete and document: Blog post 2 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 2 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 11 -->
+          <tr class="day-row" data-day="11">
+            <td class="day-cell">
+              <strong>11</strong>
+            </td>
+            <td>Week 50</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day11_task1" data-task-id="tbl14_day11_task1">
+                <label for="tbl14_day11_task1">Blog: BPE tokenizer pitfalls - Day 11</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day11_task2" data-task-id="tbl14_day11_task2">
+                <label for="tbl14_day11_task2">Include code examples</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day11_task3" data-task-id="tbl14_day11_task3">
+                <label for="tbl14_day11_task3">Complete and document: Blog post 2 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 2 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 12 -->
+          <tr class="day-row" data-day="12">
+            <td class="day-cell">
+              <strong>12</strong>
+            </td>
+            <td>Week 50</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day12_task1" data-task-id="tbl14_day12_task1">
+                <label for="tbl14_day12_task1">Blog: BPE tokenizer pitfalls - Day 12</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day12_task2" data-task-id="tbl14_day12_task2">
+                <label for="tbl14_day12_task2">Include code examples</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day12_task3" data-task-id="tbl14_day12_task3">
+                <label for="tbl14_day12_task3">Complete and document: Blog post 2 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 2 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 13 -->
+          <tr class="day-row" data-day="13">
+            <td class="day-cell">
+              <strong>13</strong>
+            </td>
+            <td>Week 50</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day13_task1" data-task-id="tbl14_day13_task1">
+                <label for="tbl14_day13_task1">Blog: BPE tokenizer pitfalls - Day 13</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day13_task2" data-task-id="tbl14_day13_task2">
+                <label for="tbl14_day13_task2">Include code examples</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day13_task3" data-task-id="tbl14_day13_task3">
+                <label for="tbl14_day13_task3">Complete and document: Blog post 2 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 2 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 14 -->
+          <tr class="day-row" data-day="14">
+            <td class="day-cell">
+              <strong>14</strong>
+            </td>
+            <td>Week 50</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day14_task1" data-task-id="tbl14_day14_task1">
+                <label for="tbl14_day14_task1">Blog: BPE tokenizer pitfalls - Day 14</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day14_task2" data-task-id="tbl14_day14_task2">
+                <label for="tbl14_day14_task2">Include code examples</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day14_task3" data-task-id="tbl14_day14_task3">
+                <label for="tbl14_day14_task3">Complete and document: Blog post 2 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 2 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 15 -->
+          <tr class="day-row" data-day="15">
+            <td class="day-cell">
+              <strong>15</strong>
+            </td>
+            <td>Week 51</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day15_task1" data-task-id="tbl14_day15_task1">
+                <label for="tbl14_day15_task1">Blog: MVP shipping process - Day 15</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day15_task2" data-task-id="tbl14_day15_task2">
+                <label for="tbl14_day15_task2">Document deployment learnings</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day15_task3" data-task-id="tbl14_day15_task3">
+                <label for="tbl14_day15_task3">Complete and document: Blog post 3 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 3 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 16 -->
+          <tr class="day-row" data-day="16">
+            <td class="day-cell">
+              <strong>16</strong>
+            </td>
+            <td>Week 51</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day16_task1" data-task-id="tbl14_day16_task1">
+                <label for="tbl14_day16_task1">Blog: MVP shipping process - Day 16</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day16_task2" data-task-id="tbl14_day16_task2">
+                <label for="tbl14_day16_task2">Document deployment learnings</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day16_task3" data-task-id="tbl14_day16_task3">
+                <label for="tbl14_day16_task3">Complete and document: Blog post 3 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 3 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 17 -->
+          <tr class="day-row" data-day="17">
+            <td class="day-cell">
+              <strong>17</strong>
+            </td>
+            <td>Week 51</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day17_task1" data-task-id="tbl14_day17_task1">
+                <label for="tbl14_day17_task1">Blog: MVP shipping process - Day 17</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day17_task2" data-task-id="tbl14_day17_task2">
+                <label for="tbl14_day17_task2">Document deployment learnings</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day17_task3" data-task-id="tbl14_day17_task3">
+                <label for="tbl14_day17_task3">Complete and document: Blog post 3 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 3 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 18 -->
+          <tr class="day-row" data-day="18">
+            <td class="day-cell">
+              <strong>18</strong>
+            </td>
+            <td>Week 51</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day18_task1" data-task-id="tbl14_day18_task1">
+                <label for="tbl14_day18_task1">Blog: MVP shipping process - Day 18</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day18_task2" data-task-id="tbl14_day18_task2">
+                <label for="tbl14_day18_task2">Document deployment learnings</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day18_task3" data-task-id="tbl14_day18_task3">
+                <label for="tbl14_day18_task3">Complete and document: Blog post 3 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 3 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 19 -->
+          <tr class="day-row" data-day="19">
+            <td class="day-cell">
+              <strong>19</strong>
+            </td>
+            <td>Week 51</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day19_task1" data-task-id="tbl14_day19_task1">
+                <label for="tbl14_day19_task1">Blog: MVP shipping process - Day 19</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day19_task2" data-task-id="tbl14_day19_task2">
+                <label for="tbl14_day19_task2">Document deployment learnings</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day19_task3" data-task-id="tbl14_day19_task3">
+                <label for="tbl14_day19_task3">Complete and document: Blog post 3 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 3 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-high">High</span>
+            </td>
+          </tr>
+
+          <!-- Day 20 -->
+          <tr class="day-row" data-day="20">
+            <td class="day-cell">
+              <strong>20</strong>
+            </td>
+            <td>Week 51</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day20_task1" data-task-id="tbl14_day20_task1">
+                <label for="tbl14_day20_task1">Blog: MVP shipping process - Day 20</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day20_task2" data-task-id="tbl14_day20_task2">
+                <label for="tbl14_day20_task2">Document deployment learnings</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day20_task3" data-task-id="tbl14_day20_task3">
+                <label for="tbl14_day20_task3">Complete and document: Blog post 3 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 3 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 21 -->
+          <tr class="day-row" data-day="21">
+            <td class="day-cell">
+              <strong>21</strong>
+            </td>
+            <td>Week 51</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day21_task1" data-task-id="tbl14_day21_task1">
+                <label for="tbl14_day21_task1">Blog: MVP shipping process - Day 21</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day21_task2" data-task-id="tbl14_day21_task2">
+                <label for="tbl14_day21_task2">Document deployment learnings</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day21_task3" data-task-id="tbl14_day21_task3">
+                <label for="tbl14_day21_task3">Complete and document: Blog post 3 (bilingual)</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Blog post 3 (bilingual)<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 22 -->
+          <tr class="day-row" data-day="22">
+            <td class="day-cell">
+              <strong>22</strong>
+            </td>
+            <td>Week 52</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day22_task1" data-task-id="tbl14_day22_task1">
+                <label for="tbl14_day22_task1">Architecture diagrams - Day 22</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day22_task2" data-task-id="tbl14_day22_task2">
+                <label for="tbl14_day22_task2">Write master_summary.txt</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day22_task3" data-task-id="tbl14_day22_task3">
+                <label for="tbl14_day22_task3">Complete and document: Final portfolio complete</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Final portfolio complete<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 23 -->
+          <tr class="day-row" data-day="23">
+            <td class="day-cell">
+              <strong>23</strong>
+            </td>
+            <td>Week 52</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day23_task1" data-task-id="tbl14_day23_task1">
+                <label for="tbl14_day23_task1">Architecture diagrams - Day 23</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day23_task2" data-task-id="tbl14_day23_task2">
+                <label for="tbl14_day23_task2">Write master_summary.txt</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day23_task3" data-task-id="tbl14_day23_task3">
+                <label for="tbl14_day23_task3">Complete and document: Final portfolio complete</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Final portfolio complete<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 24 -->
+          <tr class="day-row" data-day="24">
+            <td class="day-cell">
+              <strong>24</strong>
+            </td>
+            <td>Week 52</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day24_task1" data-task-id="tbl14_day24_task1">
+                <label for="tbl14_day24_task1">Architecture diagrams - Day 24</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day24_task2" data-task-id="tbl14_day24_task2">
+                <label for="tbl14_day24_task2">Write master_summary.txt</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day24_task3" data-task-id="tbl14_day24_task3">
+                <label for="tbl14_day24_task3">Complete and document: Final portfolio complete</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Final portfolio complete<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 25 -->
+          <tr class="day-row" data-day="25">
+            <td class="day-cell">
+              <strong>25</strong>
+            </td>
+            <td>Week 52</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day25_task1" data-task-id="tbl14_day25_task1">
+                <label for="tbl14_day25_task1">Architecture diagrams - Day 25</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day25_task2" data-task-id="tbl14_day25_task2">
+                <label for="tbl14_day25_task2">Write master_summary.txt</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day25_task3" data-task-id="tbl14_day25_task3">
+                <label for="tbl14_day25_task3">Complete and document: Final portfolio complete</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Final portfolio complete<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 26 -->
+          <tr class="day-row" data-day="26">
+            <td class="day-cell">
+              <strong>26</strong>
+            </td>
+            <td>Week 52</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day26_task1" data-task-id="tbl14_day26_task1">
+                <label for="tbl14_day26_task1">Architecture diagrams - Day 26</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day26_task2" data-task-id="tbl14_day26_task2">
+                <label for="tbl14_day26_task2">Write master_summary.txt</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day26_task3" data-task-id="tbl14_day26_task3">
+                <label for="tbl14_day26_task3">Complete and document: Final portfolio complete</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Final portfolio complete<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 27 -->
+          <tr class="day-row" data-day="27">
+            <td class="day-cell">
+              <strong>27</strong>
+            </td>
+            <td>Week 52</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day27_task1" data-task-id="tbl14_day27_task1">
+                <label for="tbl14_day27_task1">Architecture diagrams - Day 27</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day27_task2" data-task-id="tbl14_day27_task2">
+                <label for="tbl14_day27_task2">Write master_summary.txt</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day27_task3" data-task-id="tbl14_day27_task3">
+                <label for="tbl14_day27_task3">Complete and document: Final portfolio complete</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Final portfolio complete<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+          <!-- Day 28 -->
+          <tr class="day-row" data-day="28">
+            <td class="day-cell">
+              <strong>28</strong>
+            </td>
+            <td>Week 52</td>
+            <td class="tasks-cell">
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day28_task1" data-task-id="tbl14_day28_task1">
+                <label for="tbl14_day28_task1">Architecture diagrams - Day 28</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day28_task2" data-task-id="tbl14_day28_task2">
+                <label for="tbl14_day28_task2">Write master_summary.txt</label>
+              </div>
+              <div class="task-item">
+                <input type="checkbox" id="tbl14_day28_task3" data-task-id="tbl14_day28_task3">
+                <label for="tbl14_day28_task3">Complete and document: Final portfolio complete</label>
+              </div>
+            </td>
+            <td class="details-cell">
+              <strong>Deliverable:</strong> Final portfolio complete<br>
+              <strong>Priority:</strong> <span class="pri-med">Medium</span>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Back to Main Link -->
+    <div class="back-to-main">
+      <a href="/index.html" class="btn btn-secondary">← Back to Main Plan</a>
+    </div>
+    
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+      <p>&copy; 2025 DovJNash. AI & Machine Learning Mastery Plan.</p>
+      <p>
+        <a href="/index.html">Main Plan</a> | 
+        <a href="https://github.com/DovJNash">GitHub</a>
+      </p>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
