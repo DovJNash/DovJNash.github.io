@@ -511,7 +511,7 @@
     if (!searchResults) return;
     
     if (results.length === 0) {
-      searchResults.innerHTML = `<div class="search-no-results">No tasks found matching "${query}"</div>`;
+      searchResults.innerHTML = `<div class="search-no-results">No tasks found matching "${escapeHtml(query)}"</div>`;
       return;
     }
     
@@ -542,9 +542,17 @@
     });
   }
 
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   function highlightText(text, query) {
-    const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
-    return text.replace(regex, '<mark>$1</mark>');
+    const escapedText = escapeHtml(text);
+    const escapedQuery = escapeHtml(query);
+    const regex = new RegExp(`(${escapeRegex(escapedQuery)})`, 'gi');
+    return escapedText.replace(regex, '<mark>$1</mark>');
   }
 
   function escapeRegex(string) {
