@@ -249,3 +249,219 @@
   }
 
 })();
+
+// ========================================================================
+// Daily Breakdown Interactive Features
+// ========================================================================
+
+/**
+ * Initialize daily breakdown tables with localStorage persistence
+ */
+function initDailyTables() {
+  console.log('Initializing daily breakdown tables...');
+  
+  // Restore checkbox states from localStorage
+  const checkboxes = document.querySelectorAll('.task-box');
+  checkboxes.forEach(checkbox => {
+    const key = getCheckboxKey(checkbox);
+    const saved = localStorage.getItem(key);
+    if (saved === 'true') {
+      checkbox.checked = true;
+    }
+  });
+  
+  // Update progress summary
+  updateProgressSummary();
+  
+  // Setup event listeners
+  setupDailyBreakdownListeners();
+  
+  console.log(`Loaded ${checkboxes.length} task checkboxes`);
+}
+
+/**
+ * Generate localStorage key for a checkbox
+ */
+function getCheckboxKey(checkbox) {
+  const table = checkbox.dataset.table;
+  const day = checkbox.dataset.day;
+  const task = checkbox.dataset.task;
+  return `dailyTbl_${table}_day_${day}_${task}`;
+}
+
+/**
+ * Setup event listeners for daily breakdown controls
+ */
+function setupDailyBreakdownListeners() {
+  // Event delegation for all checkboxes
+  document.addEventListener('change', (e) => {
+    if (e.target.classList.contains('task-box')) {
+      handleCheckboxChange(e);
+    }
+  });
+  
+  // Event delegation for control buttons
+  document.addEventListener('click', (e) => {
+    const button = e.target.closest('.btn-control');
+    if (!button) return;
+    
+    const action = button.dataset.action;
+    const tableId = button.dataset.table;
+    
+    if (action === 'toggle') {
+      toggleTable(tableId, button);
+    } else if (action === 'markAll') {
+      markAll(tableId);
+    } else if (action === 'clearAll') {
+      clearAll(tableId);
+    }
+  });
+}
+
+/**
+ * Handle checkbox state change
+ */
+function handleCheckboxChange(e) {
+  const checkbox = e.target;
+  const key = getCheckboxKey(checkbox);
+  
+  // Save to localStorage
+  localStorage.setItem(key, checkbox.checked);
+  
+  // Update day completion status
+  updateDayCompletionStatus(checkbox);
+  
+  // Update progress summary
+  updateProgressSummary();
+  
+  console.log(`Task ${key}: ${checkbox.checked ? 'completed' : 'uncompleted'}`);
+}
+
+/**
+ * Update day completion status (all tasks checked = day completed)
+ */
+function updateDayCompletionStatus(checkbox) {
+  const row = checkbox.closest('tr[data-day]');
+  if (!row) return;
+  
+  const dayCheckboxes = row.querySelectorAll('.task-box');
+  const allChecked = Array.from(dayCheckboxes).every(cb => cb.checked);
+  
+  if (allChecked) {
+    row.classList.add('day-completed');
+  } else {
+    row.classList.remove('day-completed');
+  }
+}
+
+/**
+ * Update progress summary with current statistics
+ */
+function updateProgressSummary() {
+  const allCheckboxes = document.querySelectorAll('.task-box');
+  const checkedCheckboxes = document.querySelectorAll('.task-box:checked');
+  
+  const totalTasks = allCheckboxes.length;
+  const completedTasks = checkedCheckboxes.length;
+  const percentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+  
+  // Count completed days (days where all tasks are checked)
+  const allRows = document.querySelectorAll('tr[data-day]');
+  let completedDays = 0;
+  
+  allRows.forEach(row => {
+    const dayCheckboxes = row.querySelectorAll('.task-box');
+    if (dayCheckboxes.length > 0) {
+      const allChecked = Array.from(dayCheckboxes).every(cb => cb.checked);
+      if (allChecked) {
+        completedDays++;
+        row.classList.add('day-completed');
+      } else {
+        row.classList.remove('day-completed');
+      }
+    }
+  });
+  
+  // Update DOM elements
+  const daysCompletedEl = document.getElementById('days-completed');
+  const tasksCompletedEl = document.getElementById('tasks-completed');
+  const tasksTotalEl = document.getElementById('tasks-total');
+  const percentageEl = document.getElementById('overall-percentage');
+  const progressBar = document.getElementById('overall-progress-bar');
+  
+  if (daysCompletedEl) daysCompletedEl.textContent = completedDays;
+  if (tasksCompletedEl) tasksCompletedEl.textContent = completedTasks;
+  if (tasksTotalEl) tasksCompletedEl.textContent = `${completedTasks} / ${totalTasks}`;
+  if (percentageEl) percentageEl.textContent = `${percentage}%`;
+  if (progressBar) progressBar.style.width = `${percentage}%`;
+  
+  console.log(`Progress: ${completedDays} days, ${completedTasks}/${totalTasks} tasks (${percentage}%)`);
+}
+
+/**
+ * Toggle table visibility (expand/collapse)
+ */
+function toggleTable(tableId, button) {
+  const tableBody = document.querySelector(`[data-table-body="${tableId}"]`);
+  if (!tableBody) return;
+  
+  const isCollapsed = tableBody.classList.contains('collapsed');
+  
+  if (isCollapsed) {
+    tableBody.classList.remove('collapsed');
+    button.classList.remove('collapsed');
+  } else {
+    tableBody.classList.add('collapsed');
+    button.classList.add('collapsed');
+  }
+  
+  console.log(`Table ${tableId}: ${isCollapsed ? 'expanded' : 'collapsed'}`);
+}
+
+/**
+ * Mark all checkboxes in a table
+ */
+function markAll(tableId) {
+  const checkboxes = document.querySelectorAll(`.task-box[data-table="${tableId}"]`);
+  
+  checkboxes.forEach(checkbox => {
+    if (!checkbox.checked) {
+      checkbox.checked = true;
+      const key = getCheckboxKey(checkbox);
+      localStorage.setItem(key, 'true');
+      updateDayCompletionStatus(checkbox);
+    }
+  });
+  
+  updateProgressSummary();
+  console.log(`Marked all tasks in table ${tableId}`);
+}
+
+/**
+ * Clear all checkboxes in a table
+ */
+function clearAll(tableId) {
+  const checkboxes = document.querySelectorAll(`.task-box[data-table="${tableId}"]`);
+  
+  checkboxes.forEach(checkbox => {
+    if (checkbox.checked) {
+      checkbox.checked = false;
+      const key = getCheckboxKey(checkbox);
+      localStorage.setItem(key, 'false');
+      updateDayCompletionStatus(checkbox);
+    }
+  });
+  
+  updateProgressSummary();
+  console.log(`Cleared all tasks in table ${tableId}`);
+}
+
+// Initialize daily tables when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Small delay to ensure all other init functions run first
+    setTimeout(initDailyTables, 100);
+  });
+} else {
+  setTimeout(initDailyTables, 100);
+}
