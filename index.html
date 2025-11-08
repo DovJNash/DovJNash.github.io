@@ -513,17 +513,27 @@
     <!-- 5.5. Daily Breakdown (Interactive, Dynamically Rendered) -->
     <section id="daily-breakdown" class="content-section">
       <div class="section-header">
-        <h2>5.5. Daily Breakdown (Weeks 1–2)</h2>
+        <h2>5.5. Daily Breakdown (All 364 Days)</h2>
         <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
       </div>
       
       <div class="callout callout-info">
-        <div class="callout-title">📅 Detailed Day-by-Day Task Tracking</div>
-        <p>Track your progress through the first two weeks with detailed, atomic tasks. Each day includes exact course references, deliverables, and verification criteria. This PR covers Days 1–14; subsequent PRs will expand to cover the full 12-month plan.</p>
+        <div class="callout-title">📅 Complete 12-Month Day-by-Day Task Tracking</div>
+        <p>Track your progress through the entire 12-month plan with detailed, atomic tasks across 14 phases. Each day includes estimated time, course references, deliverables, and success criteria. Use tabs to navigate between phases, checkboxes to track completion, and the floating HUD for progress overview.</p>
       </div>
       
-      <!-- Daily Breakdown Container (populated by JavaScript) -->
-      <div id="dailyBreakdown"></div>
+      <!-- Tabbed Interface Container -->
+      <div class="tabs-container">
+        <!-- Tab List (Navigation) -->
+        <div class="tabs-nav-wrapper">
+          <div role="tablist" class="tabs-nav" aria-label="Learning phases"></div>
+        </div>
+        
+        <!-- Tab Panels (Content) -->
+        <div class="tabs-content">
+          <!-- Panels will be rendered here by JavaScript -->
+        </div>
+      </div>
       
     </section>
     
@@ -1331,8 +1341,72 @@
     </section>
     
   </main>
-    
-  </main>
+  
+  <!-- Floating Progress HUD -->
+  <div id="progressHUD" class="progress-hud" role="complementary" aria-label="Progress tracker">
+    <div class="hud-header">
+      <h3>Progress</h3>
+      <button id="hudToggle" class="hud-toggle" aria-label="Toggle HUD" aria-expanded="true">
+        <span class="hud-toggle-icon">−</span>
+      </button>
+    </div>
+    <div class="hud-content">
+      <div class="hud-stats">
+        <div class="hud-stat">
+          <div class="hud-stat-value" id="hudGlobalProgress">0%</div>
+          <div class="hud-stat-label">Global Progress</div>
+        </div>
+        <div class="hud-stat">
+          <div class="hud-stat-value" id="hudPhaseProgress">0%</div>
+          <div class="hud-stat-label">Phase Progress</div>
+        </div>
+        <div class="hud-stat">
+          <div class="hud-stat-value" id="hudTasksComplete">0/0</div>
+          <div class="hud-stat-label">Tasks</div>
+        </div>
+        <div class="hud-stat">
+          <div class="hud-stat-value" id="hudDaysComplete">0/364</div>
+          <div class="hud-stat-label">Days</div>
+        </div>
+      </div>
+      <div class="hud-actions">
+        <button id="hudExport" class="hud-btn" aria-label="Export progress">
+          <span>📤</span> Export
+        </button>
+        <button id="hudResetAll" class="hud-btn" aria-label="Reset all progress">
+          <span>🔄</span> Reset All
+        </button>
+        <button id="hudResetPhase" class="hud-btn" aria-label="Reset current phase">
+          <span>↩️</span> Reset Phase
+        </button>
+        <button id="hudSearch" class="hud-btn" aria-label="Toggle search">
+          <span>🔍</span> Search
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Search Modal -->
+  <div id="searchModal" class="search-modal" role="dialog" aria-labelledby="searchModalTitle" aria-hidden="true">
+    <div class="search-modal-content">
+      <div class="search-modal-header">
+        <h3 id="searchModalTitle">Search Tasks</h3>
+        <button id="searchModalClose" class="search-modal-close" aria-label="Close search">×</button>
+      </div>
+      <div class="search-modal-body">
+        <input 
+          type="search" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Search within current phase..." 
+          aria-label="Search tasks"
+        />
+        <div id="searchResults" class="search-results">
+          <!-- Results will be populated here -->
+        </div>
+      </div>
+    </div>
+  </div>
   
   <!-- Footer -->
   <footer class="footer" role="contentinfo">
@@ -1348,36 +1422,9 @@
   
   </div>
   
-  <!-- Floating Progress HUD -->
-  <div id="progressHUD" class="progress-hud collapsed">
-    <div class="progress-hud-header">
-      <h4>📊 Progress Tracker</h4>
-      <button id="hudToggle" class="hud-toggle" aria-label="Toggle progress HUD">−</button>
-    </div>
-    <div class="progress-hud-content">
-      <div class="hud-stat">
-        <div class="hud-stat-value" id="hud-percent">0%</div>
-        <div class="hud-stat-label">Complete</div>
-      </div>
-      <div class="hud-stat">
-        <div class="hud-stat-value" id="hud-tasks"><span id="hud-completed">0</span>/<span id="hud-total">0</span></div>
-        <div class="hud-stat-label">Tasks</div>
-      </div>
-      <div class="hud-stat">
-        <div class="hud-stat-value" id="hud-days">0</div>
-        <div class="hud-stat-label">Days Done</div>
-      </div>
-      <div class="hud-phase-progress">
-        <div class="hud-phase-label">Current Phase</div>
-        <div class="hud-phase-bar">
-          <div class="hud-phase-fill" id="hud-phase-fill" style="width: 0%"></div>
-        </div>
-        <div class="hud-phase-text" id="hud-phase-text">0%</div>
-      </div>
-    </div>
-  </div>
   
   <!-- JavaScript -->
+  <script src="/assets/js/data/planPhases.js"></script>
   <script src="/assets/js/main.js"></script>
 </body>
 </html>
