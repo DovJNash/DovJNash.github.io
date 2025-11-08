@@ -19,94 +19,33 @@
   <!-- Skip to Content Link -->
   <a href="#main-content" class="skip-to-content">Skip to content</a>
   
-  <!-- Header with Modern Tab Navigation -->
+  <!-- Header with Sticky Navigation -->
   <header class="header" role="banner">
     <div class="header-container">
-      <div class="header-brand">
-        <h1 class="site-title">AI & ML Mastery Plan</h1>
-        <span class="site-subtitle">52-Week Journey</span>
-      </div>
-      <nav class="tab-nav" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="tab-nav-item active">
-          <span class="tab-icon">📖</span>
-          <span class="tab-label">Overview</span>
-        </a>
-        <a href="timeline.html" class="tab-nav-item">
-          <span class="tab-icon">📅</span>
-          <span class="tab-label">Timeline</span>
-        </a>
-        <a href="weekly-plan.html" class="tab-nav-item">
-          <span class="tab-icon">📋</span>
-          <span class="tab-label">Weekly</span>
-        </a>
-        <a href="daily-breakdown.html" class="tab-nav-item">
-          <span class="tab-icon">✅</span>
-          <span class="tab-label">Daily</span>
-        </a>
-        <a href="tooling.html" class="tab-nav-item">
-          <span class="tab-icon">🛠️</span>
-          <span class="tab-label">Tools</span>
-        </a>
-        <a href="gpu-strategy.html" class="tab-nav-item">
-          <span class="tab-icon">⚡</span>
-          <span class="tab-label">GPU</span>
-        </a>
-        <a href="success-criteria.html" class="tab-nav-item">
-          <span class="tab-icon">🎯</span>
-          <span class="tab-label">Success</span>
-        </a>
-        <button class="nav-more-toggle" aria-label="More pages">
-          <span class="tab-icon">⋯</span>
-          <span class="tab-label">More</span>
-        </button>
+      <h1 class="site-title">AI & ML Mastery Plan</h1>
+      <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="#direction">Direction</a></li>
+          <li><a href="#outcomes">Outcomes</a></li>
+          <li><a href="#tooling">Tooling</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#weekly-plan">Weekly Plan</a></li>
+          <li><a href="#israeli-context">Israeli Context</a></li>
+          <li><a href="#gpu-strategy">GPU Strategy</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#success-criteria">Success</a></li>
+          <li><a href="#failure-recovery">Recovery</a></li>
+          <li><a href="#mlops">MLOps</a></li>
+          <li><a href="#changes">Changes</a></li>
+          <li><a href="#repo-structure">Repo</a></li>
+          <li><a href="#next-actions">Next Actions</a></li>
+          <li><a href="#mindset">Mindset</a></li>
+        </ul>
       </nav>
-      <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
   </header>
-  
-  <!-- More Menu Overlay -->
-  <div class="more-menu-overlay" id="moreMenu">
-    <div class="more-menu-content">
-      <div class="more-menu-header">
-        <h3>Additional Sections</h3>
-        <button class="more-menu-close" aria-label="Close menu">&times;</button>
-      </div>
-      <div class="more-menu-grid">
-        <a href="mlops.html" class="more-menu-item">
-          <span class="more-icon">🔄</span>
-          <span class="more-label">MLOps</span>
-        </a>
-        <a href="repo-structure.html" class="more-menu-item">
-          <span class="more-icon">📁</span>
-          <span class="more-label">Repo Structure</span>
-        </a>
-        <a href="research.html" class="more-menu-item">
-          <span class="more-icon">📚</span>
-          <span class="more-label">Research</span>
-        </a>
-        <a href="community.html" class="more-menu-item">
-          <span class="more-icon">👥</span>
-          <span class="more-label">Community</span>
-        </a>
-        <a href="failure-recovery.html" class="more-menu-item">
-          <span class="more-icon">🔧</span>
-          <span class="more-label">Recovery</span>
-        </a>
-        <a href="israeli-context.html" class="more-menu-item">
-          <span class="more-icon">🇮🇱</span>
-          <span class="more-label">Israeli Context</span>
-        </a>
-        <a href="next-actions.html" class="more-menu-item">
-          <span class="more-icon">🚀</span>
-          <span class="more-label">Next Actions</span>
-        </a>
-      </div>
-    </div>
-  </div>
   
   <!-- Hero Section -->
   <section class="hero" role="banner">
@@ -529,169 +468,6 @@
           <li>Final deliverable: <code>master_summary.txt</code></li>
         </ul>
       </div>
-    </section>
-    
-
-    <!-- 5.5 Daily Breakdown (14 Program Phases) -->
-    <section id="daily-breakdown" class="content-section daily-breakdown">
-      <div class="section-header">
-        <h2>5.5 Daily Breakdown (14 Program Phases)</h2>
-        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
-      </div>
-      
-      <!-- Progress Summary -->
-      <div class="progress-summary" role="region" aria-live="polite" aria-label="Daily breakdown progress">
-        <h3>📊 Overall Progress</h3>
-        <div class="progress-stats">
-          <div class="stat">
-            <span class="stat-label">Days Completed</span>
-            <span class="stat-value" id="days-completed">0</span>
-            <span class="stat-total">/ 350</span>
-          </div>
-          <div class="stat">
-            <span class="stat-label">Tasks Completed</span>
-            <span class="stat-value" id="tasks-completed">0</span>
-            <span class="stat-total" id="tasks-total">/ 0</span>
-          </div>
-          <div class="stat">
-            <span class="stat-label">Overall Completion</span>
-            <span class="stat-value" id="overall-percentage">0%</span>
-          </div>
-        </div>
-        <div class="progress-bar-container">
-          <div class="progress-bar" id="overall-progress-bar" style="width: 0%"></div>
-        </div>
-      </div>
-
-      <div class="callout callout-info">
-        <div class="callout-title">📅 Interactive Daily Task Tracking</div>
-        <p>Check off tasks as you complete them. Your progress is automatically saved and will persist across browser sessions. Use the controls to expand/collapse tables and manage tasks efficiently.</p>
-      </div>
-
-      <!-- TABLE 1: Weeks 1-6 - Foundations (Days 1-7 sample) -->
-      <div class="daily-table-wrapper" data-table="1">
-        <div class="daily-table-header">
-          <h3>Table 1: Weeks 1-6 — Foundations</h3>
-          <p class="table-subtitle">42 days | Days 1-7 shown as working demo</p>
-        </div>
-        <div class="control-bar">
-          <button class="btn-control btn-toggle" data-action="toggle" data-table="1">
-            <span class="toggle-icon">▼</span> Expand/Collapse
-          </button>
-          <button class="btn-control btn-mark-all" data-action="markAll" data-table="1">
-            ✓ Mark All
-          </button>
-          <button class="btn-control btn-clear-all" data-action="clearAll" data-table="1">
-            ✗ Clear All
-          </button>
-        </div>
-        <div class="table-container" data-table-body="1">
-          <table class="daily-table">
-            <thead>
-              <tr>
-                <th style="width: 80px;">Day #</th>
-                <th>Tasks</th>
-                <th style="width: 120px;">Est. Time</th>
-                <th style="width: 100px;">Priority</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Day 1 -->
-              <tr data-day="1">
-                <td class="day-number">1</td>
-                <td class="tasks-cell">
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t0" class="task-box" data-table="1" data-day="1" data-task="0">
-                    <label for="t1-d1-t0">Setup: Create GitHub repo "llm-mastery-plan", initialize README</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t1" class="task-box" data-table="1" data-day="1" data-task="1">
-                    <label for="t1-d1-t1">Setup: Install VS Code, configure Copilot Pro</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t2" class="task-box" data-table="1" data-day="1" data-task="2">
-                    <label for="t1-d1-t2">Setup: Create docs/ directory structure</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t3" class="task-box" data-table="1" data-day="1" data-task="3">
-                    <label for="t1-d1-t3">Setup: Create Deepnote account, create first notebook "Week01_Day01"</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t4" class="task-box" data-table="1" data-day="1" data-task="4">
-                    <label for="t1-d1-t4">DataCamp: "Introduction to NumPy" - Chapter 1: Python Lists (30 min)</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t5" class="task-box" data-table="1" data-day="1" data-task="5">
-                    <label for="t1-d1-t5">3Blue1Brown: "Essence of Linear Algebra" Episode 1 - Vectors (10 min)</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t6" class="task-box" data-table="1" data-day="1" data-task="6">
-                    <label for="t1-d1-t6">Notebook: Create vectors_intro.ipynb - define 2D/3D vectors, visualize</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t7" class="task-box" data-table="1" data-day="1" data-task="7">
-                    <label for="t1-d1-t7">Log: Create docs/weekly_logs/week_01.md, write Day 1 entry</label>
-                  </div>
-                </td>
-                <td class="time-cell"><code>90 minutes</code></td>
-                <td class="priority-cell"><span class="pri-badge pri-high">HIGH</span></td>
-              </tr>
-              
-              <!-- Day 2 -->
-              <tr data-day="2">
-                <td class="day-number">2</td>
-                <td class="tasks-cell">
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d2-t0" class="task-box" data-table="1" data-day="2" data-task="0">
-                    <label for="t1-d2-t0">DataCamp: "Introduction to NumPy" - Chapter 2: NumPy Arrays (45 min)</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d2-t1" class="task-box" data-table="1" data-day="2" data-task="1">
-                    <label for="t1-d2-t1">3Blue1Brown: Episode 1 rewatch, take detailed notes on span concept</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d2-t2" class="task-box" data-table="1" data-day="2" data-task="2">
-                    <label for="t1-d2-t2">Notebook: vectors_operations.ipynb - add, scale, dot product vectors</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d2-t3" class="task-box" data-table="1" data-day="2" data-task="3">
-                    <label for="t1-d2-t3">Exercise: Manually calculate 3 dot products, verify with np.dot()</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d2-t4" class="task-box" data-table="1" data-day="2" data-task="4">
-                    <label for="t1-d2-t4">Community: Join Hugging Face Discord, introduce yourself in #beginners</label>
-                  </div>
-                </td>
-                <td class="time-cell"><code>90 minutes</code></td>
-                <td class="priority-cell"><span class="pri-badge pri-high">HIGH</span></td>
-              </tr>
-              
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Implementation Status Note -->
-      <div class="callout callout-warning">
-        <div class="callout-title">🚧 Full Dataset Implementation</div>
-        <p><strong>Infrastructure Status: Complete & Functional</strong></p>
-        <ul>
-          <li>✅ LocalStorage persistence working</li>
-          <li>✅ Progress tracking updating live</li>
-          <li>✅ Expand/collapse controls functional</li>
-          <li>✅ Mark all / Clear all working</li>
-          <li>✅ Dark mode supported</li>
-          <li>✅ Mobile responsive design</li>
-        </ul>
-        <p><strong>Data Entry:</strong> The v4_complete_analysis.txt file contains 350 days with 2000+ tasks across 14 tables. A Python parser script has been created to extract this data. To complete the implementation:</p>
-        <ol>
-          <li>Run the parser script to generate HTML for all remaining days</li>
-          <li>Insert the generated HTML following the same structure as Table 1 above</li>
-          <li>All JavaScript functionality will automatically work with the additional data</li>
-        </ol>
-        <p>Sample Table 1 demonstrates the complete system - remaining tables follow identical structure.</p>
-      </div>
-
     </section>
     
     <!-- 6. Israeli Context Integration -->
@@ -1513,166 +1289,4 @@
   <!-- JavaScript -->
   <script src="/assets/js/main.js"></script>
 </body>
-
-    <!-- 5.5 Daily Breakdown (14 Program Phases) -->
-    <section id="daily-breakdown" class="content-section daily-breakdown">
-      <div class="section-header">
-        <h2>5.5 Daily Breakdown (14 Program Phases)</h2>
-        <button class="anchor-link" aria-label="Copy link to this section" title="Copy link">#</button>
-      </div>
-      
-      <!-- Progress Summary -->
-      <div class="progress-summary" role="region" aria-live="polite" aria-label="Daily breakdown progress">
-        <h3>📊 Overall Progress</h3>
-        <div class="progress-stats">
-          <div class="stat">
-            <span class="stat-label">Days Completed</span>
-            <span class="stat-value" id="days-completed">0</span>
-            <span class="stat-total">/ 350</span>
-          </div>
-          <div class="stat">
-            <span class="stat-label">Tasks Completed</span>
-            <span class="stat-value" id="tasks-completed">0</span>
-            <span class="stat-total" id="tasks-total">/ 0</span>
-          </div>
-          <div class="stat">
-            <span class="stat-label">Overall Completion</span>
-            <span class="stat-value" id="overall-percentage">0%</span>
-          </div>
-        </div>
-        <div class="progress-bar-container">
-          <div class="progress-bar" id="overall-progress-bar" style="width: 0%"></div>
-        </div>
-      </div>
-
-      <div class="callout callout-info">
-        <div class="callout-title">📅 Interactive Daily Task Tracking</div>
-        <p>Check off tasks as you complete them. Your progress is automatically saved and will persist across browser sessions. Use the controls to expand/collapse tables and manage tasks efficiently.</p>
-      </div>
-
-      <!-- TABLE 1: Weeks 1-6 - Foundations (Days 1-7 sample) -->
-      <div class="daily-table-wrapper" data-table="1">
-        <div class="daily-table-header">
-          <h3>Table 1: Weeks 1-6 — Foundations</h3>
-          <p class="table-subtitle">42 days | Days 1-7 shown as working demo</p>
-        </div>
-        <div class="control-bar">
-          <button class="btn-control btn-toggle" data-action="toggle" data-table="1">
-            <span class="toggle-icon">▼</span> Expand/Collapse
-          </button>
-          <button class="btn-control btn-mark-all" data-action="markAll" data-table="1">
-            ✓ Mark All
-          </button>
-          <button class="btn-control btn-clear-all" data-action="clearAll" data-table="1">
-            ✗ Clear All
-          </button>
-        </div>
-        <div class="table-container" data-table-body="1">
-          <table class="daily-table">
-            <thead>
-              <tr>
-                <th style="width: 80px;">Day #</th>
-                <th>Tasks</th>
-                <th style="width: 120px;">Est. Time</th>
-                <th style="width: 100px;">Priority</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Day 1 -->
-              <tr data-day="1">
-                <td class="day-number">1</td>
-                <td class="tasks-cell">
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t0" class="task-box" data-table="1" data-day="1" data-task="0">
-                    <label for="t1-d1-t0">Setup: Create GitHub repo "llm-mastery-plan", initialize README</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t1" class="task-box" data-table="1" data-day="1" data-task="1">
-                    <label for="t1-d1-t1">Setup: Install VS Code, configure Copilot Pro</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t2" class="task-box" data-table="1" data-day="1" data-task="2">
-                    <label for="t1-d1-t2">Setup: Create docs/ directory structure</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t3" class="task-box" data-table="1" data-day="1" data-task="3">
-                    <label for="t1-d1-t3">Setup: Create Deepnote account, create first notebook "Week01_Day01"</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t4" class="task-box" data-table="1" data-day="1" data-task="4">
-                    <label for="t1-d1-t4">DataCamp: "Introduction to NumPy" - Chapter 1: Python Lists (30 min)</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t5" class="task-box" data-table="1" data-day="1" data-task="5">
-                    <label for="t1-d1-t5">3Blue1Brown: "Essence of Linear Algebra" Episode 1 - Vectors (10 min)</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t6" class="task-box" data-table="1" data-day="1" data-task="6">
-                    <label for="t1-d1-t6">Notebook: Create vectors_intro.ipynb - define 2D/3D vectors, visualize</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d1-t7" class="task-box" data-table="1" data-day="1" data-task="7">
-                    <label for="t1-d1-t7">Log: Create docs/weekly_logs/week_01.md, write Day 1 entry</label>
-                  </div>
-                </td>
-                <td class="time-cell"><code>90 minutes</code></td>
-                <td class="priority-cell"><span class="pri-badge pri-high">HIGH</span></td>
-              </tr>
-              
-              <!-- Day 2 -->
-              <tr data-day="2">
-                <td class="day-number">2</td>
-                <td class="tasks-cell">
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d2-t0" class="task-box" data-table="1" data-day="2" data-task="0">
-                    <label for="t1-d2-t0">DataCamp: "Introduction to NumPy" - Chapter 2: NumPy Arrays (45 min)</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d2-t1" class="task-box" data-table="1" data-day="2" data-task="1">
-                    <label for="t1-d2-t1">3Blue1Brown: Episode 1 rewatch, take detailed notes on span concept</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d2-t2" class="task-box" data-table="1" data-day="2" data-task="2">
-                    <label for="t1-d2-t2">Notebook: vectors_operations.ipynb - add, scale, dot product vectors</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d2-t3" class="task-box" data-table="1" data-day="2" data-task="3">
-                    <label for="t1-d2-t3">Exercise: Manually calculate 3 dot products, verify with np.dot()</label>
-                  </div>
-                  <div class="task-item">
-                    <input type="checkbox" id="t1-d2-t4" class="task-box" data-table="1" data-day="2" data-task="4">
-                    <label for="t1-d2-t4">Community: Join Hugging Face Discord, introduce yourself in #beginners</label>
-                  </div>
-                </td>
-                <td class="time-cell"><code>90 minutes</code></td>
-                <td class="priority-cell"><span class="pri-badge pri-high">HIGH</span></td>
-              </tr>
-              
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Implementation Status Note -->
-      <div class="callout callout-warning">
-        <div class="callout-title">🚧 Full Dataset Implementation</div>
-        <p><strong>Infrastructure Status: Complete & Functional</strong></p>
-        <ul>
-          <li>✅ LocalStorage persistence working</li>
-          <li>✅ Progress tracking updating live</li>
-          <li>✅ Expand/collapse controls functional</li>
-          <li>✅ Mark all / Clear all working</li>
-          <li>✅ Dark mode supported</li>
-          <li>✅ Mobile responsive design</li>
-        </ul>
-        <p><strong>Data Entry:</strong> The v4_complete_analysis.txt file contains 350 days with 2000+ tasks across 14 tables. A Python parser script has been created to extract this data. To complete the implementation:</p>
-        <ol>
-          <li>Run the parser script to generate HTML for all remaining days</li>
-          <li>Insert the generated HTML following the same structure as Table 1 above</li>
-          <li>All JavaScript functionality will automatically work with the additional data</li>
-        </ol>
-        <p>Sample Table 1 demonstrates the complete system - remaining tables follow identical structure.</p>
-      </div>
-
-    </section>
-    
+</html>
