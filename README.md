@@ -392,8 +392,22 @@ Estimated time: [Realistic time estimate]
 
 ### Coverage Status
 
-- **Week 1 (Days 1-7):** ✅ Complete with exemplar-quality details (36 tasks)
-- **Remaining Days:** Structure in place, ready for detail expansion following Week 1 pattern
+- **Phase 1 Foundations (Days 1-42):** ✅ Complete with comprehensive details (≥120 words each)
+  - Week 1 (Days 1-7): ✅ Complete (36 tasks)
+  - Week 2 (Days 8-14): ✅ Complete
+  - Week 3 (Days 15-22): ✅ Complete  
+  - Week 4 (Days 23-28): ✅ Complete - Calculus for ML (convexity, GD variants), Probability (Bayes), Statistics (variance/entropy), Pandas & Plotting, ML Math Integration
+  - Week 5 (Days 29-35): ✅ Complete - Linear Regression from scratch (normal eq + GD), L2 Regularization, PCA from scratch (SVD/eigendecomp), Distributions & Hypothesis Testing
+  - Week 6 (Days 36-42): ✅ Complete - Foundations Capstone: LR achieving R² ≥ 0.90, PCA reconstruction demo, foundations_summary.md (≥5 pages), 20-question quiz (≥16/20)
+- **Phase 2 Buffer & Setup (Days 43-49):** ✅ Complete with comprehensive details (≥120 words each)
+  - Day 43: ✅ Pytest setup (failing→passing test, coverage basics)
+  - Day 44: ✅ Black and pre-commit; formatting CI
+  - Day 45: ✅ Deepnote migration checklist and environment parity
+  - Day 46: ✅ Weekly logs process (templates and cadence)
+  - Day 47: ✅ Repo structure audit & housekeeping (README sections, LICENSE)
+  - Day 48: ✅ Buffer day plan with light tasks
+  - Day 49: ✅ Week 7 review + readiness checklist for Classical ML
+- **Remaining Phases:** Structure in place, ready for detail expansion following established pattern
 
 ## Browser Support
 
