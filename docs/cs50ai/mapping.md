@@ -1,145 +1,133 @@
-# CS50AI Integration Module Mapping
+# Classical ML → CS50AI Survey + Bridge Sprint Mapping (Compressed)
 
-This document maps the old Classical ML phase (Days 50-70) to the new CS50AI Integration Module structure, showing how CS50AI course units align with depth extensions.
+This document maps the original 21-day Classical ML phase (Days 50–70) to the new **compressed** CS50AI Survey + Bridge Sprint structure.
 
 ## Overview
 
-The CS50AI Integration Module replaces the repetitive classical ML curriculum with Harvard's CS50 Introduction to AI course, supplemented by custom depth extensions. This provides broader AI survey coverage while maintaining hands-on implementation requirements.
+**Decision Rationale (Option D: Compressed CS50AI + Bridge Sprint):**  
+The original Phase 3 (Classical ML Fundamentals) consisted of 21 days of sklearn-focused content. After evaluation, we chose to **compress** CS50AI from 21 days to 7 days + add a 4-day Bridge Sprint (11 days total). This achieves:
+- **Maximum efficiency**: One CS50AI module per day, eliminating deep dives
+- **Breadth over depth**: Survey of Search, Knowledge, Uncertainty, Optimization, Learning, Neural Networks, Language
+- **Early Phase 4 start**: Deep Learning Core begins at Day 61 (10 days earlier)
+- **Focused preparation**: 4-day bridge specifically targets Transformer readiness
 
-## Week-by-Week Mapping
+## New Phase 3B Structure (11 Days Total)
 
-### Week A: Search Algorithms (Days 50-53)
+### Part 1: CS50AI Survey (Days 50–56, 7 days)
+Compressed one-module-per-day format. Each day: lecture + problem set + brief reflection. Uses `minimalDetails: true` with ~50-80 word task descriptions.
 
-| Day | CS50AI Unit | Topics Covered | Depth Extension |
-|-----|-------------|----------------|-----------------|
-| 50 | Search 0 | DFS, BFS basics | Heuristic benchmark suite |
-| 51 | Search 1 | Greedy best-first, A* | Custom heuristic design |
-| 52 | Search 2 | Minimax algorithm | Alpha-beta optimization |
-| 53 | Search 3 | Depth-limited minimax | Game tree visualization |
+| Day | CS50AI Module | Topics | Notes |
+|-----|---------------|--------|-------|
+| 50 | Search | DFS, BFS, A*, minimax, alpha-beta | CS50AI Lecture 0 + problem set |
+| 51 | Knowledge | Propositional logic, inference, model checking | CS50AI Lecture 1 + problem set |
+| 52 | Uncertainty | Probability, Bayes' rule, Bayesian networks | CS50AI Lecture 2 + problem set |
+| 53 | Optimization | Hill climbing, simulated annealing, CSP | CS50AI Lecture 3 + problem set |
+| 54 | Learning | k-NN, perceptron, SVM, overfitting | CS50AI Lecture 4 + problem set |
+| 55 | Neural Networks | Backprop, CNNs, TensorFlow/Keras intro | CS50AI Lecture 5 + problem set |
+| 56 | Language | NLP, n-grams, word2vec, attention (+RL brief) | CS50AI Lecture 6 + problem set + survey completion |
 
-**Old Classical ML Days 50-53:** sklearn introduction, logistic regression, classification metrics, confusion matrices
+**Deliverable**: `docs/cs50ai/notes.md` (consolidated notes file for all 7 modules)
 
-**Rationale for Change:** CS50AI's search algorithms provide foundational AI concepts (state space, heuristics, adversarial search) that are more broadly applicable than repetitive sklearn exercises.
+### Part 2: Bridge Sprint (Days 57–60, 4 days)
+Full 120-180 word details. Prepares for Phase 4 Transformer implementation.
 
-### Week B: Knowledge & Inference (Days 54-56)
+| Day | Bridge Topic | Key Activities | Deliverables |
+|-----|--------------|----------------|--------------|
+| 57 | Conceptual Bridge | ML→Transformer rationale, task selection, retrospective | `docs/bridge/ml_to_transformer_rationale.md`, `baseline_task.md`, `phase3_retrospective.md` |
+| 58 | Reproducibility & Environment | Seeds, determinism, environment setup, git workflow | `docs/bridge/reproducibility_checklist.md`, `environment_setup.md`, `git_workflow.md` |
+| 59 | Data Pipeline | PyTorch Dataset/DataLoader, character-level tokenization | `notebooks/bridge/char_dataset.ipynb`, `pipeline_test.ipynb` |
+| 60 | Attention Math | Scaled dot-product, causal masking, sanity tests | `notebooks/bridge/attention_math.ipynb`, `attention_tests.ipynb` |
 
-| Day | CS50AI Unit | Topics Covered | Depth Extension |
-|-----|-------------|----------------|-----------------|
-| 54 | Knowledge 0 | Propositional logic | SAT solver implementation |
-| 55 | Knowledge 1 | Model checking | Custom inference engine |
-| 56 | Knowledge 2 | Resolution, first-order logic | Logic puzzle solver |
+**Bridge Artifacts Folder**: `docs/bridge/` + `notebooks/bridge/`
 
-**Old Classical ML Days 54-56:** Precision/recall/F1, ROC-AUC curves, stratified k-fold
+### Days 61–70: Superseded (Early Phase 4 Start)
+All marked as `inactive: true` with `supersededBy: 'Phase 4: Deep Learning Core (early start)'`.  
+Phase 4 begins at Day 61 instead of Day 71 (**10-day acceleration**).
 
-**Rationale for Change:** Logical reasoning and inference are fundamental to AI systems and provide better preparation for understanding LLM reasoning capabilities than additional sklearn metrics.
+## Comparison: Old vs New
 
-### Week C: Optimization & CSP (Days 57-59)
+| Aspect | Old Phase 3 (21 days) | New Phase 3B (11 days) |
+|--------|----------------------|------------------------|
+| **Duration** | Days 50-70 | Days 50-60 (+early Phase 4 at 61) |
+| **Focus** | sklearn classical ML, repetitive exercises | CS50AI AI survey + Transformer bridge |
+| **Content** | Classification, regression, CV, metrics × 21 days | 7-day CS50AI + 4-day bridge sprint |
+| **Depth** | Deep sklearn practice | Broad AI survey, targeted bridge |
+| **Overlap with Phase 4** | High (ML fundamentals repeated) | Low (complementary breadth) |
+| **Phase 4 Start** | Day 71 | Day 61 (**10 days earlier**) |
 
-| Day | CS50AI Unit | Topics Covered | Depth Extension |
-|-----|-------------|----------------|-----------------|
-| 57 | Optimization 0 | Hill climbing, simulated annealing | Hyperparameter tuning demo |
-| 58 | Optimization 1 | Constraint satisfaction problems | Sudoku/scheduling solver |
-| 59 | Optimization 2 | Backtracking, arc consistency | CSP visualization tool |
+## Learning Objectives Mapping
 
-**Old Classical ML Days 57-59:** Learning curves, model selection, Week 8 review
+### What Was Preserved
+- Fundamentals of supervised learning (Day 54: CS50AI Learning)
+- Neural network basics (Day 55: CS50AI Neural Networks)
+- Practical implementation experience (CS50AI problem sets)
 
-**Rationale for Change:** Optimization algorithms are directly relevant to ML training, and CSP provides clearer problem-solving skills than learning curve analysis alone.
+### What Was Replaced
+- Repetitive sklearn workflows → CS50AI survey modules
+- Deep classification/regression practice → Broader AI fundamentals
+- Week-long ML topics → Compressed daily modules
 
-### Week D: Supervised Learning & Metrics (Days 60-64)
+### What Was Added
+- Search algorithms and heuristics (Day 50)
+- Logical reasoning and inference (Day 51)
+- Probabilistic reasoning (Day 52)
+- Optimization and CSP (Day 53)
+- NLP and attention introduction (Day 56)
+- 4-day bridge sprint (Days 57-60) for Phase 4 preparation
 
-| Day | CS50AI Unit | Topics Covered | Depth Extension |
-|-----|-------------|----------------|-----------------|
-| 60 | Learning 0 | SVM, regression basics | Compare with sklearn implementation |
-| 61 | Learning 1 | Overfitting, regularization | Regularization strength sweep |
-| 62 | Learning 2 | Train/val/test splits, metrics | Calibration curves |
-| 63 | Learning 3 | Cross-validation | Precision-recall curve analysis |
-| 64 | Learning 4 | Ensemble methods intro | ROC curve comparison across models |
+## Notes File Structure
 
-**Old Classical ML Days 60-64:** SVM concepts, decision trees, random forests, gradient boosting, bias-variance
+### `docs/cs50ai/notes.md`
+Single consolidated notes file for all 7 CS50AI modules:
+```markdown
+# CS50AI Survey Notes
 
-**Rationale for Change:** CS50AI covers these topics more efficiently, allowing time for depth extensions on calibration and precision-recall analysis that are more relevant to LLM evaluation.
+## Module 0: Search (Day 50)
+[lecture notes, key concepts, problem set insights]
 
-### Week E: Neural Networks Bridge (Days 65-67)
+## Module 1: Knowledge (Day 51)
+...
 
-| Day | CS50AI Unit | Topics Covered | Depth Extension |
-|-----|-------------|----------------|-----------------|
-| 65 | Neural Networks 0 | Perceptron, activation functions | Raw PyTorch MLP from scratch |
-| 66 | Neural Networks 1 | Backpropagation intuition | Manual gradient computation |
-| 67 | Neural Networks 2 | Deep learning overview | Bridge to Phase 4 (PyTorch tensors) |
+## Module 6: Language (Day 56)
+...
 
-**Old Classical ML Days 65-67:** Unsupervised learning (K-Means), PCA application, dimensionality reduction
+## Survey Completion Checklist
+- [ ] All 7 lectures watched
+- [ ] All 7 problem sets completed
+- [ ] Notes consolidated
+- [ ] Gaps identified for Phase 4
+```
 
-**Rationale for Change:** Neural network fundamentals provide a more natural bridge to Phase 4 (Deep Learning Core) than unsupervised methods, which are less central to the LLM-focused curriculum.
+### Bridge Documentation
+Separate files in `docs/bridge/`:
+- `ml_to_transformer_rationale.md` (Day 57)
+- `baseline_task.md` (Day 57)
+- `phase3_retrospective.md` (Day 57)
+- `reproducibility_checklist.md` (Day 58)
+- `environment_setup.md` (Day 58)
+- `git_workflow.md` (Day 58)
 
-### Week F: Optional/Buffer (Days 68-70)
+## Implementation Notes
 
-| Day | CS50AI Unit | Topics Covered | Depth Extension |
-|-----|-------------|----------------|-----------------|
-| 68 | RL 0 (optional) | Q-learning basics | OpenAI Gym environment |
-| 69 | NLP 0 (optional) | Language models preview | Markov chain text generation |
-| 70 | Review/Buffer | Phase 3 retrospective | Complete unfinished tasks, polish artifacts |
+- **minimalDetails Flag**: Days 50-56 use `minimalDetails: true` for ~50-80 word task descriptions
+- **Full Details**: Days 57-60 use standard 120-180 word details with Action/Boundaries/Deliverables/Verification/Pitfalls/Sources
+- **Inactive Days**: Days 61-70 have `inactive: true` flag
+- **Links**: All external links use `target="_blank" rel="noreferrer"`
+- **Global Day Numbering**: Preserved unchanged (50-70)
 
-**Old Classical ML Days 68-70:** Classical ML mini-project, project report, model selection justification
+## Success Metrics
 
-**Rationale for Change:** Optional RL/NLP units preview Phase 6+ topics, and buffer day allows completion and integration of Phase 3 learning.
+### Phase 3B Completion Criteria
+- **CS50AI Survey**: 7/7 lectures watched, 7/7 problem sets completed
+- **Bridge Sprint**: All 11 artifacts created (7 docs + 4 notebooks)
+- **Readiness**: Phase 3 retrospective completed, Phase 4 environment set up
+- **Timeline**: Completed by end of Week 9 (enabling Day 61 Phase 4 start)
 
-## Deliverables Comparison
+### Readiness Assessment for Phase 4
+- [ ] CS50AI attention mechanism understood
+- [ ] PyTorch Dataset/DataLoader implemented
+- [ ] Scaled dot-product attention coded from scratch
+- [ ] Causal masking working correctly
+- [ ] Baseline task selected and documented
+- [ ] Development environment ready
 
-### Old Classical ML Phase Deliverables
-- `classical_ml_report.md`: sklearn pipelines, model comparison tables
-- Jupyter notebooks: classification metrics, ensemble methods, clustering
-- Artifact images: confusion matrices, ROC curves, learning curves
-
-### New CS50AI Module Deliverables
-- `docs/cs50ai/summary.md`: Comprehensive module completion summary
-- `docs/cs50ai/mapping.md`: This file (mapping old to new structure)
-- Depth Extension notebooks: Heuristic benchmarks, SAT solver, calibration curves, PyTorch MLP, etc.
-- CS50AI problem set solutions (external links to CS50 platform)
-- Reflection documents for each week
-
-## Learning Objectives Preserved
-
-Despite the curriculum change, these classical ML learning objectives are **preserved**:
-
-1. **Supervised Learning:** Covered in Days 60-64 (SVM, regression, overfitting, regularization)
-2. **Model Evaluation:** Covered comprehensively in Days 62-64 (metrics, cross-validation, calibration)
-3. **Ensemble Methods:** Introduced in Day 64 (CS50AI Learning 4)
-4. **Neural Network Basics:** Covered in Days 65-67 with better PyTorch bridge
-
-## Learning Objectives Enhanced
-
-These objectives are **enhanced** by the CS50AI integration:
-
-1. **AI Fundamentals:** Search, logic, and optimization provide broader AI understanding
-2. **Problem-Solving Skills:** Heuristic design, constraint satisfaction improve algorithm design
-3. **Bridge to Advanced Topics:** NN fundamentals and optional RL/NLP preview Phase 6+
-4. **Hands-On Implementation:** Depth extensions require custom implementations beyond course materials
-
-## Time Allocation
-
-- **CS50AI Course Content:** ~40% of time (lectures, problem sets)
-- **Depth Extensions:** ~40% of time (custom notebooks, implementations)
-- **Reflection & Integration:** ~20% of time (notes, retrospective, artifact polish)
-
-Total: 21 days × 3-4 hours/day = 63-84 hours of focused work
-
-## Success Criteria
-
-Phase 3B completion requires:
-
-1. All CS50AI problem sets submitted (Search, Knowledge, Optimization, Learning)
-2. All Depth Extension notebooks completed with artifacts
-3. `docs/cs50ai/summary.md` filled out (≥5 pages)
-4. Phase 3 retrospective document with baseline metrics
-5. At least 80% of tasks checked off in daily tracking
-
-## References
-
-- [CS50 AI Course](https://cs50.harvard.edu/ai/)
-- [CS50 AI Syllabus](https://cs50.harvard.edu/ai/2024/syllabus/)
-- Original Classical ML curriculum: See `assets/js/data/planPhases.js` (git history)
-
----
-
-**Created:** 2025-11-09  
-**Last Updated:** 2025-11-09

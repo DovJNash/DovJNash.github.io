@@ -1,295 +1,259 @@
-# CS50AI Integration Module Summary
+# CS50AI Survey + Bridge Sprint Completion Summary
 
-**Student:** DovJNash  
-**Phase:** 3B (CS50AI Integration Module)  
-**Duration:** Days 50-70 (21 days across Weeks 8-10)  
-**Status:** Template - To be filled as module is completed  
-**Created:** 2025-11-09
+This document tracks completion of the compressed Phase 3B: CS50AI Survey (Days 50-56) + Bridge Sprint (Days 57-60).
 
----
+## Overview
 
-## Module Overview
+**Phase 3B Structure**: 11 days total
+- **Part 1**: CS50AI Survey (7 days, Days 50-56) - One module per day
+- **Part 2**: Bridge Sprint (4 days, Days 57-60) - Phase 4 preparation
 
-This document serves as a comprehensive summary of the CS50AI Integration Module, which replaces the traditional Classical ML phase with Harvard's CS50 Introduction to AI course supplemented by custom depth extensions. The module provides broader AI survey coverage including search algorithms, logical reasoning, optimization, supervised ML, and neural networks fundamentals.
-
-**Design Rationale:** The CS50AI integration eliminates redundancy with Phase 4 (Deep Learning Core) while providing essential AI fundamentals and a stronger bridge to Transformer-based LLM systems in Phase 6+.
+**Completion Target**: End of Week 9 (enabling early Phase 4 start at Day 61)
 
 ---
 
-## Week A: Search Algorithms (Days 50-53)
+## Part 1: CS50AI Survey (Days 50-56)
 
-### Topics Covered
-- Depth-First Search (DFS) and Breadth-First Search (BFS)
-- Informed search: Greedy best-first, A* algorithm
-- Adversarial search: Minimax, Alpha-beta pruning
-- Heuristic design and evaluation
+### Day 50: Search (Module 0)
+- [ ] CS50AI Lecture 0 watched (DFS, BFS, A*, minimax, alpha-beta)
+- [ ] Problem Set 0 completed (Degrees and/or Tic-Tac-Toe)
+- [ ] Notes added to `docs/cs50ai/notes.md` (Search section)
 
-### CS50AI Problem Sets Completed
-<!-- Fill in as completed -->
-- [ ] Search 0: Degrees (6 degrees of Kevin Bacon)
-- [ ] Search 1: Tic-Tac-Toe (Minimax implementation)
+**Key Concepts**: State space, heuristics, adversarial search, minimax algorithm  
+**Connection to Transformers**: Attention as learned search over sequence positions
 
-### Depth Extensions Completed
-<!-- Fill in as completed -->
-- [ ] Heuristic benchmark suite comparing admissible heuristics
-- [ ] Custom heuristic design for maze navigation
-- [ ] Alpha-beta pruning performance analysis
-- [ ] Game tree visualization tool
+### Day 51: Knowledge (Module 1)
+- [ ] CS50AI Lecture 1 watched (propositional logic, inference, model checking)
+- [ ] Problem Set 1 completed (Knights and/or Minesweeper)
+- [ ] Notes added to `docs/cs50ai/notes.md` (Knowledge section)
 
-### Key Learnings
-<!-- Fill in as you progress -->
-*To be documented: What did you learn about search algorithms? How do heuristics affect performance? When is A* optimal?*
+**Key Concepts**: Propositional logic, knowledge bases, inference rules  
+**Connection to LLMs**: Symbolic vs neural reasoning approaches
 
-### Artifacts Created
-<!-- List notebooks, images, implementations -->
-- `notebooks/cs50ai/day50_search_basics.ipynb`
-- `artifacts/day51_heuristic_comparison.png`
-- `artifacts/day52_minimax_tree.png`
-- [Add more as created]
+### Day 52: Uncertainty (Module 2)
+- [ ] CS50AI Lecture 2 watched (probability, Bayes' rule, Bayesian networks)
+- [ ] Problem Set 2 completed (PageRank and/or Heredity)
+- [ ] Notes added to `docs/cs50ai/notes.md` (Uncertainty section)
 
----
+**Key Concepts**: Probability theory, conditional probability, Bayesian inference  
+**Connection to Language Models**: Next-token prediction as probability distribution
 
-## Week B: Knowledge & Inference (Days 54-56)
+### Day 53: Optimization (Module 3)
+- [ ] CS50AI Lecture 3 watched (hill climbing, simulated annealing, CSP)
+- [ ] Problem Set 3 completed (Crossword)
+- [ ] Notes added to `docs/cs50ai/notes.md` (Optimization section)
 
-### Topics Covered
-- Propositional logic and logical operators
-- Knowledge-based agents and model checking
-- Inference rules: Modus Ponens, Resolution
-- First-order logic introduction
+**Key Concepts**: Local search, constraint satisfaction, backtracking  
+**Connection to Training**: Gradient descent as continuous optimization
 
-### CS50AI Problem Sets Completed
-<!-- Fill in as completed -->
-- [ ] Knowledge 0: Knights (Logic puzzle solver)
-- [ ] Knowledge 1: Minesweeper (Inference-based gameplay)
+### Day 54: Learning (Module 4)
+- [ ] CS50AI Lecture 4 watched (k-NN, perceptron, SVM, overfitting, regularization)
+- [ ] Problem Set 4 completed (Shopping and/or Nim)
+- [ ] Notes added to `docs/cs50ai/notes.md` (Learning section)
 
-### Depth Extensions Completed
-<!-- Fill in as completed -->
-- [ ] SAT solver implementation from scratch
-- [ ] Custom inference engine for propositional logic
-- [ ] Logic puzzle solver (Sudoku, Einstein's riddle, etc.)
+**Key Concepts**: Supervised learning, classification, overfitting, regularization  
+**Connection to Deep Learning**: Classical ML as precursor to neural approaches
 
-### Key Learnings
-<!-- Fill in as you progress -->
-*To be documented: How does model checking work? What are the limitations of propositional logic? How does resolution prove theorems?*
+### Day 55: Neural Networks (Module 5)
+- [ ] CS50AI Lecture 5 watched (perceptron, backprop, CNNs, TensorFlow/Keras)
+- [ ] Problem Set 5 completed (Traffic)
+- [ ] Notes added to `docs/cs50ai/notes.md` (Neural Networks section)
 
-### Artifacts Created
-<!-- List notebooks, images, implementations -->
-- `notebooks/cs50ai/day54_propositional_logic.ipynb`
-- `notebooks/cs50ai/day55_sat_solver.ipynb`
-- [Add more as created]
+**Key Concepts**: Backpropagation, activation functions, convolutional layers  
+**Connection to Transformers**: Neural nets fundamentals, bridging to RNNs/Transformers
 
----
+### Day 56: Language (Module 6)
+- [ ] CS50AI Lecture 6 watched (NLP, n-grams, word2vec, attention, brief RL)
+- [ ] Problem Set 6 completed (Parser and/or Attention)
+- [ ] Notes added to `docs/cs50ai/notes.md` (Language section)
+- [ ] CS50AI Survey completion checklist filled out
 
-## Week C: Optimization & CSP (Days 57-59)
+**Key Concepts**: NLP, bag-of-words, TF-IDF, word embeddings, attention mechanism  
+**Connection to Transformers**: Attention introduction, direct precursor to multi-head attention
 
-### Topics Covered
-- Local search: Hill climbing, Simulated annealing
-- Constraint Satisfaction Problems (CSP)
-- Backtracking search and arc consistency
-- CSP applications: Sudoku, scheduling, map coloring
-
-### CS50AI Problem Sets Completed
-<!-- Fill in as completed -->
-- [ ] Optimization 0: Crossword (CSP solver)
-
-### Depth Extensions Completed
-<!-- Fill in as completed -->
-- [ ] Hyperparameter tuning with simulated annealing demo
-- [ ] Sudoku/scheduling solver with visualization
-- [ ] CSP visualization tool showing backtracking process
-
-### Key Learnings
-<!-- Fill in as you progress -->
-*To be documented: When does local search work well? How does arc consistency improve CSP solving? Connection to ML hyperparameter tuning?*
-
-### Artifacts Created
-<!-- List notebooks, images, implementations -->
-- `notebooks/cs50ai/day57_hill_climbing.ipynb`
-- `artifacts/day58_csp_sudoku.png`
-- [Add more as created]
+### CS50AI Survey Completion
+- [ ] All 7 lectures completed
+- [ ] All 7 problem sets submitted
+- [ ] `docs/cs50ai/notes.md` consolidated and reviewed
+- [ ] Gaps identified for Phase 4 review
 
 ---
 
-## Week D: Supervised Learning & Metrics (Days 60-64)
+## Part 2: Bridge Sprint (Days 57-60)
 
-### Topics Covered
-- Support Vector Machines (SVM) with different kernels
-- Linear and polynomial regression
-- Overfitting, regularization (L1/L2)
-- Training/validation/test splits
-- Evaluation metrics: accuracy, precision, recall, F1, ROC-AUC
-- Cross-validation strategies
-- Ensemble methods introduction
+### Day 57: Conceptual Bridge
+**Goal**: Connect classical ML/CS50AI to Transformer architecture
 
-### CS50AI Problem Sets Completed
-<!-- Fill in as completed -->
-- [ ] Learning 0: Shopping (Predict customer purchases)
-- [ ] Learning 1: Nim (Reinforcement learning game)
+Artifacts:
+- [ ] `docs/bridge/ml_to_transformer_rationale.md` (800-1200 words)
+  - Why sequence modeling differs from classification
+  - How attention addresses RNN limitations
+  - Positional encoding rationale
+  - Self-attention as learned contextual embeddings
+- [ ] `docs/bridge/baseline_task.md` (300-500 words)
+  - Task selection (Shakespeare/TinyStories/arithmetic)
+  - Dataset details and access
+  - Success metrics defined
+  - Compute feasibility analysis
+- [ ] `docs/notes/phase3_retrospective.md` (600-800 words)
+  - CS50AI survey effectiveness
+  - Readiness self-assessment (1-5 scale with justification)
+  - Phase 4 preparation checklist
 
-### Depth Extensions Completed
-<!-- Fill in as completed -->
-- [ ] SVM kernel comparison with sklearn
-- [ ] Regularization strength sweep analysis
-- [ ] Calibration curves for probabilistic predictions
-- [ ] Precision-recall curve analysis across models
-- [ ] ROC curve comparison (multiple models)
+**Reflection**: Foundational concepts most critical for Phase 4 success
 
-### Key Learnings
-<!-- Fill in as you progress -->
-*To be documented: How does regularization prevent overfitting? When to use precision vs recall? What makes a model well-calibrated?*
+### Day 58: Reproducibility & Environment
+**Goal**: Establish reproducible ML experimentation practices
 
-### Artifacts Created
-<!-- List notebooks, images, implementations -->
-- `notebooks/cs50ai/day60_svm_kernels.ipynb`
-- `artifacts/day62_calibration_curves.png`
-- `artifacts/day63_precision_recall.png`
-- [Add more as created]
+Artifacts:
+- [ ] `docs/bridge/reproducibility_checklist.md` (500-700 words)
+  - Random seed practices (PyTorch, numpy, Python, CUBLAS)
+  - Deterministic algorithms configuration
+  - Hardware consistency notes
+  - Environment specification template
+  - Logging practices
+- [ ] `notebooks/bridge/seed_test.ipynb`
+  - Demonstration that same seed → same results
+  - Test cases for reproducibility
+- [ ] Development environment set up
+  - Conda/venv created (`phase4`)
+  - PyTorch installed (stable, CPU or CUDA)
+  - Essential packages: numpy, matplotlib, jupyter, tensorboard
+  - `requirements.txt` with exact versions
+- [ ] `docs/bridge/environment_setup.md`
+  - Step-by-step setup instructions
+  - Import verification
+  - Device detection (CPU vs CUDA)
+- [ ] `docs/bridge/git_workflow.md`
+  - `.gitignore` for ML projects
+  - Branch strategy
+  - Commit message conventions
+  - Notebook versioning approach
 
----
+**Reflection**: Why reproducibility is critical for ML iteration
 
-## Week E: Neural Networks Bridge (Days 65-67)
+### Day 59: Data Pipeline
+**Goal**: Implement PyTorch Dataset/DataLoader for character-level LM
 
-### Topics Covered
-- Perceptron and activation functions (sigmoid, ReLU, tanh)
-- Feedforward neural networks architecture
-- Backpropagation intuition
-- Gradient descent optimization
-- Deep learning frameworks introduction (PyTorch)
+Artifacts:
+- [ ] `notebooks/bridge/char_dataset.ipynb`
+  - Character-level vocabulary (char→index, index→char)
+  - PyTorch Dataset class implementation
+  - `__getitem__` returns (input_seq, target_seq) tensors
+  - `__len__` method
+  - Simple tokenization (char-level)
+  - Test with tiny text file (<10KB)
+  - Sample input/target pairs printed
+- [ ] DataLoader implementation (same notebook or extended)
+  - batch_size=32
+  - Shuffle with reproducible seed
+  - Batch shape verification
+  - Iteration test (3-5 batches)
+  - Batches per epoch calculation
+- [ ] `notebooks/bridge/pipeline_test.ipynb`
+  - End-to-end pipeline: load → vocab → Dataset → DataLoader → iterate
+  - First and last batch verification
+  - One epoch timing
+  - Template for Phase 4 experiments
 
-### CS50AI Problem Sets Completed
-<!-- Fill in as completed -->
-- [ ] Neural Networks 0: Traffic (CNN for traffic sign classification)
+**Reflection**: What makes a good data pipeline for language models?
 
-### Depth Extensions Completed
-<!-- Fill in as completed -->
-- [ ] Raw PyTorch MLP implementation from scratch
-- [ ] Manual gradient computation for simple network
-- [ ] Bridge notebook connecting CS50AI to Phase 4 PyTorch content
+### Day 60: Attention Math & Masking
+**Goal**: Implement and understand scaled dot-product attention
 
-### Key Learnings
-<!-- Fill in as you progress -->
-*To be documented: How does backpropagation work? What are activation functions for? How does PyTorch autograd simplify gradient computation?*
+Artifacts:
+- [ ] `notebooks/bridge/attention_math.ipynb`
+  - Scaled dot-product attention from scratch
+  - Q, K, V matrices (random for testing)
+  - Attention scores = Q @ K.T / sqrt(d_k)
+  - Softmax normalization
+  - Attention output = softmax(scores) @ V
+  - Shape assertions at each step
+  - Attention weights visualization (heatmap)
+  - Explanation of sqrt(d_k) scaling
+- [ ] Causal masking implementation (same notebook or extended)
+  - Lower-triangular mask creation
+  - Apply mask before softmax (-inf for masked positions)
+  - Verify no future token attendance
+  - Masked vs unmasked comparison
+  - Mask visualization
+- [ ] `notebooks/bridge/attention_tests.ipynb`
+  - Uniform attention test (equal Q, K → uniform weights)
+  - Single position attention test (K[i] different → peak at i)
+  - Causal masking correctness (no future info leakage)
+  - Batch processing test
+  - Different sequence lengths test
+  - All assertions pass
 
-### Artifacts Created
-<!-- List notebooks, images, implementations -->
-- `notebooks/cs50ai/day65_pytorch_mlp.ipynb`
-- `artifacts/day66_gradient_computation.png`
-- [Add more as created]
-
----
-
-## Week F: Optional & Buffer (Days 68-70)
-
-### Topics Covered (Optional)
-- Reinforcement learning basics (Q-learning, exploration vs exploitation)
-- Natural language processing preview (language models, tokenization)
-- Markov chains for text generation
-
-### CS50AI Problem Sets Completed (Optional)
-<!-- Fill in if completed -->
-- [ ] RL 0: (Optional Q-learning exercise)
-- [ ] NLP 0: (Optional language model)
-
-### Buffer Activities Completed
-<!-- Fill in as completed -->
-- [ ] Phase 3 retrospective document
-- [ ] Complete unfinished depth extensions
-- [ ] Polish artifacts and documentation
-- [ ] Update README with CS50AI accomplishments
-
-### Key Learnings
-<!-- Fill in as you progress -->
-*To be documented: What is the explore-exploit tradeoff? How do RL agents learn optimal policies? Preview of Phase 6 NLP topics?*
-
-### Artifacts Created
-<!-- List notebooks, images, implementations -->
-- `docs/notes/day70_phase3_retrospective.md`
-- [Add more as created]
-
----
-
-## Overall Module Assessment
-
-### Completion Status
-<!-- Update as you progress -->
-- **CS50AI Problem Sets:** 0/10 completed
-- **Depth Extension Notebooks:** 0/15 completed
-- **Reflection Documents:** 0/6 completed
-- **Overall Progress:** 0%
-
-### Time Tracking
-<!-- Fill in actual time spent -->
-- **Total Hours Spent:** TBD
-- **Average Hours per Day:** TBD
-- **Most Time-Intensive Tasks:** TBD
-
-### Strengths and Growth Areas
-
-#### Strengths
-<!-- Identify what went well -->
-*To be filled: Which topics did you grasp quickly? Which implementations were you most proud of?*
-
-#### Areas for Improvement
-<!-- Be honest about challenges -->
-*To be filled: Which concepts remained challenging? What would you do differently? What needs more practice?*
-
-### Comparison with Original Classical ML Phase
-
-#### What Was Gained
-<!-- Advantages of CS50AI approach -->
-*To be filled: Broader AI survey? Better problem-solving skills? Clearer bridge to transformers?*
-
-#### What Was Sacrificed
-<!-- Trade-offs made -->
-*To be filled: Less sklearn depth? Fewer classical ML algorithms? Worth the trade-off?*
-
-### Readiness for Phase 4 (Deep Learning Core)
-
-<!-- Self-assessment of preparedness -->
-- **PyTorch Basics:** [ ] Not ready [ ] Partially ready [ ] Fully ready
-- **Neural Network Fundamentals:** [ ] Not ready [ ] Partially ready [ ] Fully ready
-- **Gradient Computation Understanding:** [ ] Not ready [ ] Partially ready [ ] Fully ready
-- **Evaluation Metrics Fluency:** [ ] Not ready [ ] Partially ready [ ] Fully ready
-
-**Notes on Readiness:**  
-*To be filled: What gaps remain before starting Phase 4? What should you review?*
+**Reflection**: How attention enables long-range dependency modeling
 
 ---
 
-## Key Takeaways
+## Readiness Assessment for Phase 4
 
-<!-- 5-10 bullet points summarizing the most important insights -->
+Complete this checklist before starting Phase 4 at Day 61:
 
-1. *To be filled as module progresses*
-2. 
-3. 
-4. 
-5. 
+### Technical Readiness
+- [ ] PyTorch Dataset/DataLoader implemented and tested
+- [ ] Scaled dot-product attention coded from scratch
+- [ ] Causal masking working correctly (attention tests pass)
+- [ ] Character-level tokenization pipeline functional
+- [ ] Development environment set up (phase4 conda env, PyTorch installed)
+
+### Conceptual Readiness
+- [ ] CS50AI attention mechanism understood
+- [ ] Attention as learned search intuition internalized
+- [ ] Difference between CNNs (local) and Transformers (global) clear
+- [ ] Self-attention vs cross-attention distinction understood
+- [ ] Positional encoding necessity comprehended
+
+### Practical Readiness
+- [ ] Baseline task selected and documented
+- [ ] Success metrics defined
+- [ ] Git workflow established
+- [ ] Reproducibility practices ready
+- [ ] Notebook/code organization system in place
+
+### Documentation Complete
+- [ ] CS50AI notes.md finalized (all 7 modules)
+- [ ] Bridge sprint artifacts complete (11 files: 7 docs + 4 notebooks)
+- [ ] Phase 3 retrospective written
+- [ ] README updated to reflect Phase 3B
 
 ---
 
-## Next Steps
+## Summary Statistics
 
-<!-- Action items before moving to Phase 4 -->
+**CS50AI Survey**:
+- Lectures watched: ___ / 7
+- Problem sets completed: ___ / 7
+- Estimated time spent: ~25-30 hours (7 days × 3.5-4 hrs)
 
-- [ ] Review any weak areas identified above
-- [ ] Complete all unfinished depth extensions
-- [ ] Organize all artifacts and notebooks
-- [ ] Update portfolio with CS50AI highlights
-- [ ] Prepare Phase 4 setup (GPU access, PyTorch environment)
+**Bridge Sprint**:
+- Documentation files created: ___ / 7
+- Notebooks created: ___ / 4
+- Estimated time spent: ~14-16 hours (4 days × 3.5-4 hrs)
 
----
-
-## References
-
-- [CS50 AI Course](https://cs50.harvard.edu/ai/2024/)
-- [CS50 AI Lecture Slides](https://cdn.cs50.net/ai/2020/fall/lectures/)
-- [CS50 AI Problem Sets](https://cs50.harvard.edu/ai/2024/psets/)
-- [scikit-learn Documentation](https://scikit-learn.org/stable/)
-- [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
+**Total Phase 3B**:
+- Days completed: ___ / 11
+- Total time: ~39-46 hours
+- Phase 4 early start enabled: Day 61 (10 days earlier than original plan)
 
 ---
 
-**Note:** This is a living document. Update it regularly as you progress through the CS50AI Integration Module. Aim for ≥5 pages of substantive content by Day 70.
+## Lessons Learned
 
-**Last Updated:** 2025-11-09
+*To be filled after completing Phase 3B*
+
+### What Worked Well
+- 
+
+### What Was Challenging
+- 
+
+### Adjustments for Phase 4
+- 
+
+### Key Takeaways
+- 
+
