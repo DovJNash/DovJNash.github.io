@@ -913,9 +913,8 @@ const PLAN = {
             { label: 'See Phase 4', estMinutes: 0, details: 'Content superseded by early Phase 4 start at Day 61.' }
           ],
           reflectionPrompt: ''
-        },
+        }
         // End of Phase 3B days
-      ]
       ]
     },
     {
